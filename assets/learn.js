@@ -187,9 +187,19 @@ const explain={
   bad:"Третий столбец не добавляет независимой информации. Два первых независимы, значит ранг 2."
  }
 };
-const storeKey="algebra-kr1-course-7-chapters-v1";
+const previousKey="algebra-kr1-course-7-chapters-v1";
+const storeKey="algebra-kr1-mini-checks-v2";
 let done={};
-try{done=JSON.parse(localStorage.getItem(storeKey)||"{}")||{}}catch(_){done={}}
+try {
+ const current=localStorage.getItem(storeKey);
+ if(current!==null) done=JSON.parse(current)||{};
+ else {
+  // Migrate only the seven mini-checks, never a claim that a chapter was mastered.
+  const prior=JSON.parse(localStorage.getItem(previousKey)||"{}")||{};
+  for(const name of Object.keys(explain)) if(prior[name]) done[name]=true;
+  if(Object.keys(done).length) localStorage.setItem(storeKey,JSON.stringify(done));
+ }
+} catch(_){done={}}
 function progress(){
  const n=Object.keys(explain).filter(k=>done[k]).length;
  $("chapter-progress").textContent=n+"/7";
@@ -207,9 +217,25 @@ document.querySelectorAll(".quickcheck").forEach(section=>{
 });
 progress();
 const nav=document.querySelectorAll(".course-nav a");
+const lastChapterKey="algebra-kr1-last-chapter-v1";
+const resume=document.getElementById("resume-chapter");
+function setResumeLink(id) {
+ if(!resume||!/^chapter-[0-6]$/.test(id))return;
+ // A return to chapter 1 is equivalent to the normal Start button.
+ resume.hidden=id==="chapter-0";
+ resume.href="#"+id;
+}
+try {
+ const stored=localStorage.getItem(lastChapterKey);
+ if(stored)setResumeLink(stored);
+} catch(_){}
 const observer=new IntersectionObserver(entries=>{
  const active=entries.filter(x=>x.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top)[0];
  if(!active)return;
+ if(active.target.id){
+   setResumeLink(active.target.id);
+   try{localStorage.setItem(lastChapterKey,active.target.id);}catch(_){}
+ }
  nav.forEach(link=>{
   const current=link.getAttribute("href")==="#"+active.target.id;
   if(current)link.setAttribute("aria-current","location");else link.removeAttribute("aria-current");

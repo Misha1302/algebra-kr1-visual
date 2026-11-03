@@ -2,7 +2,26 @@
 (() => {
   const A=[[1,2,3],[0,4,5],[1,0,6]], $=id=>document.getElementById(id);
   const d2=(a,b,c,d)=>a*d-b*c;
-  const n=x=>Number.isFinite(+x)?+x:0;
+  // Invalid/empty input is not mathematical zero. Never silently alter the example.
+  function finiteValues(ids, errorId, integerIds=[]) {
+    const values=[],bad=[];
+    for(const id of ids){
+      const input=$(id),raw=input.value.trim(),v=Number(raw);
+      const min=input.min!==""?Number(input.min):-Infinity;
+      const max=input.max!==""?Number(input.max):Infinity;
+      const valid=raw!=="" && Number.isFinite(v) && v>=min && v<=max &&
+        !input.validity.badInput && (!integerIds.includes(id)||Number.isInteger(v));
+      input.setAttribute("aria-invalid",String(!valid));
+      if(!valid)bad.push(id);
+      values.push(v);
+    }
+    const message=$(errorId);
+    message.hidden=bad.length===0;
+    message.textContent=bad.length?
+       "Проверь поля "+bad.join(", ")+": введи "+(integerIds.length?"допустимые числа (n — целое от 1 до 12).":"числа в указанном диапазоне.")+
+       " Предыдущий корректный результат оставлен без изменений.":"";
+    return bad.length?null:values;
+  }
   const safe=x=>String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
   const sign=x=>x<0?"− "+Math.abs(x):"+ "+x;
   function matrix(arr,classes,click){
@@ -12,7 +31,9 @@
       '<span class="cell '+classes(i,j)+'">'+safe(v)+'</span>').join("")).join("");
   }
   function det2(){
-    const v=["a","b","c","d"].map(id=>n($(id).value)),r=d2(...v);
+    const v=finiteValues(["a","b","c","d"],"det2-error");
+    if(v===null)return;
+    const r=d2(...v);
     $("det2-result").textContent=v[0]+"·"+v[3]+" − ("+v[1]+"·"+v[2]+") = "+(v[0]*v[3])+" − ("+(v[1]*v[2])+") = "+r;
     $("det2-meaning").textContent=r===0?"Определитель равен нулю: обратной матрицы нет.":"Определитель отличен от нуля: матрица обратима. Модуль определителя — коэффициент изменения площади.";
   }
@@ -74,8 +95,9 @@
   document.querySelectorAll("#rowops-options button").forEach(b=>b.addEventListener("click",()=>rowop(b.dataset.rowop)));
   rowop("original");
   function recurrence(){
-    const a=n($("rec-a").value),b=n($("rec-b").value),c=n($("rec-c").value),
-      k=Math.max(1,Math.min(12,Math.trunc(n($("rec-n").value)||1)));
+    const v=finiteValues(["rec-a","rec-b","rec-c","rec-n"],"rec-error",["rec-n"]);
+    if(v===null)return;
+    const [a,b,c,k]=v;
     const D=[1,a],steps=["D₀ = 1 (по соглашению)","D₁ = "+a];
     for(let i=2;i<=k;i++){
       D.push(a*D[i-1]-b*c*D[i-2]);

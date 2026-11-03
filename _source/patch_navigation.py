@@ -55,7 +55,7 @@ j=j.replace('const label=pdf?"Читать подробный разбор в PD
 q.write_text(j)
 # Ensure all external-facing HTML links point at dedicated sections or full HTML, not stale PDF.
 smap=root/'sitemap.xml';sm=smap.read_text()
-new_urls=['textbook.html','determinants.html','permutations.html','syllabus.html','proofs.html','problems.html']
+new_urls=['textbook.html','determinants.html','permutations.html','syllabus.html','proofs.html','problems.html','practice.html','exam.html']
 for filename in new_urls:
  if '/'+filename+'</loc>' not in sm:
   sm=sm.replace('</urlset>','<url><loc>https://misha1302.github.io/algebra-kr1-visual/'+filename+'</loc></url>\n</urlset>')

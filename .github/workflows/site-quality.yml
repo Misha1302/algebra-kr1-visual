@@ -1,9 +1,10 @@
-name: Content and interaction quality
+name: Content, pedagogy and interaction quality
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -11,7 +12,7 @@ permissions:
 jobs:
   quality:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 24
     steps:
       - name: Check out course
         uses: actions/checkout@v4
@@ -19,22 +20,52 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-test.txt
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
       - name: Install test dependencies
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install sympy beautifulsoup4 playwright
+          python -m pip install -r requirements-test.txt
           python -m playwright install --with-deps chromium
+          curl --fail --location --retry 3 --output /tmp/pandoc-3.6.4-1-amd64.deb https://github.com/jgm/pandoc/releases/download/3.6.4/pandoc-3.6.4-1-amd64.deb
+          sudo dpkg -i /tmp/pandoc-3.6.4-1-amd64.deb
+          pandoc --version | head -n 1
+          test "$(pandoc --version | head -n 1)" = "pandoc 3.6.4"
+      - name: Verify generated artifacts match committed sources
+        run: |
+          python _source/build_textbook.py
+          python _source/build_catalog.py
+          python _source/build_transfer.py
+          python _source/build_coverage.py
+          git diff --exit-code -- textbook.html proofs.html problems.html syllabus.html assets/transfer-cases.js _source/Algebra_KR1_2026_ONLINE.md docs/remediation/62_COVERAGE_POST_REMEDIATION.csv
       - name: Check JavaScript syntax
         run: |
-          node --check assets/learn.js
-          node --check assets/determinants.js
-          node --check assets/permutations.js
-          node --check theory.js
-      - name: Verify mathematics
-        run: python tests/math_invariants.py
-      - name: Verify first-principles teaching journey
-        run: python tests/learning_journey.py
-      - name: Verify main site and lab
-        run: python tests/site_smoke.py
-      - name: Verify all 62 official topics and deep links
-        run: python tests/full_site_smoke.py
+          for file in assets/*.js theory.js; do node --check "$file"; done
+      - name: Independently verify mathematics
+        run: |
+          python tests/math_invariants.py
+          python tests/transfer_oracle.py
+          python tests/variant_oracle.py
+      - name: Existing UI tests
+        run: |
+          python tests/learning_journey.py
+          python tests/site_smoke.py
+          python tests/full_site_smoke.py
+      - name: Remediation contract and user journeys
+        run: |
+          python tests/remediation_contract.py
+          python tests/remediation_e2e.py
+      - name: Automated WCAG accessibility checks
+        run: |
+          npm install --prefix "$RUNNER_TEMP/axe" axe-core@4.10.3 --no-audit --no-fund
+          AXE_JS_PATH="$RUNNER_TEMP/axe/node_modules/axe-core/axe.min.js" python tests/accessibility_wcag.py
+      - name: Upload reproducible screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: algebra-kr1-qa-screenshots
+          path: docs/remediation/screenshots/
+          if-no-files-found: warn
