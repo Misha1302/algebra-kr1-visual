@@ -13,8 +13,9 @@
   function card(d){
     const [id,term,group,plain,formal,example,tab]=d;
     const pdf=inPdf.has(id);
-    const link=pdf?"./assets/Algebra_KR1_2026_VISUAL.pdf":"./lab.html#"+encodeURIComponent(tab);
-    const label=pdf?"Читать подробный разбор в PDF ↗":"Увидеть пример в лаборатории ↗";
+    const topics={D05:"./permutations.html#basics",D06:"./permutations.html#sign",D07:"./determinants.html#leibniz",D08:"./determinants.html#laplace",D09:"./determinants.html#laplace",D10:"./determinants.html#properties",D11:"./textbook.html#D11",D15:"./textbook.html#D15"};
+    const link=topics[id]|| (pdf?"./textbook.html#"+id:"./lab.html#"+encodeURIComponent(tab));
+    const label=pdf?"Читать подробный разбор онлайн ↗":"Увидеть пример в уроке / лаборатории ↗";
     return '<article class="def" id="'+escapeText(id)+'">'+
       '<div class="top"><span class="id">'+escapeText(id)+'</span><span class="group">'+escapeText(group)+'</span></div>'+
       '<h3>'+escapeText(term)+'</h3>'+

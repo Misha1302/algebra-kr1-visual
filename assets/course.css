@@ -1,0 +1,51 @@
+:root{--bg:#f5f2e9;--ink:#202827;--muted:#5c6a65;--border:#d7dad1;--blue:#254eb0;--paper:#fffefa;--green:#cee4af}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.73 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#2146a1;text-underline-offset:3px}
+a:focus-visible{outline:3px solid #e1a24f;outline-offset:3px}
+.site-nav{position:relative;background:#fefdf8;border-bottom:1px solid var(--border)}
+.site-nav-inner{max-width:1350px;padding:14px 32px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{display:flex;gap:10px;align-items:center;color:var(--ink);text-decoration:none;font-weight:850;letter-spacing:-.04em;font-size:18px}
+.logo b{display:grid;place-items:center;width:31px;height:31px;background:#1e2a27;color:white;border-radius:6px}
+.links{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:12px;font-weight:700}
+.links a{white-space:nowrap}
+.book-hero{max-width:1350px;padding:47px 32px 28px;margin:auto}
+.kicker{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:850;color:var(--blue);margin-bottom:13px}
+.book-hero h1{font:500 clamp(40px,5vw,65px)/1.05 Georgia,serif;letter-spacing:-.055em;margin:0 0 16px;max-width:900px}
+.book-hero p{max-width:800px;color:var(--muted);line-height:1.7;font-size:16px;margin:0}
+.notice{margin-top:21px;background:#edf2fe;border-left:3px solid var(--blue);padding:14px 18px;max-width:1020px;border-radius:0 7px 7px 0;font-size:14px}
+.book-layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:26px;max-width:1350px;margin:0 auto;padding:15px 32px 70px;align-items:start}
+.book-sidebar{position:sticky;top:15px;max-height:calc(100vh - 30px);overflow-y:auto;background:var(--paper);border:1px solid var(--border);padding:22px;border-radius:9px}
+.book-sidebar h2{font:800 12px/1.3 system-ui,sans-serif;margin:0 0 12px;color:var(--blue);letter-spacing:.09em;text-transform:uppercase}
+.book-sidebar a{display:block;text-decoration:none;font-size:12px;color:#45554e;padding:7px 0;border-bottom:1px solid #edece6;line-height:1.42}
+.book-sidebar a:hover{color:var(--blue)}
+.book{max-width:100%;min-width:0;background:var(--paper);padding:45px clamp(21px,5vw,78px) 70px;border:1px solid var(--border);border-radius:9px;box-shadow:0 18px 56px rgba(21,31,30,.035)}
+.book>h1{font:500 clamp(32px,4vw,46px)/1.1 Georgia,serif;letter-spacing:-.04em;margin:60px 0 22px;padding:16px 0 14px;border-bottom:1px solid var(--border);color:#24312d}
+.book>h1:first-child{margin-top:0}
+.book h2{font-size:24px;line-height:1.33;letter-spacing:-.035em;margin:40px 0 13px;color:#24322e}
+.book h3{font-size:19px;letter-spacing:-.02em;line-height:1.4;margin:27px 0 12px}
+.book p,.book li{color:#374741;line-height:1.82}
+.book p{margin:14px 0}
+.book blockquote{margin:24px 0;padding:12px 22px;background:#edf3ff;border-left:3px solid var(--blue);color:#244179;border-radius:0 6px 6px 0}
+.book blockquote p{margin:7px 0;color:#244179}
+.book hr{border:0;border-top:1px solid var(--border);margin:32px 0}
+.book strong{color:#1d302a}
+.book table{display:block;max-width:100%;overflow:auto;border-collapse:collapse;font-size:13px;margin:22px 0}
+.book td,.book th{border:1px solid var(--border);padding:9px 12px;vertical-align:top}
+.book th{background:#e9ede9}
+.book img{max-width:100%;height:auto}
+.book .math.display{display:block;margin:22px 0;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:12px 4px;text-align:center;font-size:1.04em}
+.book .math.inline{display:inline-block;vertical-align:middle;max-width:100%;overflow-x:auto}
+.book math{max-width:none}
+.book code{font-family:"DejaVu Sans Mono",Consolas,monospace;font-size:.88em;white-space:break-spaces;overflow-wrap:anywhere;background:#f0f3ef;padding:2px 4px;border-radius:3px}
+.book pre{max-width:100%;overflow-x:auto;background:#f2f4f0;padding:17px}
+.book a[id]{display:block;height:0;scroll-margin-top:24px}
+.tipline{margin-top:15px;font-size:12px;color:var(--muted)}
+.footer{max-width:1250px;margin:auto;padding:20px 32px 30px;font-size:12px;color:var(--muted)}
+.mobile-toc{display:none}
+@media(max-width:1040px){.book-layout{grid-template-columns:1fr}.book-sidebar{position:static;max-height:none;display:grid;grid-template-columns:repeat(2,1fr);column-gap:25px}.book-sidebar h2{grid-column:1/-1}}
+@media(max-width:610px){.site-nav-inner,.book-hero,.book-layout,.footer{padding-left:18px;padding-right:18px}.site-nav-inner{align-items:flex-start;flex-direction:column;gap:10px}.links{gap:11px}.book-hero{padding-top:38px}.book-hero h1{font-size:39px}.book-layout{gap:12px}.book-sidebar{grid-template-columns:1fr}.book{padding:29px 19px}.book>h1{font-size:31px}.book h2{font-size:22px}.book p,.book li{font-size:15px}.book .math.display{font-size:14px;padding:13px 2px}}
+/* Long MathML expressions remain horizontally scrollable inside the article instead of widening the mobile viewport. */
+.book{overflow-x:auto;overscroll-behavior-x:contain}
+.book .math.display,.book table{max-width:100%;overflow-x:auto}

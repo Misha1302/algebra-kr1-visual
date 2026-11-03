@@ -1,0 +1,108 @@
+<!doctype html><html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Определители с нуля: детерминант 2×2 и 3×3, формула Лейбница, алгебраические дополнения, свойства, разложение Лапласа и рекурсии.">
+<title>Определители с нуля — Алгебра КР №1</title><link rel="stylesheet" href="./assets/lesson.css"><link rel="icon" href="./favicon.svg"></head>
+<body><nav class="topnav"><div class="wrap"><a class="brand" href="./"><b>A</b> алгебра / 01</a><div class="navlinks"><a href="./definitions.html">Определения</a><a href="./permutations.html">Подстановки</a><a href="./textbook.html">Полный учебник</a><a href="./syllabus.html">62 пункта</a></div></div></nav>
+<main><header class="hero"><div class="wrap">
+<div class="kicker">Большой наглядный урок · Определители</div>
+<h1>Определитель — это <em>число</em>, а не ещё одна матрица.</h1>
+<p class="lead">Разбираемся с нуля: почему у квадратной матрицы есть определитель, как появляется формула <strong>ad − bc</strong>, как переходить к 3×3 и большим матрицам и почему при преобразованиях строк меняется знак.</p>
+<div class="hero-chips"><span class="chip">D07–D15</span><span class="chip">P02–P08</span><span class="chip">T03, T07, T08</span><span class="chip">7 дополнительных типов</span></div>
+<div class="toc"><a href="#start">1. Смысл и 2×2</a><a href="#laplace">2. 3×3 и миноры</a><a href="#leibniz">3. Формула с подстановками</a><a href="#properties">4. Свойства</a><a href="#recurrence">5. Порядок n</a><a href="#tasks">6. Практика</a></div>
+</div></header>
+<section class="module" id="start"><div class="wrap">
+<div class="modlabel">01 · Сначала определение</div><h2>Что такое определитель?</h2>
+<p class="copy"><strong>Квадратная матрица</strong> — таблица, у которой число строк равно числу столбцов: 2×2, 3×3, n×n. <strong>Определитель матрицы A</strong>, обозначаемый <span class="math">det A</span> или <span class="math">|A|</span>, — специальное <strong>число</strong>, получаемое по правилам из элементов квадратной матрицы. Для прямоугольной матрицы определитель в обычном смысле не определён.</p>
+<div class="cols2"><div class="infocard"><strong>Для чего он нужен?</strong><p>Если det A = 0, квадратная матрица не имеет обратной. Если det A ≠ 0 — имеет. В двумерной геометрии |det A| показывает, во сколько раз линейное преобразование меняет площади.</p></div><div class="infocard"><strong>Почему знак важен?</strong><p>Положительный и отрицательный определители отражают ориентацию преобразования. Перестановка двух строк меняет знак, но не модуль определителя.</p></div></div>
+<h3>Как вычисляется det 2×2?</h3>
+<p class="copy">У матрицы <span class="math">[[a,b],[c,d]]</span> две диагонали. Сначала перемножь <strong>левый верхний и правый нижний</strong> элементы (<span class="math">ad</span>). Затем перемножь <strong>правый верхний и левый нижний</strong> (<span class="math">bc</span>). Вычти второй результат из первого.</p>
+<div class="mathblock">det [[a,b],[c,d]] = a·d − b·c</div>
+<div class="example"><strong>Пример:</strong> det [[2,1],[3,4]] = 2·4 − 1·3 = <strong>5</strong>. Мы получили одно число, а не таблицу.</div>
+<div class="lab" id="det2-lab">
+<h3>Попробуй изменить элементы</h3><p>При изменении любого числа результат пересчитывается. Синим обозначена главная диагональ, оранжевым — побочная.</p>
+<div class="matrow"><span class="op">det</span><div class="bracket" style="--cols:2">
+<label class="cell diag1"><input type="number" aria-label="Элемент a, строка 1 столбец 1" id="a" value="2" min="-9" max="9"></label>
+<label class="cell diag2"><input type="number" aria-label="Элемент b, строка 1 столбец 2" id="b" value="1" min="-9" max="9"></label>
+<label class="cell diag2"><input type="number" aria-label="Элемент c, строка 2 столбец 1" id="c" value="3" min="-9" max="9"></label>
+<label class="cell diag1"><input type="number" aria-label="Элемент d, строка 2 столбец 2" id="d" value="4" min="-9" max="9"></label>
+</div></div>
+<div class="result" aria-live="polite"><small>По диагоналям</small><div id="det2-result"></div><p id="det2-meaning"></p></div>
+<div class="formrow"><button class="btn" type="button" id="det2-reset">Вернуть пример</button><button class="btn" type="button" id="det2-singular">Сделать det = 0</button></div>
+</div>
+</div></section>
+
+<section class="module" id="laplace"><div class="wrap">
+<div class="modlabel">02 · Прежде чем применять большую формулу</div><h2>От 2×2 к определителю 3×3</h2>
+<p class="copy">Для матрицы 3×3 уже нельзя просто перемножить две диагонали. Самый надёжный способ — <strong>разложение по строке или столбцу</strong> (формула Лапласа). Чтобы понять его, нужно два новых определения.</p>
+<div class="explain"><h3>Минор элемента Mᵢⱼ</h3><p>Выбираем элемент с адресом <span class="math">(i,j)</span>, вычёркиваем его <strong>строку i</strong> и <strong>столбец j</strong>. Остаток — квадратная матрица на один порядок меньше. Её определитель и есть <strong>минор Mᵢⱼ</strong>. Для 3×3 остаётся 2×2, которую уже умеем считать.</p>
+<h3>Алгебраическое дополнение Cᵢⱼ</h3><p>Берём минор и ставим перед ним нужный знак: <span class="math">Cᵢⱼ = (−1)^(i+j) · Mᵢⱼ</span>. Знаки по позициям 3×3 образуют шахматку: <span class="math">(+ − +) / (− + −) / (+ − +)</span>.</p>
+<h3>Разложение по строке</h3><p>Выбери, например, первую строку. Каждый её элемент умножь на <strong>своё</strong> алгебраическое дополнение, затем сложи полученные три числа. Можно выбрать любую строку или столбец: результат будет одинаков.</p></div>
+<div class="lab" id="laplace-lab"><h3>Нажимай на элементы строки или столбца</h3>
+<p>Матрица A зафиксирована, поэтому весь способ можно проследить вручную. Синим выделяется выбранная строка, оранжевым — столбец, зачёркнутым — исключённые позиции.</p>
+<div class="formrow"><label for="expand-axis">Разложить по</label><select id="expand-axis"><option value="r0">строке 1</option><option value="r1">строке 2</option><option value="r2">строке 3</option><option value="c0">столбцу 1</option><option value="c1">столбцу 2</option><option value="c2">столбцу 3</option></select></div>
+<div class="matrow"><div id="mat3" class="bracket" style="--cols:3"></div><span class="op">→</span><div id="minor2" class="bracket" style="--cols:2"></div></div>
+<div class="result" aria-live="polite"><small id="laplace-label"></small><div id="laplace-step"></div><p id="laplace-total"></p></div>
+<div class="formrow"><button class="btn" id="lap-prev" type="button">← Предыдущий элемент</button><button class="btn primary" id="lap-next" type="button">Следующий элемент →</button></div>
+</div>
+<div class="example"><strong>Проверка:</strong> для A = [[1,2,3],[0,4,5],[1,0,6]] по первой строке получается <span class="math">1·24 + 2·5 + 3·(−4) = <strong>22</strong></span>. По любой другой строке или столбцу должен получиться тот же 22.</div>
+</div></section>
+
+<section class="module" id="leibniz"><div class="wrap">
+<div class="modlabel">03 · Строгое общее определение D07</div><h2>Почему в определителе участвуют подстановки?</h2>
+<p class="copy">Для матрицы порядка n нам нужно выбирать по <strong>одному числу из каждой строки и каждого столбца</strong>. Удобно сначала выбрать в первой строке один столбец, во второй — другой, и так далее. Такое правило выбора столбцов задаёт <strong>подстановка σ</strong>: строке i сопоставляем столбец σ(i).</p>
+<div class="example"><strong>Пример:</strong> σ = (2,3,1) означает: из строки 1 берём столбец 2, из строки 2 — столбец 3, из строки 3 — столбец 1. Получится произведение <span class="math">a₁₂·a₂₃·a₃₁</span>. Оно входит в определитель со знаком <strong>+</strong>, потому что в (2,3,1) две инверсии.</div>
+<div class="mathblock">det A = Σ[по всем σ ∈ Sₙ] sgn(σ) · a₁,σ(1) · … · aₙ,σ(n)</div>
+<p class="copy"><strong>Инверсия</strong> — пара позиций i&lt;j, в которых выбранные номера столбцов идут в обратном порядке: σ(i)&gt;σ(j). Если инверсий чётное число, знак +; если нечётное, знак −. Для матрицы 3×3 существует 3! = 6 подстановок, то есть шесть слагаемых.</p>
+<div class="lab"><h3>Все шесть слагаемых для одной 3×3</h3><p>Выбери подстановку: зелёные клетки показывают, какие три числа попали в её произведение. Итоговая сумма всех шести слагаемых равна 22.</p>
+<div class="numbers" id="perm-det-options"></div><div class="matrow"><div id="perm-det-matrix" class="bracket" style="--cols:3"></div></div>
+<div class="result" aria-live="polite"><small>Член формулы Лейбница</small><div id="perm-det-work"></div></div>
+</div>
+<p class="fine">Порядок композиции подстановок на вашем курсе — слева направо. При вычислении одного знака инверсии определяются последовательностью значений σ(1),…,σ(n), так что эта формула не зависит от того, как принято записывать произведение двух подстановок. <a href="./permutations.html">Изучить подстановки подробно ↗</a></p>
+</div></section>
+
+<section class="module" id="properties"><div class="wrap">
+<div class="modlabel">04 · Что разрешено при вычислении</div><h2>Свойства определителя</h2>
+<p class="copy">Именно свойства позволяют быстро приводить матрицы к треугольному виду и не раскрывать огромную сумму из n! членов.</p>
+<div class="cols2">
+<div class="property"><h4>Поменять две строки местами</h4><p>Знак определителя меняется: det A′ = −det A. Такое же правило для столбцов.</p></div>
+<div class="property"><h4>Умножить одну строку на k</h4><p>Определитель умножится на k (при k=0 станет 0).</p></div>
+<div class="property"><h4>К строке прибавить k·другую строку</h4><p>Определитель не меняется — главный инструмент метода Гаусса.</p></div>
+<div class="property"><h4>Одинаковые строки / нулевая строка</h4><p>det A = 0: нет независимости, поэтому обратной матрицы нет.</p></div>
+<div class="property"><h4>Треугольная матрица</h4><p>det A — произведение диагональных элементов. Нули под/над диагональю упрощают задачу.</p></div>
+<div class="property"><h4>Транспонирование и произведение</h4><p>det(Aᵀ)=det A; det(AB)=det A·det B (если A и B квадратные одного порядка).</p></div>
+</div>
+<div class="lab" id="rowops"><h3>Проверь свойства на числах</h3><p>Начинаем с матрицы A = [[2,1],[3,4]], det A = 5. Выбери преобразование первой/второй строки и посмотри, что произошло.</p>
+<div class="numbers" id="rowops-options"><button class="btn primary" type="button" data-rowop="original">Исходная</button><button class="btn" type="button" data-rowop="swap">R₁ ↔ R₂</button><button class="btn" type="button" data-rowop="scale">R₁ ← 2R₁</button><button class="btn" type="button" data-rowop="add">R₂ ← R₂ + 3R₁</button></div>
+<div class="matrow"><div id="rowop-matrix" class="bracket" style="--cols:2"></div></div><div id="rowop-result" class="result" aria-live="polite"></div>
+</div>
+<div class="warning"><strong>Не путай:</strong> для матриц вообще неверно <span class="math">det(A+B)=det A+det B</span>. И формула «три диагонали вправо минус три влево» (правило Саррюса) работает только для 3×3, а не для порядка 4 или n.</div>
+</div></section>
+
+<section class="module" id="recurrence"><div class="wrap">
+<div class="modlabel">05 · Определители произвольного порядка</div><h2>Как считать det n×n без n! слагаемых?</h2>
+<h3>1. Приведение к треугольному виду</h3><p class="copy">Используй элементарные преобразования строк. Если только прибавляешь к строке кратную другой, det не меняется. При перестановке строк учитывай знак; при умножении строки — множитель. После получения треугольной матрицы перемножь числа на диагонали.</p>
+<h3>2. Рекурсия для трёхдиагональной матрицы</h3><p class="copy"><strong>Трёхдиагональная</strong> матрица содержит ненулевые элементы лишь на главной диагонали и двух соседних. Если главная диагональ равна a, над ней b, под ней c, то определители <span class="math">Dₙ</span> соседних порядков связаны:</p>
+<div class="mathblock">D₀ = 1,  D₁ = a,  Dₙ = a·Dₙ₋₁ − (b·c)·Dₙ₋₂</div>
+<p class="copy">Почему? Разложи определитель по первой строке. В ней лишь два ненулевых элемента: a и b. Их миноры выражаются через матрицы порядка n−1 и n−2. Упрощение даёт указанную рекурсию. <a href="./textbook.html#T08">Полный разбор официальной T08 ↗</a></p>
+<div class="lab"><h3>Рассчитай Dₙ по шагам</h3><p>Вводи a, b, c и порядок n. Тренажёр показывает каждую промежуточную величину, а не только итог.</p>
+<div class="formrow"><label>a <input type="number" id="rec-a" value="5" min="-9" max="9"></label><label>b <input type="number" id="rec-b" value="2" min="-9" max="9"></label><label>c <input type="number" id="rec-c" value="3" min="-9" max="9"></label><label>n <input type="number" id="rec-n" value="5" min="1" max="12"></label></div>
+<div class="result" id="rec-result" aria-live="polite"></div>
+</div>
+<h3>3. Особые формулы</h3><div class="cols2">
+<div class="infocard"><strong>Постоянная диагональ 3, вне неё 2</strong><p>Для n×n матрицы <span class="math">A = I + 2J</span>, где J — матрица из единиц, <span class="math">det A = 2n + 1</span>. Используй собственные значения J или операции со строками. <a href="./textbook.html#N283">№283 ↗</a></p></div>
+<div class="infocard"><strong>Вандермонд</strong><p>У матрицы со строками <span class="math">(1, xᵢ, xᵢ²,…)</span> определитель равен произведению разностей <span class="math">∏_{i&lt;j}(xⱼ−xᵢ)</span>. Для x=(1,2,4): (2−1)(4−1)(4−2)=6. <a href="./textbook.html#N348">№348 ↗</a></p></div>
+</div>
+<p class="fine">Рекурсия — метод для специально устроенных матриц. Для произвольной матрицы порядок n вычисляют методом Гаусса или разложением Лапласа, а не применяют формулу трёхдиагонального случая.</p>
+</div></section>
+
+<section class="module" id="tasks"><div class="wrap">
+<div class="modlabel">06 · Связь с официальной программой</div><h2>Что именно решать после урока</h2>
+<div class="cols2"><div class="infocard"><strong>Определения</strong><p><a href="./textbook.html#D07">D07 — формула Лейбница</a>, <a href="./textbook.html#D08">D08 — алгебраическое дополнение</a>, <a href="./textbook.html#D09">D09 — разложение Лапласа</a>, <a href="./textbook.html#D10">D10 — «фальшивое» разложение</a>.</p></div>
+<div class="infocard"><strong>Доказательства</strong><p><a href="./textbook.html#P02">P02 — det Aᵀ</a>, <a href="./textbook.html#P03">P03 — смена знака</a>, <a href="./textbook.html#P05">P05 — три свойства</a>, <a href="./textbook.html#P06">P06 — det(AB)</a>.</p></div>
+<div class="infocard"><strong>Основные задачи</strong><p><a href="./textbook.html#T03">T03 — знак члена детерминанта</a>, <a href="./textbook.html#T07">T07 — неравенство с det</a>, <a href="./textbook.html#T08">T08 — трёхдиагональный det</a>.</p></div>
+<div class="infocard"><strong>Дополнительные задачи</strong><p><a href="./textbook.html#N230">№230</a>, <a href="./textbook.html#N231">№231</a>, <a href="./textbook.html#N283">№283</a>, <a href="./textbook.html#N299">№299</a>, <a href="./textbook.html#N302">№302</a>, <a href="./textbook.html#N348">№348</a>, <a href="./textbook.html#N365">№365</a>.</p></div></div>
+<div class="example">На контрольной одного числового ответа может быть недостаточно. Покажи, <strong>какое свойство применил</strong>, как изменился определитель при перестановках/масштабировании строк, почему можно делить на параметр и как проверяешь особые значения.</div>
+<div class="toc"><a href="./textbook.html">Читать полное решение всех задач ↗</a><a href="./permutations.html">Дальше: подстановки ↗</a><a href="./syllabus.html">Матрица полноты 62 пункта ↗</a></div>
+</div></section></main>
+<footer class="footer"><div class="wrap">Наглядная алгебра · Определители · <a href="./">На главную</a> · <a href="./textbook.html">Полный учебник</a></div></footer>
+<script src="./assets/determinants.js"></script>
+</body></html>

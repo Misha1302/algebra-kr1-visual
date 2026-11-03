@@ -1,0 +1,76 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Перестановки и подстановки слева направо: циклы, композиция, инверсии, чётность, степени и задачи T03, T04, №178.">
+<title>Подстановки слева направо — Алгебра КР №1</title><link rel="stylesheet" href="./assets/lesson.css"><link rel="icon" href="./favicon.svg"></head>
+<body><nav class="topnav"><div class="wrap"><a class="brand" href="./"><b>A</b> алгебра / 01</a><div class="navlinks"><a href="./definitions.html">Определения</a><a href="./determinants.html">Определители</a><a href="./textbook.html">Полный учебник</a><a href="./syllabus.html">62 пункта</a></div></div></nav>
+<main><header class="hero"><div class="wrap">
+<div class="kicker">Большой наглядный урок · Подстановки</div>
+<h1>Подстановки: <em>сначала левая</em>, потом правая.</h1>
+<p class="lead">Два порядка перемножения существуют в математической литературе. Здесь везде используется договорённость вашего курса: произведение <strong>σ·τ</strong> означает сначала применить <strong>σ</strong>, затем <strong>τ</strong>. Ни одна задача не должна незаметно переключаться на другой порядок.</p>
+<div class="hero-chips"><span class="chip">D05–D07</span><span class="chip">T03, T04</span><span class="chip">№184, №177, №178</span><span class="chip">Проверено на всех 7 значениях №178</span></div>
+<div class="toc"><a href="#basics">1. Что такое подстановка</a><a href="#product">2. Композиция</a><a href="#sign">3. Знак и инверсии</a><a href="#powers">4. Циклы и степени</a><a href="#task178">5. Задача №178</a><a href="#check">6. Список задач</a></div>
+</div></header>
+<section class="module" id="basics"><div class="wrap">
+<div class="modlabel">01 · Базовые определения</div><h2>В каком смысле числа «переставляются»?</h2>
+<p class="copy"><strong>Перестановка</strong> — упорядоченный список из чисел 1,…,n без повторений, например (3,1,2). <strong>Подстановка</strong> σ — взаимно однозначное отображение множества {1,…,n} в себя, то есть каждому исходному номеру она ставит в соответствие ровно один новый номер, причём все результаты различны.</p>
+<div class="explain"><h3>Запись в две строки</h3>
+<div class="mathblock">σ = ( 1  2  3 )<br>　　 ( 2  3  1 )</div>
+<p>Верхняя строка показывает исходные номера, нижняя — их образы: <strong>σ(1)=2, σ(2)=3, σ(3)=1</strong>. Это же отображение можно записать <strong>циклом (1 2 3)</strong>: 1 переходит в 2, 2 в 3, 3 в 1.</p>
+<p><strong>Sₙ</strong> — множество всех подстановок n элементов, их всего n! (факториал: 3!=3·2·1=6). Подстановку, которая ничего не меняет, обозначают <strong>e</strong>.</p></div>
+<div class="cols2"><div class="infocard"><strong>Цикл (1 2 3)</strong><p>Стрелки по кругу: 1→2→3→1. Такой цикл не означает обычное число 123 и не является произведением трёх чисел.</p></div><div class="infocard"><strong>Непересекающиеся циклы</strong><p>Например, (1 3)(2 4). Они действуют на разных элементах, поэтому при композиции не мешают друг другу и их порядок можно поменять.</p></div></div>
+</div></section>
+<section class="module" id="product"><div class="wrap">
+<div class="modlabel">02 · Главное соглашение курса</div><h2>Как перемножать подстановки?</h2>
+<p class="copy">Запись <span class="math">στ</span> — <strong>не</strong> одновременное выполнение двух замен. Нужно пройти <strong>два последовательных шага</strong> для каждого элемента. На вашем курсе <strong>первой всегда действует левая σ</strong>, потом правая τ. Формально:</p>
+<div class="mathblock">(στ)(i) = τ(σ(i))</div>
+<div class="example"><strong>Некоммутативность:</strong> если σ=(1 2), τ=(2 3), то по нашему соглашению σ·τ=(1 3 2), а τ·σ=(1 2 3). Эти подстановки различны: порядок важен.</div>
+<div class="lab" id="compose-lab"><h3>Проследи путь одного элемента</h3><p>Первая подстановка меняет промежуточный номер, вторая применяется к результату. Выбирай исходное число и меняй порядок.</p>
+<div class="formrow"><button class="btn primary" type="button" id="normal">σ·τ (сначала σ)</button><button class="btn" type="button" id="reverse">τ·σ (сначала τ)</button></div>
+<div class="numbers" id="comp-points"><button class="btn" data-value="1" type="button">Начать с 1</button><button class="btn" data-value="2" type="button">Начать с 2</button><button class="btn" data-value="3" type="button">Начать с 3</button></div>
+<div class="result" aria-live="polite"><small>Путь элемента</small><div id="comp-path"></div><p id="comp-all"></p></div>
+<div class="fine">В примере σ=(1 2), τ=(2 3). На каждой стрелке можно проверить образ числа по двухстрочной записи подстановки.</div>
+</div>
+<div class="warning"><strong>Не смешивай с соглашением из других книг.</strong> При правосторонней композиции то же произведение символов означало бы другой результат. Поэтому запись <span class="math">(στ)(i)=τ(σ(i))</span> нужно писать перед первой задачей, если есть риск неоднозначности.</div>
+</div></section>
+<section class="module" id="sign"><div class="wrap">
+<div class="modlabel">03 · Что такое знак подстановки?</div><h2>Инверсии: в каких местах порядок сломан</h2>
+<p class="copy"><strong>Инверсия</strong> — пара позиций i&lt;j, в которой левее стоит число больше правого: σ(i)&gt;σ(j). Число инверсий определяет <strong>чётность подстановки</strong>: если их чётное количество, знак +1, если нечётное — −1.</p>
+<div class="mathblock">sgn(σ) = (−1)^(количество инверсий)</div>
+<div class="example"><strong>Пример:</strong> в перестановке (3,1,4,2) видны три инверсии: 3&gt;1, 3&gt;2, 4&gt;2. Значит знак −1. Числа нужно читать по очереди <strong>слева направо</strong>, проверяя каждое со всеми числами справа.</div>
+<div class="lab"><h3>Сколько инверсий ты видишь?</h3><p>Нажми на перестановку. Пары инверсий будут перечислены явно.</p>
+<div class="numbers" id="inv-options"></div>
+<div class="result" aria-live="polite"><small>Подсчёт инверсий</small><div id="inv-result"></div></div>
+</div>
+<p class="copy">Каждый обмен двух элементов меняет чётность, а значит и знак. Для цикла длины k знак равен <span class="math">(−1)^(k−1)</span>. Знаки нужны, в частности, для каждого слагаемого определителя в <a href="./determinants.html#leibniz">формуле Лейбница</a>.</p>
+</div></section>
+<section class="module" id="powers"><div class="wrap">
+<div class="modlabel">04 · Степени и корни</div><h2>Почему циклы помогают считать большие степени?</h2>
+<p class="copy"><strong>Степень σᵏ</strong> — применение σ k раз подряд. У цикла длины m после каждых m шагов все элементы возвращаются на место. Например, <span class="math">(1 2 3)³=e</span>, а <span class="math">(1 2 3)²=(1 3 2)</span>. Для непересекающихся циклов степени считаются независимо.</p>
+<div class="example"><strong>Официальная №177:</strong> подстановка S содержит два независимых 5-цикла, значит <span class="math">S⁵=e</span>. Поскольку 150 кратно пяти, <span class="math">S¹⁵⁰=e</span>. Чтобы ответ зачли, нужно показать разложение на циклы. <a href="./textbook.html#N177">Полное решение ↗</a></div>
+<h3>Квадратные корни из подстановки</h3><p class="copy">В задаче <span class="math">σ²=(1 2 3)(4 5 6)</span> нужно найти <strong>все</strong> подстановки σ. Нельзя просто взять по корню из каждого цикла: две тройки можно объединить в один цикл длины 6, квадрат которого даст две тройки.</p>
+<div class="explain"><h3>Почему ответов ровно восемь?</h3>
+<p>На {1,…,6} один корень сохраняет две тройки раздельно: <span class="math">(1 3 2)(4 6 5)</span>. Три других корня соединяют их в один 6-цикл; выбор элемента после 1 во второй тройке даёт ровно три варианта.</p>
+<div class="mathblock">(1 4 2 5 3 6)<br>(1 5 2 6 3 4)<br>(1 6 2 4 3 5)</div>
+<p>Элементы 7 и 8 в правой части неподвижны. Корень на {7,8} может либо тоже ничего не менять, либо быть транспозицией (7 8), квадрат которой равен e. Значит <strong>4 × 2 = 8 корней</strong>. <a href="./textbook.html#T04">Подробный вывод T04 ↗</a></p></div>
+</div></section>
+<section class="module" id="task178"><div class="wrap">
+<div class="modlabel">05 · Разбор с правильным порядком</div><h2>Официальная №178: AXB = C</h2>
+<p class="copy">Здесь A, B, C и X — <strong>подстановки</strong>, а не числовые матрицы, хотя они записаны в две строки. Операция AXB — композиция подстановок. Равенство в группе даёт <span class="math">X=A⁻¹CB⁻¹</span>, но по нашему соглашению для вычисления <span class="math">X(i)</span> нужно применять <strong>A⁻¹, затем C, затем B⁻¹</strong>.</p>
+<div class="example"><strong>Заданные отображения:</strong><br>A: [7,3,2,1,6,5,4]<br>B: [3,1,2,7,4,5,6]<br>C: [5,1,3,6,4,7,2].<br>Каждый список задаёт образы 1,…,7. Например, A(1)=7.</div>
+<div class="lab"><h3>Посчитай X(i) без угадывания</h3><p>Выбери i: показано, куда попадает элемент после каждой подстановки, и отдельная проверка, что (AXB)(i)=C(i).</p>
+<div class="numbers" id="task178-options"></div>
+<div class="result" aria-live="polite"><small>Применяем A⁻¹ → C → B⁻¹</small><div id="task178-step"></div><p id="task178-check"></p></div>
+<div class="mathblock" id="task178-answer"></div>
+</div>
+<div class="warning"><strong>Исправление предыдущей версии:</strong> ответ для соглашения слева направо — нижняя строка X равна <strong>(7,1,2,3,4,5,6)</strong>. В предыдущем пособии был использован другой порядок, и его числовой ответ для этой задачи не подходит. Проверку проводим на всех семи значениях, а не только на одном.</div>
+</div></section>
+<section class="module" id="check"><div class="wrap">
+<div class="modlabel">06 · Что входит в контрольную</div><h2>Все задачи на подстановки</h2>
+<div class="cols2">
+<div class="infocard"><strong>D05–D07: определения</strong><p><a href="./textbook.html#D05">D05 — перестановка и подстановка</a>, <a href="./textbook.html#D06">D06 — знак и инверсии</a>, <a href="./textbook.html#D07">D07 — формула Лейбница</a>.</p></div>
+<div class="infocard"><strong>Основные</strong><p><a href="./textbook.html#T03">T03 — знак члена детерминанта</a>, <a href="./textbook.html#T04">T04 — все квадратные корни</a>.</p></div>
+<div class="infocard"><strong>Дополнительные</strong><p><a href="./textbook.html#N184">№184 — коммутирующие подстановки</a>, <a href="./textbook.html#N177">№177 — S¹⁵⁰</a>, <a href="./textbook.html#N178">№178 — AXB=C</a>.</p></div>
+<div class="infocard"><strong>Самопроверка</strong><p>Умеешь ли ты без подсказки построить двухстрочную запись по циклам, посчитать инверсии, выполнить произведение <strong>слева направо</strong> и проверить обратную подстановку?</p></div>
+</div><div class="toc"><a href="./determinants.html#leibniz">К определителям ↗</a><a href="./textbook.html">Полный учебник ↗</a><a href="./syllabus.html">Все 62 пункта ↗</a></div>
+</div></section></main>
+<footer class="footer"><div class="wrap">Наглядная алгебра · Подстановки слева направо · <a href="./">На главную</a></div></footer>
+<script src="./assets/permutations.js"></script>
+</body></html>

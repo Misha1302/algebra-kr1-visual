@@ -41,7 +41,7 @@
     .equation-label{text-transform:uppercase;font-size:10px;letter-spacing:.12em;font-weight:800;color:#63716a;margin-bottom:7px}
     .equation{font-size:19px;letter-spacing:-.025em;font-weight:750;overflow-wrap:anywhere}
     .equation strong{color:var(--blue)}.equation-note{font-size:12px;color:var(--muted);margin-top:7px}
-    .facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
     .fact{padding:25px 36px 25px 0;display:flex;align-items:baseline;gap:16px;min-width:0}.fact:not(:last-child){border-right:1px solid var(--line)}.fact:not(:first-child){padding-left:35px}
     .fact .number{font-family:Georgia,serif;font-size:42px;line-height:1;color:var(--blue)}.fact .description{font-size:13px;color:var(--muted);line-height:1.4}
     .section{padding:105px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:35px;margin-bottom:34px}
@@ -54,7 +54,7 @@
     .lesson-area{background:#e9e8e1;border-block:1px solid #d8d9d1}
     .curriculum{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:34px}
     .topic{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:19px;min-height:142px;display:flex;flex-direction:column;justify-content:space-between}
-    .topic .id{font-size:12px;color:var(--blue);font-weight:800}.topic h3{font-size:16px;margin:20px 0 0;line-height:1.34;letter-spacing:-.015em}
+    .topic .id{font-size:12px;color:var(--blue);font-weight:800}.topic{text-decoration:none;transition:border-color .2s,transform .2s}.topic:hover{border-color:#7290d2;transform:translateY(-2px)}.topic h3{font-size:16px;margin:20px 0 0;line-height:1.34;letter-spacing:-.015em}
     .resource-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;margin-top:32px}
     .resource{border:1px solid var(--line);background:var(--white);border-radius:13px;padding:29px;display:flex;flex-direction:column;align-items:start;min-height:259px}
     .resource.dark{background:#232d2b;border-color:#232d2b;color:white}
@@ -67,8 +67,8 @@
     .file-row a{font-size:13px;text-underline-offset:4px}.file-row small{color:var(--muted)}
     footer{border-top:1px solid var(--line);padding:27px 0 40px}.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:15px;font-size:12px;color:var(--muted)}
     @media(max-width:1050px){.hero{gap:25px}.matrix.a{grid-template-columns:repeat(3,28px)}.matrix.b,.matrix.c{grid-template-columns:repeat(2,28px)}.cell{min-width:28px;height:34px}.showcase-body{padding:24px 12px}.calc-row{gap:6px}}
-    @media(max-width:840px){.hero{grid-template-columns:1fr;padding:64px 0 54px}.showcase{max-width:550px;transform:none}.section{padding:72px 0}.curriculum{grid-template-columns:repeat(2,1fr)}.facts{grid-template-columns:repeat(3,1fr)}.fact{display:block;padding:22px 16px}.fact:not(:first-child){padding-left:16px}.fact .description{display:block;margin-top:5px}.steps{grid-template-columns:1fr}.step{min-height:auto}.section-head{display:block}.section-head p{max-width:600px;margin-top:19px}}
-    @media(max-width:550px){.wrap{padding:0 19px}.top{min-height:70px}.brand{font-size:18px}.top nav{gap:12px}.top nav a:first-child{display:none}.top nav .nav-cta{padding:9px 10px;font-size:12px}h1{font-size:49px}.hero-desc{font-size:16px}.actions .button{width:100%}.showcase-body{padding:20px 8px}.showcase-head{padding:14px}.calc-row{gap:4px}.matrix{padding:5px;gap:3px}.matrix.a{grid-template-columns:repeat(3,27px)}.matrix.b,.matrix.c{grid-template-columns:repeat(2,27px)}.cell{min-width:27px;height:33px;font-size:12px}.times{font-size:15px}.equation-box{margin-inline:6px}.fact .number{font-size:32px}.fact .description{font-size:11px}.curriculum{gap:8px}.topic{padding:16px;min-height:120px}.topic h3{font-size:14px}.resource-grid{grid-template-columns:1fr}.resource{min-height:240px}.resource h3{font-size:30px}}
+    @media(max-width:840px){.hero{grid-template-columns:1fr;padding:64px 0 54px}.showcase{max-width:550px;transform:none}.section{padding:72px 0}.curriculum{grid-template-columns:repeat(2,1fr)}.facts{grid-template-columns:repeat(3,1fr)}.fact{display:block;padding:17px 10px}.fact:not(:first-child){padding-left:16px}.fact .description{display:block;margin-top:5px}.steps{grid-template-columns:1fr}.step{min-height:auto}.section-head{display:block}.section-head p{max-width:600px;margin-top:19px}}
+    @media(max-width:550px){.wrap{padding:0 19px}.top{min-height:70px}.brand{font-size:18px}.top nav{gap:12px}.top nav a:first-child{display:none}.top nav .nav-cta{padding:9px 10px;font-size:12px}h1{font-size:49px}.hero-desc{font-size:16px}.actions .button{width:100%}.showcase-body{padding:20px 8px}.showcase-head{padding:14px}.calc-row{gap:4px}.matrix{padding:5px;gap:3px}.matrix.a{grid-template-columns:repeat(3,27px)}.matrix.b,.matrix.c{grid-template-columns:repeat(2,27px)}.cell{min-width:27px;height:33px;font-size:12px}.times{font-size:15px}.equation-box{margin-inline:6px}.fact .number{font-size:27px}.fact .description{font-size:10px}.curriculum{gap:8px}.topic{padding:16px;min-height:120px}.topic h3{font-size:14px}.resource-grid{grid-template-columns:1fr}.resource{min-height:240px}.resource h3{font-size:30px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button{transition:none}}
 
 .first-definition{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:32px 0;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(270px,.8fr);gap:28px;align-items:center}
@@ -90,9 +90,9 @@
     <div class="wrap top">
       <a href="./" class="brand" aria-label="Алгебра наглядно, главная"><span class="mark">A</span><span>алгебра / 01</span></a>
       <nav aria-label="Основная навигация">
-        <a href="#program">Программа</a><a href="./definitions.html">Определения</a>
+        <a href="./syllabus.html">62 пункта</a><a href="./definitions.html">Определения</a>
         <a href="#materials">Материалы</a>
-        <a class="nav-cta" href="./lab.html">Открыть лабораторию ↗</a>
+        <a class="nav-cta" href="./textbook.html">Полный учебник ↗</a>
       </nav>
     </div>
   </header>
@@ -105,7 +105,7 @@
           <p class="hero-desc">Сначала объясняем каждое новое слово: что такое матрица, ранг, минор или adj(A). Показываем на числах, выделяем нужные элементы — и только затем переходим к общей формуле.</p>
           <div class="actions">
             <a class="button primary" href="./definitions.html">Начать с определений <span aria-hidden="true">↗</span></a>
-            <a class="button secondary" href="./lab.html">Перейти к лаборатории <span aria-hidden="true">↗</span></a>
+            <a class="button secondary" href="./textbook.html">Полный учебник <span aria-hidden="true">↗</span></a>
           </div>
           <p class="smallprint">Бесплатно · без регистрации · тренажёр работает без сервера</p>
         </div>
@@ -158,11 +158,28 @@
         </div>
       </section>
       <div class="facts" aria-label="Содержание курса">
+        <div class="fact"><span class="number">62</span><span class="description">официальных пункта<br>с полными разборами</span></div>
         <div class="fact"><span class="number">53</span><span class="description">страницы наглядного<br>пособия</span></div>
         <div class="fact"><span class="number">18</span><span class="description">схем и иллюстраций<br>с числами</span></div>
         <div class="fact"><span class="number">08</span><span class="description">интерактивных разделов<br>для практики</span></div>
       </div>
     </div>
+    <section class="section" id="all-topics">
+      <div class="wrap">
+        <div class="section-tag">Полная программа · а не только умножение матриц</div>
+        <div class="section-head"><h2>Выбери тему,<br>которую не понимаешь.</h2><p>Здесь есть самостоятельные наглядные уроки, все доказательства и все официальные типы задач. Можно идти прямо к нужной теме.</p></div>
+        <div class="curriculum">
+          <a class="topic" href="./determinants.html"><span class="id">ОТ ОСНОВ К 3×3 И n×n</span><h3>Определители, свойства, рекурсии ↗</h3></a>
+          <a class="topic" href="./permutations.html"><span class="id">ПО КОНВЕНЦИИ КУРСА</span><h3>Подстановки слева направо ↗</h3></a>
+          <a class="topic" href="./lab.html"><span class="id">8 ТРЕНАЖЁРОВ</span><h3>Матрицы, Гаусс, ранг, LU ↗</h3></a>
+          <a class="topic" href="./textbook.html"><span class="id">ПОЛНОЕ ИЗЛОЖЕНИЕ</span><h3>Учебник с формулами ↗</h3></a>
+          <a class="topic" href="./definitions.html"><span class="id">D01–D26</span><h3>26 определений с примерами ↗</h3></a>
+          <a class="topic" href="./proofs.html"><span class="id">P01–P11</span><h3>11 доказательств ↗</h3></a>
+          <a class="topic" href="./problems.html"><span class="id">T01–T12 + №</span><h3>25 задач и скрытые решения ↗</h3></a>
+          <a class="topic" href="./syllabus.html"><span class="id">АУДИТ ПОЛНОТЫ</span><h3>Чек-лист 62 пунктов ↗</h3></a>
+        </div>
+      </div>
+    </section>
     <section class="section">
       <div class="wrap">
         <div class="section-tag">Как устроено обучение</div>
@@ -196,10 +213,10 @@
         <div class="section-tag">Материалы</div>
         <div class="section-head"><h2>Учиться, а не<br>переписывать формулы.</h2><p>Всё необходимое рядом: полный PDF, интерактивные задания и отдельная мини-контрольная.</p></div>
         <div class="resource-grid">
-          <article class="resource dark"><div class="resource-label">Основной материал · PDF</div><h3>Наглядный учебник</h3><p>Разборы с нуля, числовые примеры, 26 определений, 11 доказательств, 12 основных и 13 дополнительных задач.</p><a href="./assets/Algebra_KR1_2026_VISUAL.pdf" target="_blank" rel="noopener">Открыть пособие · 53 стр. ↗</a></article>
+          <article class="resource dark"><div class="resource-label">Главный материал · полный онлайн-учебник</div><h3>Наглядный учебник</h3><p>Разборы с нуля, числовые примеры, 26 определений, 11 доказательств, 12 основных и 13 дополнительных задач.</p><a href="./textbook.html">Открыть полную исправленную онлайн-версию ↗</a></article>
           <article class="resource"><div class="resource-label">Самостоятельная работа</div><h3>Проверить себя</h3><p>Реши четыре новые задачи самостоятельно. Ключ с ответами находится отдельно, чтобы не подглядывать.</p><a href="./assets/KR1_Practice_No_Answers.pdf" target="_blank" rel="noopener">Открыть мини-КР ↗</a></article>
         </div>
-        <div class="file-row"><a href="./assets/KR1_Answer_Key.pdf" target="_blank" rel="noopener">Ответы к мини-КР ↗</a><a href="https://github.com/Misha1302/algebra-kr1-visual" target="_blank" rel="noopener">Исходники на GitHub ↗</a><small>Файлы можно скачать и читать офлайн.</small></div>
+        <div class="file-row"><a href="./assets/KR1_Answer_Key.pdf" target="_blank" rel="noopener">Ответы к мини-КР ↗</a><a href="./assets/Algebra_KR1_2026_LEFT_TO_RIGHT_FULL.pdf" target="_blank" rel="noopener">Скачать исправленную PDF-версию (38 страниц) ↗</a><a href="./assets/Algebra_KR1_2026_VISUAL.pdf" target="_blank" rel="noopener">Прежний иллюстрированный PDF — другое соглашение о подстановках ↗</a><a href="https://github.com/Misha1302/algebra-kr1-visual" target="_blank" rel="noopener">Исходники на GitHub ↗</a><small>Файлы можно скачать и читать офлайн.</small></div>
       </div>
     </section>
   </main>
