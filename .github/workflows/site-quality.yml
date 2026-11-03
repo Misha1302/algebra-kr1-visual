@@ -1,0 +1,40 @@
+name: Content and interaction quality
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out course
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install sympy beautifulsoup4 playwright
+          python -m playwright install --with-deps chromium
+      - name: Check JavaScript syntax
+        run: |
+          node --check assets/learn.js
+          node --check assets/determinants.js
+          node --check assets/permutations.js
+          node --check theory.js
+      - name: Verify mathematics
+        run: python tests/math_invariants.py
+      - name: Verify first-principles teaching journey
+        run: python tests/learning_journey.py
+      - name: Verify main site and lab
+        run: python tests/site_smoke.py
+      - name: Verify all 62 official topics and deep links
+        run: python tests/full_site_smoke.py

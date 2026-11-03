@@ -3,93 +3,632 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f5f2e9">
-<meta name="description" content="26 определений к первой контрольной по алгебре: строгие формулировки, простые объяснения, числовые примеры и ссылки на интерактивные упражнения.">
-<title>26 определений по алгебре · Наглядно</title>
+<meta name="description" content="Линейная алгебра с нуля к КР №1: настоящий пошаговый учебник с определениями, диаграммами, интерактивными вычислениями, доказательствами и задачами.">
+<meta name="theme-color" content="#f6f5ef">
+<title>Линейная алгебра с нуля — последовательный учебник · КР №1</title>
+<link rel="stylesheet" href="./assets/learn.css">
 <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-<style>
-:root{--bg:#f5f2e9;--paper:#fffefa;--ink:#202727;--muted:#606e69;--line:#d9d9d1;--blue:#2548ae}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:25px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-underline-offset:3px}button,input{font:inherit}button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #e99f36;outline-offset:3px}
-.container{max-width:1130px;padding:0 30px;margin:auto}
-nav{border-bottom:1px solid var(--line);background:var(--paper)}.nav-inner{min-height:71px;display:flex;justify-content:space-between;align-items:center;gap:14px}
-.logo{font-size:18px;font-weight:800;letter-spacing:-.04em;text-decoration:none}.logo b{display:inline-grid;place-items:center;background:#24302d;color:white;border-radius:6px;width:31px;height:31px;margin-right:8px;font-size:15px;letter-spacing:0}
-.links{display:flex;align-items:center;gap:20px;font-size:13px;font-weight:650}.links a{text-decoration:none}.links a:hover{text-decoration:underline}
-.hero{padding:65px 0 45px;border-bottom:1px solid var(--line)}.kicker{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--blue);font-weight:850;margin-bottom:13px}h1,h2{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.047em;line-height:1.13}h1{font-size:clamp(41px,5.5vw,68px);margin:0 0 21px}h1 em{color:var(--blue)}.hero p{max-width:760px;margin:0;color:#4b5c55;font-size:17px;line-height:1.67}
-.start{display:grid;grid-template-columns:1.2fr .8fr;gap:25px;align-items:center;margin:32px 0 0;padding:27px;background:var(--paper);border:1px solid var(--line);border-radius:12px}
-.start h2{font-size:30px;margin:0 0 13px}.start p{color:var(--muted);margin:0 0 12px;font-size:15px}.start p:last-child{margin:0}
-.mini{background:#f2f5f2;padding:22px;border-radius:8px;text-align:center}.mini-label{font-size:12px;color:var(--muted);margin-bottom:9px;font-weight:700}
-.columns{font-size:10px;color:#6c7971;display:grid;grid-template-columns:repeat(3,1fr);margin-left:26px;margin-bottom:5px;gap:4px}
-.demo-matrix{display:grid;grid-template-columns:24px repeat(3,minmax(37px,1fr));gap:5px;align-items:center;max-width:250px;margin:auto}
-.demo-matrix .rowlabel{font-size:11px;color:#6c7971}.demo-matrix .cell{background:#fff;border:1px solid #d4dcd9;border-radius:5px;padding:10px 7px;font-weight:800;text-align:center}
-.demo-matrix .cell.active{background:#dfe8ff;color:var(--blue);border-color:#95b0ff}.mini-note{font-size:12px;color:#485952;margin-top:13px}
-.info{padding:35px 0 17px}.info-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:18px}
-.info-head h2{font-size:37px;margin:0}.info-head span{font-size:13px;color:var(--muted)}.toolbar{display:grid;grid-template-columns:minmax(210px,1fr) auto;gap:12px;align-items:center}
-.search{background:#fff;border:1px solid #ccd3ce;border-radius:8px;padding:14px 16px;width:100%;font-size:15px}
-.filter{display:flex;gap:7px;flex-wrap:wrap}.filter button{border:1px solid #ccd3ce;color:#4d6058;background:transparent;font-size:12px;font-weight:700;border-radius:6px;padding:10px 11px;cursor:pointer}
-.filter button.active{background:#26332e;color:white;border-color:#26332e}
-.result{font-size:12px;color:var(--muted);min-height:24px;margin-top:13px}
-.list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;padding-bottom:78px;align-items:stretch}
-.def{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:24px;scroll-margin-top:23px}
-.def .top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
-.def .id{font-size:12px;font-weight:850;color:var(--blue)}.def .group{font-size:11px;color:#667771;text-align:right}
-.def h3{font-size:21px;letter-spacing:-.03em;line-height:1.25;margin:0 0 16px}
-.def p{font-size:14px;line-height:1.63;margin:0 0 14px;color:#43524d}
-.def p:last-child{margin:0}
-.def p b{display:block;color:#26312d;font-size:11px;letter-spacing:.065em;text-transform:uppercase;margin-bottom:4px}
-.def .formal{padding:12px 14px;background:#f3f4f0;border-left:2px solid #acbcb0;border-radius:0 5px 5px 0}
-.def .example{background:#e8edf9;color:#1f386d;border-radius:6px;padding:12px 14px;overflow-wrap:anywhere}
-.def .example b{color:#345b9b}
-.def a{font-size:13px;color:var(--blue);font-weight:700;display:inline-block;margin-top:4px}
-.hidden{display:none!important}
-.empty{padding:30px;text-align:center;color:var(--muted);grid-column:1/-1}
-.foot{border-top:1px solid var(--line);padding:24px 0 35px;color:var(--muted);font-size:12px}
-@media(max-width:1050px){.toolbar{grid-template-columns:1fr}.filter{overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}.filter button{white-space:nowrap}}
-@media(max-width:700px){.container{padding:0 19px}.nav-inner{min-height:65px}.links{gap:10px;font-size:12px}.links a:last-child{display:none}.hero{padding:45px 0 35px}.hero p{font-size:15px}.start{grid-template-columns:1fr;padding:20px}.start h2{font-size:26px}.info-head{display:block}.info-head h2{font-size:32px}.list{grid-template-columns:1fr}.def{padding:22px 19px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-</style>
 </head>
 <body>
-<nav aria-label="Навигация сайта"><div class="container nav-inner">
-<a class="logo" href="./"><b>A</b> алгебра / 01</a>
-<div class="links"><a href="./">Главная</a><a href="./lab.html#matrix">Лаборатория</a><a href="./textbook.html">Полный учебник ↗</a></div>
-</div></nav>
-<main>
-<div class="container">
-<section class="hero">
-<div class="kicker">Вводный справочник · Контрольная №1</div>
-<h1>Сначала <em>определение.</em><br>Потом задача.</h1>
-<p><a href="./determinants.html">Определители с нуля ↗</a> · <a href="./permutations.html">Подстановки слева направо ↗</a></p><p>Это не список слов для заучивания. Для каждого понятия ниже есть три слоя: <strong>что оно означает простыми словами</strong>, <strong>строгая формулировка</strong> и <strong>маленький пример</strong>. Если встречается незнакомое слово, начни с него, а затем переходи к вычислению.</p>
-<div class="start" id="before">
-<div>
-<h2>Нулевая ступень: что такое матрица?</h2>
-<p><strong>Матрица</strong> — прямоугольная таблица чисел. <strong>Строка</strong> — горизонтальный ряд, <strong>столбец</strong> — вертикальный. <strong>Размер</strong> записывается как «число строк × число столбцов».</p>
-<p>Здесь две строки и три столбца, значит <strong>2 × 3</strong>. Элемент <strong>a₂₃</strong> означает число во второй строке и третьем столбце: это <strong>6</strong>. Первая цифра индекса — строка, вторая — столбец.</p>
-<p><a href="./lab.html#matrix">Попробовать умножение на этой матрице ↗</a></p>
+<header class="site-nav">
+  <a href="./" class="site-brand"><span class="brand-icon">A</span> алгебра / КР №1</a>
+  <nav class="site-links" aria-label="Разделы сайта">
+    <a href="./" >Главная</a>
+    <a href="./definitions.html" class="active" aria-current="page">Учебник с нуля</a>
+    <a href="./syllabus.html">Все 62 пункта</a>
+    <a href="./problems.html">Задачи</a>
+    <a href="./proofs.html">Доказательства</a>
+  </nav>
+</header>
+<div class="course-layout">
+  <aside class="nav-panel" aria-label="Маршрут обучения">
+    <div class="nav-title">Учебный маршрут</div>
+    <nav class="course-nav" id="course-nav">
+      <a href="#chapter-0"><span class="num">01</span><span>Матрицы: что означают числа и индексы</span></a>
+      <a href="#chapter-1"><span class="num">02</span><span>Гаусс: почему разрешено менять строки</span></a>
+      <a href="#chapter-2"><span class="num">03</span><span>Подстановки и определители</span></a>
+      <a href="#chapter-3"><span class="num">04</span><span>Крамер, adj и обратная матрица</span></a>
+      <a href="#chapter-4"><span class="num">05</span><span>Ранг и линейная зависимость</span></a>
+      <a href="#chapter-5"><span class="num">06</span><span>Кронекер — Капелли и СЛАУ</span></a>
+      <a href="#chapter-6"><span class="num">07</span><span>LU, разложения, рекурсии и практика</span></a>
+    </nav>
+    <div class="side-status">Прохождение: <b id="chapter-progress">0/7</b> глав изучено</div>
+    <div class="side-note">Новая тема вводится через <strong>действие → объяснение → определение → проверку</strong>. Полные теоретические доказательства и официальный перечень доступны по ссылкам внутри глав.</div>
+  </aside>
+  <main class="course-body">
+    <section class="hero" aria-labelledby="course-title">
+      <div class="eyebrow">Реальный учебник · от первого знакомства до контрольной</div>
+      <h1 id="course-title">Понять <em>как работает</em> алгебра.</h1>
+      <p>Здесь не нужно знать, что такое <strong>минор, ранг, определитель или adj(A)</strong> заранее. Каждое новое понятие возникает из конкретной задачи, а затем получает строгое определение. Строки и столбцы выделяются, вычисления показываются по шагам, ограничения объясняются на ошибочных примерах.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#chapter-0">Начать с первой главы <span aria-hidden="true">→</span></a>
+        <a class="btn" href="./syllabus.html">Список всех 62 вопросов</a>
+        <a class="btn" href="./textbook.html">Формальные доказательства</a>
+      </div>
+      <div class="hero-structure">
+        <div><span>01</span><strong>Увидеть</strong><small>Что меняется на рисунке?</small></div>
+        <div><span>02</span><strong>Посчитать</strong><small>Откуда взялось число?</small></div>
+        <div><span>03</span><strong>Обобщить</strong><small>Когда формула работает?</small></div>
+      </div>
+    </section>
+
+    <section class="chapter" id="chapter-0" aria-labelledby="ch0-title">
+      <div class="chapter-head">
+        <div class="chapter-number">Глава 01 / Матрицы и операции</div>
+        <h2 id="ch0-title">Сначала научимся читать матрицу.</h2>
+        <p class="chapter-intro">Перед тем как умножать или транспонировать таблицы, нужно договориться, что называется строкой, столбцом, размером и элементом. Без этих четырёх слов индексы в определениях выглядят бессмысленно.</p>
+        <div class="outcome"><b>После главы</b><span>Ты определишь размеры, найдёшь любой элемент по индексам, сам умножишь две матрицы, объяснишь ограничение размеров и транспонируешь матрицу без угадывания.</span></div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 1 · Куда смотреть</div>
+        <h3>Матрица — прямоугольная таблица чисел</h3>
+        <p>Возьмём обычную таблицу с шестью числами. Горизонтальные группы называют <strong>строками</strong>, вертикальные — <strong>столбцами</strong>. Первый индекс обозначает <strong>номер строки</strong>, второй — <strong>номер столбца</strong>. Нумерация начинается с единицы.</p>
+        <div class="visual">
+          <div class="visual-head"><h4>Прочитай положение числа</h4><small>Нажми на любую клетку</small></div>
+          <div class="matrix-row"><div class="mat-wrap"><div class="mat-label">Матрица A · 2 строки × 3 столбца</div><div class="mat" style="--cols:3" id="base-matrix">
+            <button class="v" type="button" data-i="0" data-j="0">1</button><button class="v" type="button" data-i="0" data-j="1">2</button><button class="v" type="button" data-i="0" data-j="2">3</button>
+            <button class="v" type="button" data-i="1" data-j="0">4</button><button class="v" type="button" data-i="1" data-j="1">5</button><button class="v" type="button" data-i="1" data-j="2">6</button>
+          </div></div></div>
+          <div class="visual-note" id="base-explain" aria-live="polite">Для числа 6: вторая строка, третий столбец → a₂₃ = 6.</div>
+        </div>
+        <div class="formal"><div class="formal-head">Первое рабочее определение</div><p><em>Матрица размера m × n</em> — таблица из m строк и n столбцов. Её элемент на пересечении строки i и столбца j обозначают aᵢⱼ. Индексы i и j — адрес числа в таблице, а не операции умножения.</p></div>
+        <p class="why"><strong>Почему 2 × 3, а не 3 × 2?</strong> Первым пишем число строк. Для A это две горизонтальные группы по три числа, значит размер 2 × 3. Именно эту информацию далее использует правило умножения.</p>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 2 · Операция по парам</div>
+        <h3>Умножение: сначала строка, затем столбец</h3>
+        <p>Пусть у нас есть A размера <strong>2 × 3</strong> и B размера <strong>3 × 2</strong>. Чтобы найти одно число в произведении C = AB, берём <strong>одну строку A</strong> и <strong>один столбец B</strong>. Накладываем их как два списка одинаковой длины; элементы на одинаковых позициях перемножаем, а произведения складываем.</p>
+        <div class="visual" id="multiply-visual">
+          <div class="visual-head"><h4>Где берётся каждый элемент C?</h4><small>Выбирай зелёную клетку результата и раскрывай сумму</small></div>
+          <div class="matrix-row">
+            <div class="mat-wrap"><div class="mat-label">A · 2 × 3</div><div class="mat" style="--cols:3" id="mul-A"></div></div>
+            <span class="symbol-op">×</span>
+            <div class="mat-wrap"><div class="mat-label">B · 3 × 2</div><div class="mat" style="--cols:2" id="mul-B"></div></div>
+            <span class="symbol-op">=</span>
+            <div class="mat-wrap"><div class="mat-label">C · 2 × 2</div><div class="mat" style="--cols:2" id="mul-C"></div></div>
+          </div>
+          <div class="key"><span><i class="blue"></i>выбранная строка A</span><span><i class="amber"></i>столбец B</span><span><i class="green"></i>клетка C</span></div>
+          <div class="work-step"><span class="step-num">1</span><div><p id="mul-step-text">Выбрали строку 1 и столбец 1.</p><span class="mathline" id="mul-equation">1·7 + 2·9 + 3·11 = 58</span></div></div>
+          <div class="controlbar"><button type="button" id="mul-next">Следующий промежуточный шаг →</button><button type="button" id="mul-restart">Сначала</button></div>
+          <p class="visual-note" id="mul-hint" aria-live="polite">Каждая клетка вычисляется независимо; попробуй выбрать C₁₂.</p>
+        </div>
+        <div class="worked">
+          <div class="worked-header"><strong>Разбор c₁₂ без формулы</strong><span>Первая строка × второй столбец</span></div>
+          <div class="worked-body">
+            <div class="work-step"><span class="step-num">1</span><p>Выбираем строку 1 из A: <strong>(1, 2, 3)</strong>.</p></div>
+            <div class="work-step"><span class="step-num">2</span><p>Выбираем столбец 2 из B: <strong>(8, 10, 12)</strong>.</p></div>
+            <div class="work-step"><span class="step-num">3</span><p>Сопоставляем числа на одинаковых позициях: <strong>1·8, 2·10, 3·12</strong>.</p></div>
+            <div class="work-step"><span class="step-num">4</span><p>Складываем: <strong>8 + 20 + 36 = 64</strong>. Получается <strong>c₁₂ = 64</strong>.</p></div>
+          </div>
+        </div>
+        <div class="formal" id="D01"><div class="formal-head">D01 · Строгое определение умножения</div><p>Для A размера m × p и B размера p × n произведение C = AB имеет размер m × n. Его элемент cᵢⱼ равен сумме <em>cᵢⱼ = aᵢ₁b₁ⱼ + aᵢ₂b₂ⱼ + … + aᵢₚbₚⱼ</em>. Запись Σ означает сложение всех p попарных произведений.</p><div class="symbols">i — номер строки A; j — номер столбца B; k пробегает позиции от 1 до p.</div></div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 3 · Зачем нужно ограничение</div>
+        <h3>Почему нельзя умножить матрицы любых размеров?</h3>
+        <p>Мы соединяем <strong>строку</strong> первой матрицы со <strong>столбцом</strong> второй. У них должно быть <em>одинаковое количество элементов</em>. Если в строке три числа, а в столбце два, третьему числу строки просто не с чем составить пару.</p>
+        <div class="visual">
+          <div class="visual-head"><h4>Проверь два случая</h4><small>Сравни длину списков</small></div>
+          <div class="controlbar"><button type="button" id="size-ok" aria-pressed="true">A 2×3, B 3×2</button><button type="button" id="size-bad" aria-pressed="false">A 2×3, B 2×2</button></div>
+          <div id="size-visual" class="visual-note" aria-live="polite"><strong>Совместимо:</strong> в строке A три элемента, в столбце B — тоже три.</div>
+        </div>
+        <p>Если обозначить размеры как A: n × p, B: q × m (четыре буквы), то придётся наложить условие <strong>p = q</strong>. Эти две размерности не независимы, поэтому их удобно сразу обозначить одной буквой p. Остаются три независимых размера: <strong>(n × p) · (p × m) → (n × m)</strong>.</p>
+        <div class="why"><strong>Ещё одна ловушка:</strong> даже когда оба произведения AB и BA существуют, обычно AB ≠ BA. Перестановка порядка меняет, какие строки и столбцы сопоставляются.</div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 4 · Перенос без арифметики</div>
+        <h3>Транспонирование: поменять строки и столбцы</h3>
+        <p><strong>Транспонировать A</strong> — записать её первую строку как первый столбец новой матрицы, вторую строку как второй столбец и так далее. Никакого сложения или умножения нет: числа просто получают новые адреса. Обозначение — Aᵀ.</p>
+        <div class="visual" id="transpose-visual">
+          <div class="visual-head"><h4>Куда переехало конкретное число?</h4><small>Нажми на любую клетку исходной матрицы</small></div>
+          <div class="matrix-row">
+            <div class="mat-wrap"><div class="mat-label">A · 2 × 3</div><div class="mat" style="--cols:3" id="tr-A"></div></div>
+            <span class="symbol-op">→</span>
+            <div class="mat-wrap"><div class="mat-label">Aᵀ · 3 × 2</div><div class="mat" style="--cols:2" id="tr-T"></div></div>
+          </div>
+          <div class="visual-note" id="tr-caption" aria-live="polite">Выбрано число 6: адрес (2,3) меняется на (3,2). Значение не меняется.</div>
+        </div>
+        <div class="formal"><div class="formal-head">Строгая запись транспонирования</div><p>У A размера m × n транспонированная Aᵀ имеет размер n × m и <em>(Aᵀ)ⱼᵢ = aᵢⱼ</em>. Операция похожа на отражение таблицы относительно главной диагонали, а не на поворот на 180°.</p></div>
+        <p>Если транспонировать матрицу ещё раз, каждый адрес (i, j) снова станет (i, j). Поэтому <strong>(Aᵀ)ᵀ = A</strong>.</p>
+      </div>
+      <div class="quickcheck" data-check="matrix">
+        <div class="qhead">Проверка понимания · глава 1</div>
+        <h4>Матрица A имеет размер 4×3, B — 3×2. Какой размер у AB?</h4>
+        <div class="choices"><button type="button" data-answer="bad">3×3</button><button type="button" data-answer="yes">4×2</button><button type="button" data-answer="bad">4×3</button></div>
+        <div class="feedback" hidden aria-live="polite"></div>
+      </div>
+      <div class="summary"><h3>Что теперь должно получаться без подсказок</h3><ul><li>Найти a₂₃ в прямоугольной таблице и объяснить оба индекса.</li><li>Взять строку из A и столбец из B, выписать пары и сложить произведения.</li><li>Объяснить несовместимые размеры без фразы «такое правило».</li><li>Перенести aᵢⱼ в Aᵀ и объяснить изменение размера.</li></ul></div>
+      <div class="chapter-next"><span class="chapter-footer">Официальные вопросы: <a href="./textbook.html#D01">D01</a>, доказательство <a href="./proofs.html#P01">P01</a>.</span><a href="#chapter-1">Далее: метод Гаусса →</a></div>
+    </section>
+
+    <section class="chapter" id="chapter-1" aria-labelledby="ch1-title">
+      <div class="chapter-head">
+        <div class="chapter-number">Глава 02 / Элементарные преобразования и Гаусс</div>
+        <h2 id="ch1-title">Как убрать неизвестную и не потерять решение?</h2>
+        <p class="chapter-intro">Метод Гаусса кажется набором манипуляций со строками. Но строка расширенной матрицы — это просто одно уравнение. Увидим, какие действия сохраняют его решения и почему в результате появляются «ступеньки».</p>
+        <div class="outcome"><b>После главы</b><span>Ты сможешь записать систему в виде матрицы, выполнять три разрешённых преобразования, получать ступенчатый вид и находить решение обратным ходом.</span></div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 1 · От уравнений к таблице</div>
+        <h3>Зачем здесь строки?</h3>
+        <p>Возьмём систему <strong>x + y = 3</strong> и <strong>2x − y = 0</strong>. В обеих строках сначала стоит коэффициент при x, затем при y, а после вертикальной черты — правая часть.</p>
+        <div class="visual">
+          <div class="visual-head"><h4>Одно уравнение = одна строка</h4><small>Черта отделяет свободный член</small></div>
+          <div class="matrix-row">
+            <div class="mat-wrap"><div class="mat-label">Обычная запись</div><span class="mathline">x + y = 3<br>2x − y = 0</span></div>
+            <span class="symbol-op">→</span>
+            <div class="mat-wrap"><div class="mat-label">Расширенная матрица</div><div class="mat" style="--cols:3">
+              <span class="v">1</span><span class="v">1</span><span class="v focus">3</span>
+              <span class="v">2</span><span class="v">−1</span><span class="v focus">0</span>
+            </div></div>
+          </div><p class="visual-note">В расширенной матрице A|b последний столбец — правая часть b. Сами неизвестные не исчезли: известен порядок столбцов x, y.</p>
+        </div>
+        <p>Наша цель — уничтожить коэффициент 2 под первым x во втором уравнении, чтобы осталось только y. Для этого вычтем из второй строки удвоенную первую: <strong>R₂ ← R₂ − 2R₁</strong>.</p>
+        <div class="worked">
+          <div class="worked-header"><strong>Преобразование одной строки, поэлементно</strong><span>Не пропускаем столбец с правой частью</span></div>
+          <div class="worked-body">
+            <div class="work-step"><span class="step-num">1</span><p>Первый столбец: <strong>2 − 2·1 = 0</strong> — коэффициент при x уничтожен.</p></div>
+            <div class="work-step"><span class="step-num">2</span><p>Второй столбец: <strong>−1 − 2·1 = −3</strong>.</p></div>
+            <div class="work-step"><span class="step-num">3</span><p>Правая часть: <strong>0 − 2·3 = −6</strong>.</p></div>
+            <div class="work-step"><span class="step-num">4</span><p>Новая вторая строка: <strong>[0, −3 | −6]</strong> или уравнение <strong>−3y = −6</strong>.</p></div>
+          </div>
+        </div>
+        <div class="formal" id="D02"><div class="formal-head">D02 · Элементарные преобразования строк</div>
+          <p>Разрешены три вида операций: <em>(1)</em> поменять две строки местами; <em>(2)</em> умножить строку на ненулевое число; <em>(3)</em> прибавить к строке другую строку, умноженную на любое число. Если преобразуем расширенную матрицу системы, эти действия не меняют множество её решений.</p>
+        </div>
+        <div class="why"><strong>Почему нельзя умножить строку на ноль?</strong> Уравнение x = 1 превратится в 0 = 0. Мы потеряем информацию x = 1 и получим лишние решения. Поэтому множитель во второй операции должен быть <strong>ненулевым</strong>.</div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 2 · Одна операция за раз</div>
+        <h3>Приведём систему к ступенчатому виду</h3>
+        <div class="visual" id="gauss-demo">
+          <div class="visual-head"><h4>Метод Гаусса на нашей системе</h4><small>Листай операции и сравнивай строки</small></div>
+          <div class="matrix-row"><div class="mat-wrap"><div class="mat-label" id="gauss-label">Исходная матрица</div><div class="mat" id="gauss-matrix" style="--cols:3"></div></div></div>
+          <div class="worked-body"><div class="work-step"><span class="step-num" id="gauss-count">0</span><div><p id="gauss-operation">Сначала выбираем первую ненулевую клетку в первом столбце.</p><span class="mathline blue" id="gauss-equation">[1, 1 | 3] и [2, −1 | 0]</span><small id="gauss-why">Поскольку слева сверху стоит 1, можем использовать первую строку для исключения x.</small></div></div></div>
+          <div class="controlbar"><button type="button" id="gauss-prev">← Назад</button><button type="button" id="gauss-next">Следующая операция →</button><button type="button" id="gauss-reset">Начать снова</button></div>
+        </div>
+        <p>После исключения x во второй строке остаётся <strong>−3y = −6</strong>. Делим обе части на −3, получаем y = 2; в первую строку подставляем y = 2, откуда x = 1. Именно это называется <strong>обратным ходом</strong>.</p>
+        <div class="formal" id="D03"><div class="formal-head">D03 · Ступенчатая и улучшенная ступенчатая формы</div>
+          <p><em>Ступенчатая матрица</em>: нулевые строки расположены внизу, а первый ненулевой элемент каждой следующей ненулевой строки стоит <strong>правее</strong> первого ненулевого элемента предыдущей. Такой первый ненулевой элемент называют ведущим. В <em>улучшенном ступенчатом</em> виде ведущие элементы равны 1 и в каждом ведущем столбце остальные элементы равны нулю.</p>
+          <p class="symbols">Наш пример: [1,1|3], [0,−3|−6] — ступенчатый вид. [1,0|1], [0,1|2] — улучшенный ступенчатый.</p>
+        </div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 3 · Что гарантирует метод</div>
+        <h3>Почему метод Гаусса всегда можно продолжить?</h3>
+        <p>Если в текущем столбце есть ненулевое число, его можно поставить на ведущую позицию перестановкой строк. Затем обнулить все элементы ниже ведущего. После этого переходят к столбцам справа и строкам ниже: число ещё не обработанных строк или столбцов уменьшается. Поэтому процесс завершается.</p>
+        <div class="formal" id="D04"><div class="formal-head">D04 · Теорема о методе Гаусса</div>
+          <p>Любую матрицу можно с помощью элементарных преобразований строк привести к ступенчатой форме, а затем — к улучшенной ступенчатой. Для расширенной матрицы системы при этом сохраняется множество решений.</p>
+        </div>
+        <div class="note">Гаусс работает и с прямоугольными матрицами, и при наличии параметров. Но если мы хотим делить на выражение, содержащее параметр λ, сначала следует проверить, когда этот делитель равен нулю.</div>
+        <div class="quickcheck" data-check="gauss">
+          <div class="qhead">Проверка понимания · глава 2</div>
+          <h4>После операции R₂ ← R₂ − 2R₁ со строками [1,1 | 3] и [2,−1 | 0] получим…</h4>
+          <div class="choices"><button type="button" data-answer="bad">[0, −3 | 0]</button><button type="button" data-answer="yes">[0, −3 | −6]</button><button type="button" data-answer="bad">[0, 1 | 6]</button></div>
+          <div class="feedback" hidden aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="summary"><h3>Проверь себя без подсказки</h3><ul><li>Объясни, почему преобразования строк расширенной матрицы не меняют решения, а умножение на ноль — меняет.</li><li>Выполни вычитание строк поэлементно, включая правую часть.</li><li>Отличи ступенчатую форму от улучшенной и найди ведущие элементы.</li></ul></div>
+      <div class="chapter-next"><span class="chapter-footer">Официальные вопросы: <a href="./textbook.html#D02">D02</a>, <a href="./textbook.html#D03">D03</a>, <a href="./textbook.html#D04">D04</a>. Задача: <a href="./problems.html#T09">T09</a>.</span><a href="#chapter-2">Далее: перестановки и определители →</a></div>
+    </section>
+
+    <section class="chapter" id="chapter-2" aria-labelledby="ch2-title">
+      <div class="chapter-head">
+        <div class="chapter-number">Глава 03 / Подстановки, инверсии, определители</div>
+        <h2 id="ch2-title">Почему определитель — не просто перемножение чисел?</h2>
+        <p class="chapter-intro">Чтобы понять определитель большой матрицы, нужно увидеть способ выбирать числа: <strong>ровно одно из каждой строки и каждого столбца</strong>. Выбор задаёт подстановка, её чётность задаёт знак, а миноры позволяют вычислять тот же результат проще.</p>
+        <div class="outcome"><b>После главы</b><span>Ты отличишь перестановку от подстановки, посчитаешь инверсии, найдёшь определитель 2×2, вычислишь минор и дополнение, разложишь 3×3 по строке и объяснишь «фальшивое» разложение.</span></div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 1 · От списка к отображению</div>
+        <h3>Перестановка и подстановка — не одно и то же слово</h3>
+        <p><strong>Перестановка</strong> — список тех же элементов в некотором порядке без повторений, например (3,1,2). <strong>Подстановка</strong> — правило, которое каждому исходному номеру 1,2,3 ставит в соответствие новый номер. Если записать подстановку в две строки, верхняя строка — <em>аргументы</em>, нижняя — <em>образы</em>.</p>
+        <div class="visual">
+          <div class="visual-head"><h4>Проследи движение одного числа</h4><small>Нажми на исходный элемент</small></div>
+          <div class="matrix-row"><div class="mat-wrap"><div class="mat-label">σ: образ каждого номера</div><div class="mat" style="--cols:3"><span class="v">1</span><span class="v">2</span><span class="v">3</span><span class="v sel-h">2</span><span class="v">3</span><span class="v">1</span></div></div></div>
+          <div class="controlbar" id="permutation-points"><button type="button" data-p="1" aria-pressed="true">Начать с 1</button><button type="button" data-p="2">Начать с 2</button><button type="button" data-p="3">Начать с 3</button></div>
+          <div class="visual-note" id="permutation-caption" aria-live="polite">σ(1)=2: число 1 перешло в 2. Затем 2→3, 3→1: это цикл (1 2 3).</div>
+        </div>
+        <div class="formal" id="D05"><div class="formal-head">D05 · Перестановка и подстановка</div><p><em>Перестановка</em> n элементов — их упорядочение без повторений. <em>Подстановка</em> — биекция множества {1,…,n} на себя: каждому элементу поставлен один образ, и каждый номер является образом ровно одного элемента. Все такие подстановки образуют множество Sₙ; их количество — n!.</p></div>
+        <p>В твоём курсе подстановки <strong>компонуются слева направо</strong>: запись στ означает <strong>сначала применить σ, затем τ</strong>. Например, для σ=(1 2), τ=(2 3) имеем στ=(1 3 2), потому что 1→2→3, 3→3→2, 2→1→1.</p>
+        <div class="why"><strong>Важная договорённость.</strong> (στ)(i)=τ(σ(i)). В других учебниках могут начинать с правой подстановки. Не смешивай эти правила. <a href="./permutations.html#product">В отдельном тренажёре</a> можно пройти оба порядка и увидеть различие.</div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 2 · Определяем знак</div>
+        <h3>Инверсия — пара, в которой порядок нарушен</h3>
+        <p>У списка (3,1,2) число 3 стоит раньше чисел 1 и 2, хотя больше обоих. Получаются две <strong>инверсии</strong>: 3&gt;1 и 3&gt;2. Их количество чётное, поэтому знак этой подстановки <strong>+1</strong>. Для списка (2,1,3) только одна инверсия 2&gt;1, знак <strong>−1</strong>.</p>
+        <div class="worked">
+          <div class="worked-header"><strong>Как самостоятельно посчитать инверсии</strong><span>Без угадывания чётности</span></div>
+          <div class="worked-body">
+            <div class="work-step"><span class="step-num">1</span><p>Для каждого элемента просмотри все числа <strong>справа</strong> от него.</p></div>
+            <div class="work-step"><span class="step-num">2</span><p>Подсчитай, сколько из этих чисел <strong>меньше</strong> выбранного.</p></div>
+            <div class="work-step"><span class="step-num">3</span><p>Сложи количества. Если сумма чётная — знак +; если нечётная — знак −.</p></div>
+          </div>
+        </div>
+        <div class="formal" id="D06"><div class="formal-head">D06 · Чётность и знак подстановки</div><p><em>Инверсия</em> — пара позиций i&lt;j, для которой σ(i)&gt;σ(j). Подстановка называется чётной при чётном числе инверсий и нечётной в противоположном случае. Её знак определяется как <em>sgn(σ) = (−1)<sup>число инверсий</sup></em>.</p></div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 3 · Простейший определитель</div>
+        <h3>Определитель матрицы 2×2 — одно число</h3>
+        <p>Для квадратной матрицы <strong>[[a,b],[c,d]]</strong> у нас есть два способа выбрать по одному элементу из каждой строки и каждого столбца. Первый выбор — <strong>a и d</strong> (по главной диагонали), второй — <strong>b и c</strong> (по побочной). Первое произведение идёт со знаком +, второе — со знаком −.</p>
+        <div class="visual">
+          <div class="visual-head"><h4>Подсветка двух диагоналей</h4><small>Каждая пара — один из двух возможных выборов</small></div>
+          <div class="matrix-row">
+            <div class="mat-wrap"><div class="mat-label">A · 2 × 2</div><div class="mat" style="--cols:2"><span class="v row-h">2</span><span class="v col-h">1</span><span class="v col-h">3</span><span class="v row-h">4</span></div></div>
+            <span class="symbol-op">→</span>
+            <div><span class="mathline"><span class="a">2·4</span> − <span class="b">1·3</span></span><span class="mathline">8 − 3 = <strong>5</strong></span></div>
+          </div>
+          <div class="key"><span><i class="blue"></i>главная диагональ: плюс</span><span><i class="amber"></i>побочная: минус</span></div>
+        </div>
+        <p><strong>Определитель</strong> (det A) помогает понять, теряет ли матрица информацию. Если для квадратной матрицы det A = 0, у неё нет обратной; если det A ≠ 0, обратная существует. В геометрии |det A| показывает, во сколько раз линейное преобразование изменяет площадь (или объём в соответствующей размерности).</p>
+        <p class="why"><strong>Ограничение:</strong> обычный определитель существует только для <strong>квадратной</strong> матрицы. Для матрицы 2×3 нельзя просто приписать третью диагональ и считать по той же формуле.</p>
+        <div class="formal" id="D07"><div class="formal-head">D07 · Определитель через подстановки (формула Лейбница)</div>
+          <p>Для квадратной матрицы A порядка n перебирают все подстановки σ из Sₙ. Для каждой σ берут произведение элементов <em>a₁,σ(1) · a₂,σ(2) · … · aₙ,σ(n)</em> и умножают его на <em>sgn(σ)</em>. Сумма всех n! получившихся слагаемых — это det A.</p><div class="symbols">Каждая подстановка выбирает ровно одну клетку в каждой строке и в каждом столбце. Для n=2 формула даёт ad−bc; для n=3 — шесть слагаемых.</div>
+        </div>
+        <p>Для матрицы A = [[1,2,3],[0,4,5],[1,0,6]] выбор (1,2,3) даёт 1·4·6 = 24 со знаком +, а выбор (3,2,1) даёт 3·4·1 = 12 со знаком −. Остальные четыре члена дают в сумме +10. Поэтому <strong>det A = 24 − 12 + 10 = 22</strong>.</p>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 4 · Не перебираем шесть слагаемых каждый раз</div>
+        <h3>Минор и алгебраическое дополнение</h3>
+        <p>У квадратной матрицы 3×3 выбираем элемент. <strong>Вычёркиваем всю его строку и весь его столбец</strong>. Остаются четыре числа, образующие квадрат 2×2. Его определитель — <strong>минор</strong> выбранного элемента. Но для разложения требуется ещё знак, зависящий от позиции.</p>
+        <div class="visual" id="cofactor-visual">
+          <div class="visual-head"><h4>Как вычислить Cᵢⱼ по шагам</h4><small>Нажми на элемент исходной матрицы</small></div>
+          <div class="matrix-row">
+            <div class="mat-wrap"><div class="mat-label">A · выбери (i,j)</div><div class="mat" style="--cols:3" id="cofactor-A"></div></div>
+            <span class="symbol-op">→</span>
+            <div class="mat-wrap"><div class="mat-label">После вычёркивания</div><div class="mat" style="--cols:2" id="cofactor-small"></div></div>
+          </div>
+          <div class="visual-note" id="cofactor-caption" aria-live="polite">При (1,2) остаётся [[0,5],[1,6]], минор −5; знак позиции отрицательный, дополнение +5.</div>
+        </div>
+        <div class="formal" id="D08"><div class="formal-head">D08 · Алгебраическое дополнение</div><p><em>Минор Mᵢⱼ</em> элемента aᵢⱼ — определитель матрицы, оставшейся после удаления i-й строки и j-го столбца. <em>Алгебраическое дополнение</em> Cᵢⱼ равно (−1)<sup>i+j</sup> · Mᵢⱼ. Знаки по 3×3: <strong>+ − + / − + − / + − +</strong>.</p></div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 5 · Из трёх меньших определителей — один большой</div>
+        <h3>Разложение по строке или столбцу</h3>
+        <p>Рассмотрим первую строку A = <strong>(1, 2, 3)</strong>. Мы уже умеем вычислять C₁₁, C₁₂, C₁₃. Умножаем каждый элемент строки на <strong>его собственное дополнение</strong> и складываем:</p>
+        <div class="worked">
+          <div class="worked-header"><strong>Полный расчёт первой строки</strong><span>A = [[1,2,3],[0,4,5],[1,0,6]]</span></div>
+          <div class="worked-body">
+            <div class="work-step"><span class="step-num">1</span><p>C₁₁ = +det[[4,5],[0,6]] = 4·6 − 5·0 = <strong>24</strong>.</p></div>
+            <div class="work-step"><span class="step-num">2</span><p>C₁₂ = −det[[0,5],[1,6]] = −(0·6 − 5·1) = <strong>5</strong>.</p></div>
+            <div class="work-step"><span class="step-num">3</span><p>C₁₃ = +det[[0,4],[1,0]] = 0·0 − 4·1 = <strong>−4</strong>.</p></div>
+            <div class="work-step"><span class="step-num">4</span><p>det A = 1·24 + 2·5 + 3·(−4) = <strong>22</strong>.</p></div>
+          </div>
+        </div>
+        <div class="formal" id="D09"><div class="formal-head">D09 · Разложение определителя</div><p>Для любой фиксированной строки i: <em>det A = Σⱼ aᵢⱼ Cᵢⱼ</em>. Для любого фиксированного столбца j: <em>det A = Σᵢ aᵢⱼ Cᵢⱼ</em>. Если выбирать строку или столбец с большим количеством нулей, вычислений будет меньше.</p></div>
+        <div class="formal" id="D10"><div class="formal-head">D10 · Фальшивое разложение</div><p>Если взять элементы одной строки k и дополнения <em>другой строки</em> i≠k, сумма будет нулевой: <em>Σⱼ aₖⱼ Cᵢⱼ = 0</em>. Аналогично для различных столбцов.</p>
+          <p><strong>Почему?</strong> Это определитель матрицы, где вместо строки i поставили копию строки k. Две строки совпадут, поэтому определитель равен нулю.</p>
+          <p class="symbols">Проверка на наших числах: (0,4,5) · (24,5,−4) = 0·24 + 4·5 + 5·(−4) = 0.</p>
+        </div>
+        <p>Урок с <a href="./determinants.html">интерактивным определителем</a> позволяет самому выбирать разложение по любой из трёх строк или столбцов, считать все шесть членов формулы Лейбница и проверять свойства при преобразованиях строк.</p>
+        <div class="quickcheck" data-check="det">
+          <div class="qhead">Проверка понимания · глава 3</div>
+          <h4>Какое дополнение C₁₂ у A = [[1,2,3],[0,4,5],[1,0,6]]?</h4>
+          <div class="choices"><button type="button" data-answer="bad">−5</button><button type="button" data-answer="yes">+5</button><button type="button" data-answer="bad">+24</button></div>
+          <div class="feedback" hidden aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="summary"><h3>К концу главы ты должен уметь</h3><ul><li>Провести одно число через две подстановки <strong>слева направо</strong>.</li><li>Выписать инверсии по парам и определить знак.</li><li>Для каждого выбранного элемента матрицы вычеркнуть правильные строку и столбец.</li><li>Вычислить Cᵢⱼ и не забыть знак (−1)<sup>i+j</sup>.</li><li>Разложить определитель по произвольной строке или столбцу и объяснить фальшивое разложение.</li></ul></div>
+      <div class="chapter-next"><span class="chapter-footer">Официальные D05–D10 · <a href="./determinants.html">Практика с определителями</a> · <a href="./permutations.html">Композиция подстановок</a>.</span><a href="#chapter-3">Далее: обратная матрица →</a></div>
+    </section>
+
+    <section class="chapter" id="chapter-3" aria-labelledby="ch3-title">
+      <div class="chapter-head">
+        <div class="chapter-number">Глава 04 / Крамер, союзная и обратная матрица</div>
+        <h2 id="ch3-title">Зачем мы вообще вычисляли определитель и дополнения?</h2>
+        <p class="chapter-intro">Теперь предыдущие определения собираются в полезный механизм: решать системы и «отменять» действие матрицы. Мы постепенно построим обратную матрицу, увидим роль транспонирования в adj(A) и проверим результат умножением.</p>
+        <div class="outcome"><b>После главы</b><span>Ты поймёшь формулы Крамера, построишь союзную матрицу, отличишь её от матрицы дополнений и объяснишь, когда обратная существует и почему при обращении произведения порядок меняется.</span></div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 1 · Решаем систему через два определителя</div>
+        <h3>Формулы Крамера: заменяем столбец, а не строку</h3>
+        <p>Рассмотрим систему <strong>2x + y = 5</strong>, <strong>x + 3y = 7</strong>. Матрица коэффициентов A = [[2,1],[1,3]], столбец правых частей b = (5,7)ᵀ. Её определитель det A = <strong>2·3 − 1·1 = 5</strong>, значит он не нулевой.</p>
+        <p>Чтобы найти <strong>x</strong>, заменяем первый столбец A на b и вычисляем det получившейся матрицы. Чтобы найти <strong>y</strong>, заменяем второй столбец. Делим каждый новый определитель на det A.</p>
+        <div class="visual">
+          <div class="visual-head"><h4>Как выглядит замена столбца</h4><small>Выделен столбец, который заменили на b</small></div>
+          <div class="matrix-row">
+            <div class="mat-wrap"><div class="mat-label">Исходная A</div><div class="mat" style="--cols:2"><span class="v">2</span><span class="v">1</span><span class="v">1</span><span class="v">3</span></div></div>
+            <span class="symbol-op">→</span>
+            <div class="mat-wrap"><div class="mat-label">A₁ для x</div><div class="mat" style="--cols:2"><span class="v row-h">5</span><span class="v">1</span><span class="v row-h">7</span><span class="v">3</span></div></div>
+            <span class="symbol-op">и</span>
+            <div class="mat-wrap"><div class="mat-label">A₂ для y</div><div class="mat" style="--cols:2"><span class="v">2</span><span class="v row-h">5</span><span class="v">1</span><span class="v row-h">7</span></div></div>
+          </div>
+          <div class="visual-note">det A₁ = 5·3 − 1·7 = <strong>8</strong>; det A₂ = 2·7 − 5·1 = <strong>9</strong>.</div>
+        </div>
+        <div class="worked">
+          <div class="worked-header"><strong>Доведём ответ до чисел</strong><span>Знаменатель один и тот же</span></div>
+          <div class="worked-body">
+            <div class="work-step"><span class="step-num">1</span><p>Определитель матрицы коэффициентов: <strong>det A = 5</strong>.</p></div>
+            <div class="work-step"><span class="step-num">2</span><p>Первую неизвестную получаем как <strong>x = det A₁ / det A = 8/5</strong>.</p></div>
+            <div class="work-step"><span class="step-num">3</span><p>Вторую — как <strong>y = det A₂ / det A = 9/5</strong>.</p></div>
+            <div class="work-step"><span class="step-num">4</span><p>Проверяем первую строку: 2·8/5 + 9/5 = 25/5 = <strong>5</strong>. Вторую: 8/5 + 3·9/5 = 35/5 = <strong>7</strong>.</p></div>
+          </div>
+        </div>
+        <div class="formal" id="D11"><div class="formal-head">D11 · Формулы Крамера</div><p>Для квадратной системы Ax=b порядка n при <em>det A ≠ 0</em> существует единственное решение. Его i-я координата <em>xᵢ = det Aᵢ / det A</em>, где Aᵢ получена заменой <strong>i-го столбца</strong> A на столбец b.</p></div>
+        <p class="why"><strong>Когда формула неприменима?</strong> Если det A = 0, делить нельзя. Но это ещё не означает «решений нет»: их может не быть либо может быть бесконечно много. Разберём этот случай в главе о системах.</p>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 2 · Собираем матрицу из дополнений</div>
+        <h3>Что такое adj(A) и почему её нужно транспонировать?</h3>
+        <p>Пусть A = [[2,1],[3,4]]. Мы уже знаем, что такое дополнение Cᵢⱼ: удаляем его строку и столбец, берём определитель остатка и выбираем знак. Для 2×2 остаток — одно число.</p>
+        <div class="worked">
+          <div class="worked-header"><strong>Четыре дополнения для 2×2</strong><span>Шахматка знаков + − / − +</span></div>
+          <div class="worked-body">
+            <div class="work-step"><span class="step-num">1</span><p>C₁₁: после удаления первой строки и столбца остаётся 4, знак +, значит <strong>C₁₁=4</strong>.</p></div>
+            <div class="work-step"><span class="step-num">2</span><p>C₁₂: остаётся 3, знак −, значит <strong>C₁₂=−3</strong>.</p></div>
+            <div class="work-step"><span class="step-num">3</span><p>C₂₁: остаётся 1, знак −, значит <strong>C₂₁=−1</strong>.</p></div>
+            <div class="work-step"><span class="step-num">4</span><p>C₂₂: остаётся 2, знак +, значит <strong>C₂₂=2</strong>.</p></div>
+          </div>
+        </div>
+        <p>Сначала получаем матрицу дополнений <strong>C = [[4,−3],[−1,2]]</strong>. Но <strong>adj(A) — это не C</strong>. Нужно ещё <strong>транспонировать</strong>: поменять элементы на местах (1,2) и (2,1). Поэтому <strong>adj(A) = [[4,−1],[−3,2]]</strong>.</p>
+        <div class="formal" id="D12"><div class="formal-head">D12 · Союзная матрица</div><p><em>Союзная матрица</em> adj(A) строится из всех алгебраических дополнений Cᵢⱼ посредством транспонирования: <em>adj(A) = (Cᵢⱼ)ᵀ</em>. Этот шаг обязателен: без него формула для обратной в общем случае неверна.</p></div>
+        <div class="visual" id="inverse-visual">
+          <div class="visual-head"><h4>Построй adj(A) и A⁻¹ по этапам</h4><small>Смена таблиц и результата показана отдельно</small></div>
+          <div class="matrix-row" id="inverse-stage"></div>
+          <div class="visual-note" id="inverse-caption" aria-live="polite">Шаг 1: исходная A и её det A = 5.</div>
+          <div class="controlbar"><button type="button" id="inverse-prev">← Назад</button><button type="button" id="inverse-next">Следующий шаг →</button><button type="button" id="inverse-reset">Сначала</button></div>
+        </div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 3 · Обратная матрица — аналог деления</div>
+        <h3>Чем обратная отличается от союзной?</h3>
+        <p>У обычного числа 5 есть обратное 1/5, потому что 5·(1/5) = 1. Для матриц аналогом числа 1 служит <strong>единичная матрица I</strong>: на её главной диагонали стоят единицы, а остальные элементы нулевые. Например, I₂ = [[1,0],[0,1]].</p>
+        <p>Если можно найти B так, что <strong>AB = BA = I</strong>, тогда B называется <strong>обратной матрицей</strong> к A и обозначается A⁻¹. Матрица adj(A) помогает её вычислить, но сама по себе обычно не равна A⁻¹.</p>
+        <div class="formal" id="D13"><div class="formal-head">D13 · Обратная матрица</div><p>Для квадратной матрицы A матрица B называется <em>обратной</em>, если AB = BA = I. Если обратная существует, она единственна и обозначается A⁻¹; это эквивалентно условию det A ≠ 0.</p></div>
+        <div class="formal" id="D14"><div class="formal-head">D14 · Формула обратной матрицы</div><p>При <em>det A ≠ 0</em>: <em>A⁻¹ = adj(A) / det A</em>, то есть каждый элемент союзной матрицы делят на одно и то же число det A.</p><p class="symbols">В нашем примере: A⁻¹ = (1/5) · [[4,−1],[−3,2]].</p></div>
+        <div class="worked">
+          <div class="worked-header"><strong>Откуда известно, что это обратная?</strong><span>Проверяем умножением, а не верим записи</span></div>
+          <div class="worked-body">
+            <div class="work-step"><span class="step-num">1</span><p>Перемножаем A и adj(A): [[2,1],[3,4]] · [[4,−1],[−3,2]].</p></div>
+            <div class="work-step"><span class="step-num">2</span><p>Первая строка результата: 2·4 + 1·(−3)=5; 2·(−1)+1·2=0.</p></div>
+            <div class="work-step"><span class="step-num">3</span><p>Вторая строка: 3·4 + 4·(−3)=0; 3·(−1)+4·2=5.</p></div>
+            <div class="work-step"><span class="step-num">4</span><p>Получили [[5,0],[0,5]] = 5I. Делим adj(A) на 5, и произведение становится <strong>I</strong>.</p></div>
+          </div>
+        </div>
+        <p>Смысл формулы становится понятным: элементы на диагонали A·adj(A) — «настоящие» разложения определителя, а вне диагонали — «фальшивые» разложения, которые равны нулю. Поэтому <strong>A·adj(A) = (det A)·I</strong>.</p>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 4 · Порядок действий имеет значение</div>
+        <h3>Почему (AB)⁻¹ = B⁻¹A⁻¹?</h3>
+        <p>Если сначала выполнили действие B, а затем A (как матричное произведение AB действует на вектор-столбец справа), отменять нужно в обратном порядке. Умножение на B⁻¹ уничтожает B, а затем A⁻¹ уничтожает A.</p>
+        <div class="formal" id="D15"><div class="formal-head">D15 · Обратная к произведению</div><p>Для двух обратимых квадратных матриц одного порядка <em>(AB)⁻¹ = B⁻¹A⁻¹</em>. Проверка: (AB)(B⁻¹A⁻¹) = A(BB⁻¹)A⁻¹ = AA⁻¹ = I.</p></div>
+        <div class="note"><strong>Не путай:</strong> здесь речь о произведении числовых <strong>матриц</strong>. Договорённость твоего курса о композиции <strong>подстановок слева направо</strong> — отдельное правило записи подстановок и не меняет формулы для матриц.</div>
+        <div class="quickcheck" data-check="inverse">
+          <div class="qhead">Проверка понимания · глава 4</div><h4>Чему равен y в системе 2x+y=5, x+3y=7 по Крамеру?</h4>
+          <div class="choices"><button type="button" data-answer="bad">5/9</button><button type="button" data-answer="yes">9/5</button><button type="button" data-answer="bad">8/5</button></div>
+          <div class="feedback" hidden aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="summary"><h3>Главные различия</h3><ul><li>Aᵢ в Крамере: заменили <strong>столбец</strong> A на b; det Aᵢ — число.</li><li>Cᵢⱼ: <strong>одно</strong> алгебраическое дополнение; (Cᵢⱼ) — матрица всех дополнений.</li><li>adj(A): <strong>транспонированная</strong> матрица дополнений.</li><li>A⁻¹: союзная матрица, <strong>делённая на det A</strong>, если этот определитель не ноль.</li></ul></div>
+      <div class="chapter-next"><span class="chapter-footer">Официальные D11–D15 · <a href="./proofs.html">Доказательство A·adj(A)=det(A)·I</a> · <a href="./problems.html#T11">T11</a>.</span><a href="#chapter-4">Далее: независимость и ранг →</a></div>
+    </section>
+
+    <section class="chapter" id="chapter-4" aria-labelledby="ch4-title">
+      <div class="chapter-head">
+        <div class="chapter-number">Глава 05 / Линейная зависимость, миноры и ранг</div>
+        <h2 id="ch4-title">Как понять, что одна строка ничего нового не добавляет?</h2>
+        <p class="chapter-intro">Ранг — не число ненулевых клеток. Он измеряет, сколько <strong>независимой информации</strong> содержит матрица. К этому определению придём через комбинации векторов и квадратные фрагменты самой таблицы.</p>
+        <div class="outcome"><b>После главы</b><span>Ты определишь линейную зависимость, найдёшь независимые столбцы, вычислишь минор любого порядка, выберешь базисный минор, определишь ранг и разберёшь особые значения параметров.</span></div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 1 · Новое слово — вектор</div>
+        <h3>Вектор и линейная комбинация</h3>
+        <p><strong>Вектор</strong> здесь — упорядоченный список чисел одинаковой длины, например (1,2). Два вектора можно складывать поэлементно, а каждый вектор умножить на число. Выражение <strong>2(1,2) − (2,4) = (0,0)</strong> называется линейной комбинацией.</p>
+        <div class="visual">
+          <div class="visual-head"><h4>Посмотри, что происходит при умножении</h4><small>Вторая строка повторяет направление первой</small></div>
+          <div class="matrix-row">
+            <div class="mat-wrap"><div class="mat-label">Строка 1</div><div class="mat" style="--cols:3"><span class="v row-h">1</span><span class="v row-h">2</span><span class="v row-h">3</span></div></div>
+            <span class="symbol-op">× 2</span>
+            <div class="mat-wrap"><div class="mat-label">Строка 2</div><div class="mat" style="--cols:3"><span class="v col-h">2</span><span class="v col-h">4</span><span class="v col-h">6</span></div></div>
+          </div><div class="visual-note">2·(1,2,3) − (2,4,6) = (0,0,0). Вторая строка не добавляет нового независимого направления.</div>
+        </div>
+        <div class="formal" id="D19"><div class="formal-head">D19 · Линейная комбинация</div><p>Для векторов v₁,…,vₖ одной длины и чисел α₁,…,αₖ выражение <em>α₁v₁ + … + αₖvₖ</em> называется линейной комбинацией. Она <em>нетривиальная</em>, если хотя бы один коэффициент αᵢ не равен нулю.</p></div>
+        <div class="formal" id="D20"><div class="formal-head">D20 · Линейная зависимость строк</div><p>Строки v₁,…,vₖ <em>линейно зависимы</em>, если существует нетривиальная комбинация, равная нулевому вектору: <em>α₁v₁ + … + αₖvₖ = 0</em>, где не все αᵢ нули.</p><p class="symbols">Наш пример: α₁ = 2, α₂ = −1. Оба не равны нулю, а результат равен нулевой строке.</p></div>
+        <p><strong>Линейная независимость</strong> означает противоположное: нулевой результат возможен только при нулевых коэффициентах. Например, (1,0) и (0,1) независимы, потому что α(1,0)+β(0,1)=(0,0) только при α=β=0.</p>
+        <div class="formal" id="D21"><div class="formal-head">D21 · Линейная независимость столбцов</div><p>Столбцы одной длины v₁,…,vₖ <em>линейно независимы</em>, если равенство α₁v₁ + … + αₖvₖ = 0 возможно только при α₁ = … = αₖ = 0. Определение одинаково для строк и столбцов; меняется лишь их расположение в матрице.</p></div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 2 · Параметр показывает границу независимости</div>
+        <h3>Одна матрица, два разных ранга</h3>
+        <p>Рассмотрим A(t) с двумя строками. Во второй строке есть <strong>параметр t</strong> — число, которое мы можем менять. Если t = 0, вторая строка ровно вдвое больше первой. Если t ≠ 0, её нельзя получить из первой простым умножением, поэтому две строки независимы.</p>
+        <div class="visual" id="rank-visual">
+          <div class="visual-head"><h4>Измени t и посмотри, что ломается</h4><small>Обрати внимание на определитель выделенной 2×2 части</small></div>
+          <div class="controlbar"><label for="rank-t">Параметр t:</label><input id="rank-t" type="range" min="-3" max="3" value="0" step="1"><strong id="rank-t-label">0</strong><button type="button" id="rank-zero">Вернуть t = 0</button></div>
+          <div class="matrix-row">
+            <div class="mat-wrap"><div class="mat-label">A(t) · 2 × 3</div><div class="mat" style="--cols:3" id="rank-matrix"></div></div>
+            <span class="symbol-op">→</span>
+            <div class="mat-wrap"><div class="mat-label">Первые два столбца · 2 × 2</div><div class="mat" style="--cols:2" id="rank-sub"></div></div>
+          </div>
+          <div class="visual-note" id="rank-caption" aria-live="polite">При t=0 вторая строка удваивает первую.</div>
+          <div class="worked-body"><span class="mathline blue" id="rank-det">det = 1·4 − 2·2 = 0</span><span class="mathline" id="rank-answer">rank A = 1</span></div>
+        </div>
+        <p>Обрати внимание: третий столбец матрицы всегда равен <strong>сумме первого и второго</strong>. Для t=1 это (3,7)=(1,2)+(2,5). Поэтому всего независимых столбцов не может быть три, даже если в таблице три столбца.</p>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 3 · Измеряем независимость через квадраты</div>
+        <h3>Минор порядка k и базисный минор</h3>
+        <p>Если выбрать в прямоугольной матрице <strong>k строк и k столбцов</strong>, их пересечение образует квадратную подматрицу k×k. Её определитель называют <strong>минором порядка k</strong>. Это обобщает миноры Mᵢⱼ, которые мы использовали для вычисления дополнений.</p>
+        <div class="formal" id="D16"><div class="formal-head">D16 · Минор порядка k</div><p><em>Минор порядка k</em> — определитель квадратной подматрицы, составленной из произвольно выбранных k строк и k столбцов исходной матрицы.</p><p class="symbols">Пример: у A(1)=[[1,2,3],[2,5,7]] минор по строкам 1,2 и столбцам 1,2 равен det[[1,2],[2,5]]=1.</p></div>
+        <p>Для матрицы A(1) этот минор порядка 2 не нулевой. Минор порядка 3 взять невозможно, потому что у матрицы только две строки. Значит максимальный порядок ненулевого минора — <strong>2</strong>.</p>
+        <div class="formal" id="D17"><div class="formal-head">D17 · Базисный минор</div><p><em>Базисный минор</em> — ненулевой минор <strong>наибольшего возможного порядка</strong>. Строки и столбцы, выбранные для него, называют базисными.</p></div>
+        <div class="formal" id="D18"><div class="formal-head">D18 · Ранг матрицы</div><p><em>Ранг</em> — максимальный порядок ненулевого минора матрицы; у нулевой матрицы ранг равен 0. Эквивалентно, ранг равен количеству независимых строк, независимых столбцов и количеству ненулевых строк ступенчатой формы.</p></div>
+        <div class="worked">
+          <div class="worked-header"><strong>Разница между рангом 1 и 2</strong><span>Проверяем конкретные числа</span></div>
+          <div class="worked-body">
+            <div class="work-step"><span class="step-num">1</span><p>При t=0: A=[[1,2,3],[2,4,6]]. Все миноры 2×2 равны нулю, но элемент 1 ненулевой. Следовательно, <strong>rank A=1</strong>.</p></div>
+            <div class="work-step"><span class="step-num">2</span><p>При t=1: A=[[1,2,3],[2,5,7]]. Минор по первым двум столбцам равен 5−4=<strong>1</strong>. Следовательно, <strong>rank A=2</strong>.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 4 · Почему достаточно базисных строк и столбцов</div>
+        <h3>Критерии зависимости и теоремы о ранге</h3>
+        <p>Если третий столбец равен первому плюс второму, его не обязательно хранить отдельно для описания всей матрицы: он восстанавливается из других. Это даёт критерий зависимости: нечто в наборе выражается через остальные — значит набор содержит лишнюю информацию.</p>
+        <div class="formal" id="D22"><div class="formal-head">D22 · Критерий линейной зависимости</div><p>Конечная система векторов линейно зависима тогда и только тогда, когда хотя бы один вектор можно выразить линейной комбинацией остальных. Если α₁v₁+…+αₖvₖ=0 и αⱼ≠0, то можно выразить vⱼ через остальные, разделив на αⱼ.</p></div>
+        <div class="formal" id="D23"><div class="formal-head">D23 · Теорема о базисном миноре</div><p>Строки и столбцы, соответствующие <em>любому базисному минору</em>, линейно независимы. Остальные строки и столбцы выражаются линейными комбинациями выбранных базисных.</p><p class="symbols">Пример: в A(1) первые два столбца независимы, их определитель равен 1, а третий = первый + второй.</p></div>
+        <div class="formal" id="D24"><div class="formal-head">D24 · Теорема о ранге</div><p>Ранг матрицы равен одновременно максимальному числу линейно независимых строк и максимальному числу линейно независимых столбцов. Хотя количество строк и столбцов различается, их максимальное независимое количество одинаково.</p></div>
+        <p>Наконец, для квадратной матрицы порядок n есть особенно простой тест полной независимости: её определитель отличен от нуля. Именно поэтому в формулах Крамера и обратной матрицы стояло ограничение det A ≠ 0.</p>
+        <div class="formal" id="D25"><div class="formal-head">D25 · Критерий невырожденности</div><p>Для квадратной матрицы A порядка n следующие утверждения эквивалентны: <em>det A ≠ 0</em>; <em>rank A = n</em>; все n строк линейно независимы; все n столбцов линейно независимы; существует обратная A⁻¹.</p></div>
+        <p class="why"><strong>Пограничный случай.</strong> Если в задаче появляется параметр t, нельзя без разбора делить на него. При t=0 ранг может уменьшиться. Нужно рассмотреть t=0 отдельно от t≠0.</p>
+        <div class="quickcheck" data-check="rank">
+          <div class="qhead">Проверка понимания · глава 5</div>
+          <h4>Чему равен ранг матрицы [[1,2,3],[2,4,6]]?</h4>
+          <div class="choices"><button type="button" data-answer="bad">0</button><button type="button" data-answer="yes">1</button><button type="button" data-answer="bad">2</button><button type="button" data-answer="bad">3</button></div>
+          <div class="feedback" hidden aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="summary"><h3>Теперь три языка описывают одно свойство</h3><ul>
+        <li><strong>Через строки:</strong> сколько строк нельзя составить из остальных.</li>
+        <li><strong>Через столбцы:</strong> сколько столбцов нельзя составить из остальных.</li>
+        <li><strong>Через определители:</strong> самый большой размер ненулевого минора.</li>
+        <li><strong>Через Гаусса:</strong> число ненулевых строк после приведения к ступенчатому виду.</li></ul>
+      </div>
+      <div class="chapter-next"><span class="chapter-footer">Официальные D16–D25 · доказательства <a href="./proofs.html">P09–P11</a> · задачи <a href="./problems.html#T10">T10</a>, <a href="./problems.html#T12">T12</a>.</span><a href="#chapter-5">Далее: системы уравнений →</a></div>
+    </section>
+
+    <section class="chapter" id="chapter-5" aria-labelledby="ch5-title">
+      <div class="chapter-head">
+        <div class="chapter-number">Глава 06 / Системы линейных уравнений и Кронекер — Капелли</div>
+        <h2 id="ch5-title">Когда у системы нет решений, а когда их бесконечно много?</h2>
+        <p class="chapter-intro">Может показаться, что наличие двух уравнений всегда позволяет найти x и y. Но иногда второе уравнение лишь повторяет первое или даже противоречит ему. Теперь ранг помогает различить все случаи без догадок.</p>
+        <div class="outcome"><b>После главы</b><span>Ты будешь различать совместные и несовместные системы, вычислять ранг расширенной матрицы и по теореме Кронекера — Капелли определять, сколько решений возможно.</span></div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 1 · Видим противоречие без теоремы</div>
+        <h3>Три системы, похожие только внешне</h3>
+        <p><strong>Совместная система</strong> — та, у которой существует хотя бы один общий набор значений неизвестных, удовлетворяющий <em>всем</em> уравнениям. <strong>Несовместная</strong> — у которой нет ни одного такого набора.</p>
+        <div class="visual" id="systems-visual">
+          <div class="visual-head"><h4>Измени второе уравнение</h4><small>Проследи разность строк расширенной матрицы</small></div>
+          <div class="controlbar" id="system-controls">
+            <button type="button" data-system="many" aria-pressed="true">Бесконечно много</button>
+            <button type="button" data-system="none">Нет решений</button>
+            <button type="button" data-system="one">Одно решение</button>
+          </div>
+          <div class="matrix-row">
+            <div class="mat-wrap"><div class="mat-label">Коэффициенты и правые части</div><div class="mat" id="system-matrix" style="--cols:3"></div></div>
+          </div>
+          <div class="visual-note" id="system-description" aria-live="polite">Оба уравнения описывают одну прямую: второе получается удвоением первого.</div>
+          <div class="worked-body"><span class="mathline blue" id="system-operation">R₂ ← R₂ − 2R₁</span><span class="mathline" id="system-result">[0, 0 | 0]</span></div>
+          <div class="feedback" id="system-verdict" aria-live="polite">Система совместна, решений бесконечно много.</div>
+        </div>
+        <div class="worked">
+          <div class="worked-header"><strong>Почему результат 0 = 1 — это проблема</strong><span>Проверяем правую часть</span></div>
+          <div class="worked-body">
+            <div class="work-step"><span class="step-num">1</span><p>Первое уравнение: x+y=2. Удвоив его, получим <strong>2x+2y=4</strong>.</p></div>
+            <div class="work-step"><span class="step-num">2</span><p>Если во втором уравнении написано <strong>2x+2y=5</strong>, оно противоречит первому.</p></div>
+            <div class="work-step"><span class="step-num">3</span><p>Вычитание удвоенной первой строки из второй даст <strong>0x+0y=1</strong>, то есть 0=1.</p></div>
+            <div class="work-step"><span class="step-num">4</span><p>Ни одна пара (x,y) не может удовлетворять 0=1 — решений нет.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 2 · Сравниваем две матрицы</div>
+        <h3>Почему появляется расширенная матрица [A|b]?</h3>
+        <p>Матрица A содержит только <strong>коэффициенты</strong> при неизвестных. В расширенной матрице [A|b] справа добавлен столбец свободных членов b. Если этот новый столбец несёт информацию, противоречащую коэффициентам, ранг расширенной матрицы оказывается больше ранга A.</p>
+        <div class="formal" id="D26"><div class="formal-head">D26 · Теорема Кронекера — Капелли</div>
+          <p>Система Ax=b <em>совместна тогда и только тогда</em>, когда <em>rank A = rank [A|b]</em>. Если это выполнено и общий ранг r равен числу неизвестных n, решение единственное. Если r&lt;n, над вещественными числами у совместной системы есть свободные параметры и бесконечно много решений.</p>
+        </div>
+        <div class="worked">
+          <div class="worked-header"><strong>Проверяем три случая через ранги</strong><span>Не заучиваем слова без вычисления</span></div>
+          <div class="worked-body">
+            <div class="work-step"><span class="step-num">1</span><p>x+y=2; 2x+2y=4 → rank A = rank[A|b] = 1, n=2. <strong>Бесконечно много решений</strong>: x=2−t, y=t.</p></div>
+            <div class="work-step"><span class="step-num">2</span><p>x+y=2; 2x+2y=5 → rank A = 1, rank[A|b] = 2. <strong>Нет решений</strong>.</p></div>
+            <div class="work-step"><span class="step-num">3</span><p>x+y=2; x−y=0 → оба ранга равны 2 и n=2. <strong>Одно решение</strong>: x=1, y=1.</p></div>
+          </div>
+        </div>
+        <p class="why"><strong>Важно:</strong> само по себе rank A = 1 не означает «решения нет». Нужно обязательно сравнить ранг A с рангом <strong>расширенной</strong> матрицы. И только потом считать число свободных переменных.</p>
+        <div class="quickcheck" data-check="systems">
+          <div class="qhead">Проверка понимания · глава 6</div>
+          <h4>У системы 3 неизвестные, rank A=rank[A|b]=2. Что это означает?</h4>
+          <div class="choices"><button type="button" data-answer="bad">Нет решений</button><button type="button" data-answer="bad">Решение одно</button><button type="button" data-answer="yes">Бесконечно много решений</button></div>
+          <div class="feedback" hidden aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="summary"><h3>Маршрут решения любой СЛАУ</h3><ul><li>Запиши расширенную матрицу, приведи её к ступенчатой форме.</li><li>Найди rank A и rank[A|b]. Если они различаются — решения нет.</li><li>Если равны, сравни ранг с числом неизвестных. При равенстве n — единственное решение, иначе — свободные параметры.</li><li>При делении на выражение с параметром отдельно проверь случай, когда делитель равен нулю.</li></ul></div>
+      <div class="chapter-next"><span class="chapter-footer">Официальная <a href="./textbook.html#D26">D26</a> · задачи <a href="./problems.html#T09">T09</a> и <a href="./problems.html#T10">T10</a>.</span><a href="#chapter-6">Далее: разложения и рекурсии →</a></div>
+    </section>
+
+    <section class="chapter" id="chapter-6" aria-labelledby="ch6-title">
+      <div class="chapter-head">
+        <div class="chapter-number">Глава 07 / Разложения, рекурсии и связь с контрольной</div>
+        <h2 id="ch6-title">Как связать все методы в одну систему?</h2>
+        <p class="chapter-intro">Осталось понять, почему матрицу иногда удобно представить произведением других матриц, а большой определитель — вычислять через меньшие. Это не новые определения без связи с предыдущим материалом: они используют Гаусса, ранг и свойства определителя.</p>
+        <div class="outcome"><b>После главы</b><span>Ты различишь LU и скелетное разложение, поймёшь смысл рекурсии для трёхдиагонального определителя и научишься выбирать метод для каждого типа задачи.</span></div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 1 · Записать матрицу как произведение</div>
+        <h3>LU — это история исключений Гаусса</h3>
+        <p>Матрица <strong>нижнетреугольная</strong>, если все элементы выше её диагонали нулевые, и <strong>верхнетреугольная</strong>, если нули стоят ниже диагонали. LU-разложение представляет A как <strong>A = L·U</strong>, где L нижнетреугольная, U верхнетреугольная.</p>
+        <div class="visual">
+          <div class="visual-head"><h4>Проверь одно реальное разложение</h4><small>Все числа можно пересчитать по строке × столбцу</small></div>
+          <div class="matrix-row">
+            <div class="mat-wrap"><div class="mat-label">L</div><div class="mat" style="--cols:2"><span class="v">1</span><span class="v sel-h">0</span><span class="v">2</span><span class="v">1</span></div></div><span class="symbol-op">×</span>
+            <div class="mat-wrap"><div class="mat-label">U</div><div class="mat" style="--cols:2"><span class="v">2</span><span class="v">1</span><span class="v sel-h">0</span><span class="v">3</span></div></div><span class="symbol-op">=</span>
+            <div class="mat-wrap"><div class="mat-label">A</div><div class="mat" style="--cols:2"><span class="v">2</span><span class="v">1</span><span class="v">4</span><span class="v">5</span></div></div>
+          </div>
+          <div class="visual-note">Проверяем правую нижнюю клетку: 2·1 + 1·3 = <strong>5</strong>. L хранит коэффициент 2, который использовался при исключении второго уравнения методом Гаусса.</div>
+        </div>
+        <p>Для A=[[2,1],[4,5]] вычитаем из второй строки первую, умноженную на 2, и получаем U=[[2,1],[0,3]]. Коэффициент исключения 2 оказывается в L=[[1,0],[2,1]].</p>
+        <div class="why"><strong>Ограничение:</strong> обычное LU без перестановок не всегда возможно. Если ведущий элемент равен нулю, может понадобиться переставить строки; тогда используют <strong>PA=LU</strong>, где P — матрица перестановки строк.</div>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 2 · Храним только независимые столбцы</div>
+        <h3>Скелетное разложение — это следствие ранга</h3>
+        <p>У A=[[1,2,3],[2,5,7]] третий столбец равен первому плюс второму. Вместо всех трёх столбцов можно хранить только первые два, а отдельно — коэффициенты их комбинаций. Это и есть идея <strong>скелетного (рангового) разложения</strong>.</p>
+        <div class="visual">
+          <div class="visual-head"><h4>Восстанавливаем третий столбец</h4><small>Ранг этой матрицы равен 2</small></div>
+          <div class="matrix-row">
+            <div class="mat-wrap"><div class="mat-label">B · базисные столбцы</div><div class="mat" style="--cols:2"><span class="v row-h">1</span><span class="v col-h">2</span><span class="v row-h">2</span><span class="v col-h">5</span></div></div><span class="symbol-op">×</span>
+            <div class="mat-wrap"><div class="mat-label">C · как сложить</div><div class="mat" style="--cols:3"><span class="v">1</span><span class="v">0</span><span class="v sel-h">1</span><span class="v">0</span><span class="v">1</span><span class="v sel-h">1</span></div></div><span class="symbol-op">=</span>
+            <div class="mat-wrap"><div class="mat-label">A · исходная матрица</div><div class="mat" style="--cols:3"><span class="v">1</span><span class="v">2</span><span class="v sel-h">3</span><span class="v">2</span><span class="v">5</span><span class="v sel-h">7</span></div></div>
+          </div><div class="visual-note">Чтобы получить третий столбец, умножаем B на (1,1): (1,2)+(2,5)=(3,7). Отсюда A=B·C.</div>
+        </div>
+        <p>Для матрицы A размера m×n и ранга r можно выбрать B размера m×r из r независимых столбцов и C размера r×n с коэффициентами их восстановления. Проверка: <strong>перемножить B и C и получить исходную A</strong>.</p>
+        <p>Разница принципиальна: <strong>LU</strong> связан с исключением строк и треугольным видом; <strong>скелетное разложение</strong> связано с независимыми столбцами и рангом. Подробные официальные задачи — <a href="./problems.html#T11">T11 (LU)</a> и <a href="./problems.html#T12">T12 (скелетное)</a>.</p>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 3 · Большой определитель через маленькие</div>
+        <h3>Трёхдиагональный определитель и рекурсия</h3>
+        <p>У <strong>трёхдиагональной матрицы</strong> ненулевые числа могут стоять только на главной диагонали и двух соседних. Если на диагонали записано a, выше — b, ниже — c, определитель порядка n обозначим <strong>Dₙ</strong>.</p>
+        <p>Разложение по первой строке связывает определитель порядка n с определителями двух меньших порядков: <strong>Dₙ = aDₙ₋₁ − bcDₙ₋₂</strong>. Начальные значения: D₀=1 (удобное соглашение), D₁=a.</p>
+        <div class="worked">
+          <div class="worked-header"><strong>Рекурсия на конкретных числах</strong><span>a = 5, b = 2, c = 3</span></div>
+          <div class="worked-body">
+            <div class="work-step"><span class="step-num">1</span><p>D₀=1, D₁=5.</p></div>
+            <div class="work-step"><span class="step-num">2</span><p>D₂=5·D₁−6·D₀ = 25−6 = <strong>19</strong>.</p></div>
+            <div class="work-step"><span class="step-num">3</span><p>D₃=5·D₂−6·D₁ = 95−30 = <strong>65</strong>.</p></div>
+            <div class="work-step"><span class="step-num">4</span><p>D₄=5·65−6·19 = <strong>211</strong>.</p></div>
+          </div>
+        </div>
+        <p>Такой метод намного удобнее, чем раскрывать сумму из n! членов. Но формулу нельзя применять к произвольной матрице: она выведена именно из <strong>трёхдиагональной структуры</strong>. <a href="./determinants.html#recurrence">Интерактивно проследи D₁…Dₙ</a>.</p>
+      </div>
+      <div class="concept">
+        <div class="micro">Шаг 4 · Как готовиться к контрольной</div>
+        <h3>Определения, доказательства и вычисления — разные навыки</h3>
+        <p>Тебе понадобится не только узнавать термины, но и уметь обосновывать переходы в решениях. Поэтому после этих семи глав маршрут продолжается отдельно:</p>
+        <div class="worked">
+          <div class="worked-header"><strong>Три обязательных вида практики</strong><span>Официальная программа КР №1</span></div>
+          <div class="worked-body">
+            <div class="work-step"><span class="step-num">1</span><p><a href="./textbook.html#CH09"><strong>26 определений</strong></a>: для каждого термина перескажи смысл своими словами, затем запиши строгую формулировку и свой пример.</p></div>
+            <div class="work-step"><span class="step-num">2</span><p><a href="./proofs.html"><strong>11 доказательств</strong></a>: объясни, почему каждый переход сохраняет утверждение; рисунок сам по себе общую теорему не доказывает.</p></div>
+            <div class="work-step"><span class="step-num">3</span><p><a href="./problems.html"><strong>25 задач</strong></a> (12 основных и 13 дополнительных): сначала реши самостоятельно, затем открой скрытое решение и сравни метод.</p></div>
+          </div>
+        </div>
+        <div class="quickcheck" data-check="advanced">
+          <div class="qhead">Проверка понимания · глава 7</div><h4>Третий столбец A равен сумме двух первых, а первые два независимы. Чему равен rank A?</h4>
+          <div class="choices"><button type="button" data-answer="bad">1</button><button type="button" data-answer="yes">2</button><button type="button" data-answer="bad">3</button></div>
+          <div class="feedback" hidden aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="summary"><h3>Что осталось сделать после чтения</h3><ul>
+        <li>Проверить <a href="./syllabus.html">все 62 пункта официального перечня</a>: нет ли терминов, которые ты ещё не можешь объяснить.</li>
+        <li>Прорешать задачи без готового ответа и повторить доказательства по плану.</li>
+        <li>Если какое-то место непонятно — вернуться к рисунку или промежуточному действию, а не заучивать конечную формулу.</li>
+      </ul></div>
+      <div class="chapter-next"><span class="chapter-footer">По учебному маршруту пройдены все 26 понятий D01–D26. Это не отменяет чтения доказательств P01–P11.</span><a href="./problems.html">Перейти к задачам →</a></div>
+    </section>
+  </main>
 </div>
-<div class="mini">
-<div class="mini-label">A · размер 2 × 3</div>
-<div class="columns"><span>ст. 1</span><span>ст. 2</span><span>ст. 3</span></div>
-<div class="demo-matrix">
-<div class="rowlabel">стр. 1</div><div class="cell">1</div><div class="cell">2</div><div class="cell">3</div>
-<div class="rowlabel">стр. 2</div><div class="cell">4</div><div class="cell">5</div><div class="cell active">6</div>
-</div>
-<div class="mini-note">Подсвечено a₂₃ = 6</div>
-</div>
-</div>
-</section>
-<section class="info" aria-labelledby="dict-title">
-<div class="info-head"><h2 id="dict-title">26 основных понятий</h2><span>По официальному перечню D01–D26</span></div>
-<div class="toolbar">
-<label><span style="position:absolute;left:-10000px">Найти определение</span><input class="search" type="search" id="search" placeholder="Например: ранг, минор, Крамер или D12" autocomplete="off" aria-label="Найти определение"></label>
-<div class="filter" id="filters" role="group" aria-label="Фильтр по темам"></div>
-</div>
-<div class="result" id="result" aria-live="polite"></div>
-</section>
-<div id="definitions" class="list" aria-label="Список определений"></div>
-</div>
-</main>
-<footer class="foot"><div class="container">Алгебра · КР №1 · 2026 · Числовые примеры не заменяют доказательств. Доказательства и полный разбор — в <a href="./assets/Algebra_KR1_2026_VISUAL.pdf">основном пособии</a>.</div></footer>
-<script src="./theory.js"></script>
-<script src="./glossary.js"></script>
+<footer class="footer">Алгебра · КР №1 · 2026. Материал для обучения, официальные формулировки и задачи доступны в <a href="./textbook.html">полном курсе</a>. Подстановки во всех новых объяснениях выполняются слева направо.</footer>
+<script src="./assets/learn.js"></script>
 </body></html>

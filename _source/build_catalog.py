@@ -57,7 +57,7 @@ assert len(entries)==62,entries
 # Link to specialized pages when possible, otherwise textbook.
 def link(e):
  id,title,g=e
- return ('proofs.html#' if id[0]=='P' else 'problems.html#' if id[0] in 'TN' else 'textbook.html#')+id
+ return ('proofs.html#' if id[0]=='P' else 'problems.html#' if id[0] in 'TN' else 'definitions.html#')+id
 grps=[('Определения', 'Определение'),('Доказательства','Доказательство'),('Основные задачи','Основная задача'),('Дополнительные задачи','Дополнительная задача')]
 cards=[]
 for heading,cat in grps:

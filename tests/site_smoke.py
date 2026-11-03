@@ -26,18 +26,18 @@ def run():
         desktop.screenshot(path="/tmp/algebra-home-desktop.png",full_page=True)
 
         open_local(desktop, "definitions.html")
-        assert desktop.locator("article.def").count() == 26,desktop.locator("#result").inner_text()
+        assert desktop.locator("section.chapter").count() == 7
+        assert desktop.locator(".formal[id]").count() == 26
+        assert desktop.locator(".quickcheck").count() == 7
         for id in ["D01","D04","D12","D18","D26"]:
             expect(desktop.locator("#"+id)).to_be_visible()
-        desktop.locator("#search").fill("D12")
-        assert desktop.locator("article.def").count()==1
-        assert "Союзная" in desktop.locator("#definitions").inner_text()
-        desktop.locator("#search").fill("")
-        desktop.locator('button[data-filter="Ранг и линейная зависимость"]').click()
-        assert desktop.locator("article.def").count()>=8
-        desktop.locator('button[data-filter="Все"]').click()
-        no_overflow(desktop,"glossary desktop")
-        desktop.screenshot(path="/tmp/algebra-dictionary-desktop.png",full_page=True)
+        desktop.locator('#base-matrix button[data-i="1"][data-j="2"]').click()
+        assert "a₂₃ = 6" in desktop.locator("#base-explain").inner_text()
+        desktop.locator('#mul-C button[data-i="0"][data-j="1"]').click()
+        for _ in range(3): desktop.locator("#mul-next").click()
+        assert "= 64" in desktop.locator("#mul-equation").inner_text()
+        no_overflow(desktop,"course desktop")
+        desktop.screenshot(path="/tmp/algebra-course-desktop.png",full_page=True)
 
         open_local(desktop,"lab.html")
         expect(desktop.locator("section.theory")).to_be_visible()
@@ -67,7 +67,7 @@ def run():
             no_overflow(mobile,name+" mobile")
             mobile.screenshot(path="/tmp/algebra-"+name.replace(".html","")+"-mobile.png",full_page=True)
         assert not errors,errors
-        print("PASS: 26 definitions, all 8 theory tabs, deep links, dimensions, multiplication, search, mobile widths, 0 JS errors")
+        print("PASS: 7 detailed chapters, 26 anchored definitions, 8 auxiliary labs, mobile widths, 0 JS errors")
         browser.close()
 if __name__=="__main__":
     run()
