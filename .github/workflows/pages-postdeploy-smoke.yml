@@ -1,0 +1,41 @@
+name: Verify deployed GitHub Pages
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 5 * * *'
+  deployment_status:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-publication:
+    if: github.event_name != 'deployment_status' || (github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'github-pages')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out expected deployed files
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Use Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-test.txt
+      - name: Install browser QA
+        run: |
+          python -m pip install -r requirements-test.txt
+          python -m playwright install --with-deps chromium
+      - name: Verify public HTML assets PDFs and SHA consistency
+        run: |
+          python tests/live_site_smoke.py --expect-current --output docs/remediation/live-evidence
+      - name: Attach HTTP and browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: published-site-qa
+          path: docs/remediation/live-evidence/live_site_results.json
+          if-no-files-found: warn

@@ -1,0 +1,104 @@
+[
+  {
+    "file": "index.html",
+    "width": 390,
+    "violation_count": 0,
+    "violations": []
+  },
+  {
+    "file": "index.html",
+    "width": 1366,
+    "violation_count": 0,
+    "violations": []
+  },
+  {
+    "file": "definitions.html",
+    "width": 390,
+    "violation_count": 0,
+    "violations": []
+  },
+  {
+    "file": "definitions.html",
+    "width": 1366,
+    "violation_count": 0,
+    "violations": []
+  },
+  {
+    "file": "practice.html",
+    "width": 390,
+    "violation_count": 0,
+    "violations": []
+  },
+  {
+    "file": "practice.html",
+    "width": 1366,
+    "violation_count": 0,
+    "violations": []
+  },
+  {
+    "file": "exam.html",
+    "width": 390,
+    "violation_count": 0,
+    "violations": []
+  },
+  {
+    "file": "exam.html",
+    "width": 1366,
+    "violation_count": 0,
+    "violations": []
+  },
+  {
+    "file": "problems.html",
+    "width": 390,
+    "violation_count": 0,
+    "violations": []
+  },
+  {
+    "file": "problems.html",
+    "width": 1366,
+    "violation_count": 0,
+    "violations": []
+  },
+  {
+    "file": "proofs.html",
+    "width": 390,
+    "violation_count": 0,
+    "violations": []
+  },
+  {
+    "file": "proofs.html",
+    "width": 1366,
+    "violation_count": 0,
+    "violations": []
+  },
+  {
+    "file": "syllabus.html",
+    "width": 1366,
+    "violation_count": 0,
+    "violations": []
+  },
+  {
+    "file": "determinants.html",
+    "width": 1366,
+    "violation_count": 0,
+    "violations": []
+  },
+  {
+    "file": "permutations.html",
+    "width": 1366,
+    "violation_count": 0,
+    "violations": []
+  },
+  {
+    "file": "lab.html",
+    "width": 1366,
+    "violation_count": 0,
+    "violations": []
+  },
+  {
+    "file": "textbook.html",
+    "width": 1366,
+    "violation_count": 0,
+    "violations": []
+  }
+]

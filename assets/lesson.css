@@ -35,3 +35,8 @@ h1,h2{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing
 .cell input[type=number]{width:100%;min-width:0;max-width:100%;font:700 17px/1.3 "DejaVu Sans Mono",Consolas,monospace;text-align:center;border:0;outline-offset:2px;padding:0;background:transparent;color:inherit;appearance:textfield}
 .cell input[type=number]::-webkit-outer-spin-button,.cell input[type=number]::-webkit-inner-spin-button{appearance:none;margin:0}
 @media(max-width:590px){.cell input[type=number]{font-size:14px}}
+
+.input-error{margin:12px 0;padding:12px 15px;border-left:4px solid #9f3b32;background:#fff0e8;color:#7b251b;font-size:14px;line-height:1.5}.input-error[hidden]{display:none}input[aria-invalid="true"]{outline:3px solid #ae514b;outline-offset:1px}
+
+/* A11y: text in amber cells must remain readable on light yellow. */
+#b,#c{color:#824009!important}

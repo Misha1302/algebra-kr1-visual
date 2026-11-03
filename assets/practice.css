@@ -1,0 +1,64 @@
+/* Algebra KR1: practice and proof workshop, not interchangeable with decorative cards. */
+:root { --practice-ink:#24362e; --practice-green:#234a3a; --practice-line:#d5ded4; --practice-blue:#2349ab; --practice-paper:#fbfcf8; }
+.book-sidebar .nav-heading {text-transform:uppercase;font-size:12px;letter-spacing:.1em;font-weight:800;color:#2349ab;margin:0 0 14px}
+.book h3[id] {scroll-margin-top:20px;margin:35px 0 9px;font-size:clamp(1.35rem,2.2vw,1.6rem);line-height:1.27}
+.book .micro {font-size:11px;letter-spacing:.1em;color:#33604a;font-weight:800;margin:0 0 12px}
+.problem-statement {
+  border:1px solid #b7cbbd;border-left:5px solid #336e52;
+  border-radius:8px;padding:22px clamp(16px,3vw,28px);margin:12px 0 14px;
+  background:#f5f9f4;color:var(--practice-ink);font-size:1.06rem;line-height:1.68
+}
+.problem-statement p:last-child {margin-bottom:0}
+.problem-statement math[display="block"] {display:block;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:8px 0}
+.problem-statement math[display="inline"] {max-width:100%}
+.attempt-workspace {border:1px solid var(--practice-line);border-radius:8px;padding:18px 20px;margin:12px 0;background:#fff}
+.attempt-workspace label,.proof-write-label {display:block;font-weight:750;color:var(--practice-ink);margin-bottom:9px}
+.attempt-workspace textarea,.proof-workshop textarea {
+ width:100%;min-height:100px;padding:12px 13px;border:1px solid #aebcb1;border-radius:6px;
+ font:inherit;color:#24362e;box-sizing:border-box;resize:vertical;background:#fff;line-height:1.5
+}
+.attempt-workspace textarea:focus-visible,.proof-workshop textarea:focus-visible {outline:3px solid #245bd1;outline-offset:2px}
+.attempt-actions {display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:10px}
+.attempt-actions button,.proof-options button {
+ min-height:44px;padding:9px 14px;border:1px solid #acb9b2;border-radius:7px;cursor:pointer;
+ background:#fff;color:#29473a;font:inherit;font-size:15px;font-weight:650
+}
+.attempt-actions button:hover,.proof-options button:hover {background:#edf5ef}
+.attempt-actions button:focus-visible,.proof-options button:focus-visible,details summary:focus-visible {outline:3px solid #245bd1;outline-offset:3px}
+.save-message {font-size:13px;color:#356149}
+.attempt-disclaimer {color:#586c60;font-size:14px;line-height:1.55;margin:10px 0 0}
+.method-hints {display:grid;gap:8px;margin:12px 0 14px}
+.method-hint,.book details.solution,.book details.proof-full,.book details.proof-rubric {
+ border:1px solid var(--practice-line);border-radius:7px;background:var(--practice-paper);padding:13px 17px;margin:0
+}
+.method-hint summary,.book details.solution summary,.book details.proof-full summary,.book details.proof-rubric summary {
+ font-size:15px;line-height:1.5;font-weight:750;color:var(--practice-blue);cursor:pointer
+}
+.method-hint[open],.book details.solution[open],.book details.proof-full[open] {background:#fff}
+.method-hint[open] summary,.book details.solution[open] summary,.book details.proof-full[open] summary {margin-bottom:13px}
+.book details.solution {margin:14px 0 48px}
+.book details.solution math[display="block"],.book details.proof-full math[display="block"] {display:block;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:8px 0}
+.book .tipline {display:none}
+.proof-workshop {padding:20px 24px;margin:14px 0;background:#f6faf4;border:1px solid #c7d9c9;border-radius:8px}
+.proof-workshop p {line-height:1.65}
+.proof-question {margin:18px 0;padding:16px;border-radius:6px;border-left:3px solid #85ae98;background:#fff}
+.proof-question>p:first-child {margin:0 0 12px}
+.proof-options {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:8px}
+.proof-options button {text-align:left;font-weight:550}
+.proof-options button[aria-pressed="true"] {background:#dfecfa;border-color:#1c63b5}
+.proof-feedback {margin:12px 0 0;padding:10px 13px;border-radius:5px;background:#e9f4ed;color:#23553d}
+.proof-feedback.error {background:#fff2df;color:#79501a}
+.proof-workshop textarea {margin:10px 0 15px}
+.book details.proof-full {margin:12px 0 48px}
+.book details.proof-full h3 {margin-top:17px}
+.book details.proof-full p:last-child {margin-bottom:5px}
+.book .catalog math[display="inline"] {max-width:100%}
+@media (max-width:660px){
+ .problem-statement,.proof-workshop,.attempt-workspace{padding:15px 14px}
+ .proof-options {grid-template-columns:1fr}
+ .book math {font-size:.92em}
+}
+
+.practice-variant{margin:14px 0 20px;padding:15px 18px;border-radius:7px;border:1px solid #b6c9d8;background:#f5f8fd}
+.practice-variant>summary{cursor:pointer;color:#204d9a;font-weight:800;line-height:1.5;min-height:32px}
+.practice-variant[open]>summary{margin-bottom:16px}.practice-variant .problem-statement{background:#fff}.variant-solution{border-top:1px solid #c7d6e5;padding:12px 0 0;margin-top:14px}.variant-solution>summary{cursor:pointer;font-weight:750;color:#285c44}.variant-solution math[display="block"]{display:block;max-width:100%;overflow:auto}

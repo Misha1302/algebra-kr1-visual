@@ -1,0 +1,19 @@
+{
+  "archive": {
+    "name": "KR1_Algebra_2026_ESSENTIAL.zip",
+    "sha256": "2254c022ea3c5d9f94aca1e9b930632090f9294c44c46a7543f2282517008759",
+    "local_only": true
+  },
+  "01_definitions_26.pdf": {
+    "sha256": "a34347ad13025dc03136483486ad176063634f9edf95d9e517bd1ad05e72c4de",
+    "original_reference_only": true
+  },
+  "02_proofs_11.pdf": {
+    "sha256": "558167aec8932ab250dca68ef63c4dd80322ac3a0a642210a211a9bbcae80ec4",
+    "original_reference_only": true
+  },
+  "03_practice_main12_and_extra13.pdf": {
+    "sha256": "15fecae36cf4b3be047cfbc2194a597b331a2efa2991b12c749e6b2cc1277b7d",
+    "original_reference_only": true
+  }
+}

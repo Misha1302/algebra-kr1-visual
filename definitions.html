@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#f6f5ef">
 <title>Линейная алгебра с нуля — последовательный учебник · КР №1</title>
 <link rel="stylesheet" href="./assets/learn.css">
+<link rel="stylesheet" href="./assets/transfer.css">
 <link rel="icon" href="./favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -16,6 +17,7 @@
     <a href="./" >Главная</a>
     <a href="./definitions.html" class="active" aria-current="page">Учебник с нуля</a>
     <a href="./syllabus.html">Все 62 пункта</a>
+    <a href="./practice.html">Практика на новых числах</a>
     <a href="./problems.html">Задачи</a>
     <a href="./proofs.html">Доказательства</a>
   </nav>
@@ -32,7 +34,8 @@
       <a href="#chapter-5"><span class="num">06</span><span>Кронекер — Капелли и СЛАУ</span></a>
       <a href="#chapter-6"><span class="num">07</span><span>LU, разложения, рекурсии и практика</span></a>
     </nav>
-    <div class="side-status">Прохождение: <b id="chapter-progress">0/7</b> глав изучено</div>
+    <div class="side-status">Мини-проверки: <b id="chapter-progress">0/7</b> правильных ответов <small>Это не показатель освоения всех глав.</small></div>
+    <div class="side-milestones">Новые самостоятельные задания: <b id="transfer-progress">0/8</b>. Навыки и готовность к КР оцениваются отдельно.</div>
     <div class="side-note">Новая тема вводится через <strong>действие → объяснение → определение → проверку</strong>. Полные теоретические доказательства и официальный перечень доступны по ссылкам внутри глав.</div>
   </aside>
   <main class="course-body">
@@ -42,6 +45,7 @@
       <p>Здесь не нужно знать, что такое <strong>минор, ранг, определитель или adj(A)</strong> заранее. Каждое новое понятие возникает из конкретной задачи, а затем получает строгое определение. Строки и столбцы выделяются, вычисления показываются по шагам, ограничения объясняются на ошибочных примерах.</p>
       <div class="hero-actions">
         <a class="btn primary" href="#chapter-0">Начать с первой главы <span aria-hidden="true">→</span></a>
+        <a class="btn" id="resume-chapter" href="#chapter-0" hidden>Продолжить с последней главы →</a>
         <a class="btn" href="./syllabus.html">Список всех 62 вопросов</a>
         <a class="btn" href="./textbook.html">Формальные доказательства</a>
       </div>
@@ -631,4 +635,6 @@
 </div>
 <footer class="footer">Алгебра · КР №1 · 2026. Материал для обучения, официальные формулировки и задачи доступны в <a href="./textbook.html">полном курсе</a>. Подстановки во всех новых объяснениях выполняются слева направо.</footer>
 <script src="./assets/learn.js"></script>
+<script src="./assets/transfer-cases.js"></script>
+<script src="./assets/transfer-practice.js"></script>
 </body></html>
