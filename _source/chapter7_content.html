@@ -1,0 +1,212 @@
+    <section class="chapter" id="chapter-6" aria-labelledby="ch6-title">
+      <div class="chapter-head">
+        <div class="chapter-number">Глава 07 / От метода Гаусса и ранга к трём новым задачам</div>
+        <h2 id="ch6-title">Разложения и рекурсии: разбираем без пропусков</h2>
+        <p class="chapter-intro">Здесь три разных вопроса. Как сохранить действия метода Гаусса? Как восстановить матрицу из независимых столбцов? Как вычислить определитель большой матрицы через два меньших? Никаких формул наизусть до разбора на конкретных числах.</p>
+        <div class="outcome"><b>В конце главы</b><span>Ты сможешь самостоятельно получить L и U, собрать B и C, вычислить D₄ по рекурсии и объяснить каждый переход. Это проверяется отдельными примерами, а не просмотром страниц.</span></div>
+      </div>
+
+      <div class="ch7-preflight" id="ch7-start">
+        <div class="micro">Перед началом · три вещи, которые уже понадобятся</div>
+        <p>Нужно уметь <a href="#chapter-0">перемножать матрицы</a>, <a href="#chapter-1">вычитать из строки кратную другой строку</a> и <a href="#chapter-4">проверять независимость двух столбцов</a>. Если какой-то из этих шагов сейчас непонятен, вернись по ссылке: в этой главе мы будем использовать их, а не вводить заново.</p>
+        <nav class="ch7-lesson-nav" aria-label="Три раздела седьмой главы">
+          <a href="#ch7-lu"><span>01</span><strong>LU</strong><small>Запоминаем исключение строк</small></a>
+          <a href="#ch7-skeleton"><span>02</span><strong>Скелетное</strong><small>Восстанавливаем столбцы</small></a>
+          <a href="#ch7-recurrence"><span>03</span><strong>Рекурсия</strong><small>Считаем определитель</small></a>
+        </nav>
+      </div>
+
+      <div class="concept ch7-topic" id="ch7-lu">
+        <div class="micro">01 / LU-разложение</div>
+        <h3>Метод Гаусса, только мы сохраняем его шаги</h3>
+        <p>Вспомни: методом Гаусса мы вычитали строки, чтобы получить <strong>нули под диагональю</strong>. Полученную матрицу называют <em>верхнетреугольной</em>, или U. Но есть ещё один вопрос: какую строку и сколько раз вычитали? Эти коэффициенты можно записать отдельно в матрицу L.</p>
+        <div class="ch7-terms">
+          <div><span class="ch7-term-icon">L</span><strong>Нижняя треугольная</strong><p>Выше диагонали стоят нули. В этой задаче на диагонали L — единицы, под диагональю — коэффициенты исключения.</p></div>
+          <div><span class="ch7-term-icon">U</span><strong>Верхняя треугольная</strong><p>Ниже диагонали стоят нули. Именно к такому виду мы приводим A методом Гаусса.</p></div>
+        </div>
+        <p>Начнём с конкретной матрицы. Мы не знаем L и U заранее — <strong>вычислим</strong> их:</p>
+        <div class="ch7-matrix-row">
+          <table class="ch7-matrix" aria-label="Исходная матрица A два на два"><caption>A — исходная матрица</caption><tbody><tr><td>2</td><td>1</td></tr><tr><td>4</td><td>5</td></tr></tbody></table>
+          <div class="ch7-goal"><strong>Цель первого шага</strong><span>Превратить 4, стоящую под 2, в ноль.</span><span>Но изменить нужно <em>всю</em> вторую строку.</span></div>
+        </div>
+        <ol class="ch7-teaching-steps">
+          <li><strong>Находим множитель.</strong> Как из 4 убрать 4, вычитая кратное 2? Делим 4 на 2: получаем <strong>k = 2</strong>. Это число не угадывается.</li>
+          <li><strong>Вычитаем целую строку.</strong> R₂ ← R₂ − 2R₁. Считаем обе клетки: 4 − 2·2 = 0 и 5 − 2·1 = 3.</li>
+          <li><strong>Записываем результат.</strong> Получили U = [[2,1],[0,3]]. А коэффициент k = 2 сохраняем под единичной диагональю L.</li>
+        </ol>
+
+        <div class="ch7-workshop" id="ch7-lu-workshop">
+          <div class="ch7-workshop-top"><strong>Пройди исключение вручную</strong><span id="ch7-lu-count" aria-live="polite">Шаг 1 из 4</span></div>
+          <div class="ch7-matrix-row ch7-matrix-row--interactive">
+            <div id="ch7-lu-matrix" class="ch7-matrix-mount" aria-live="polite" aria-label="Текущая матрица после шага"></div>
+            <div id="ch7-lu-reason" class="ch7-stage-copy" aria-live="polite">Здесь появится разбор следующего действия.</div>
+          </div>
+          <div class="ch7-controls"><button type="button" id="ch7-lu-prev">← Назад</button><button type="button" id="ch7-lu-next">Следующий шаг →</button><button type="button" id="ch7-lu-reset">С самого начала</button></div>
+        </div>
+
+        <div class="ch7-formula-block">
+          <div class="micro">Проверка умножением — обязательна</div>
+          <div class="ch7-matrix-row">
+            <table class="ch7-matrix" aria-label="Матрица L"><caption>L — коэффициент 2</caption><tbody><tr><td>1</td><td>0</td></tr><tr><td>2</td><td>1</td></tr></tbody></table>
+            <span class="ch7-symbol" aria-hidden="true">×</span>
+            <table class="ch7-matrix" aria-label="Матрица U"><caption>U — после Гаусса</caption><tbody><tr><td>2</td><td>1</td></tr><tr><td>0</td><td>3</td></tr></tbody></table>
+            <span class="ch7-symbol" aria-hidden="true">=</span>
+            <table class="ch7-matrix" aria-label="Произведение равно A"><caption>Снова A</caption><tbody><tr><td>2</td><td>1</td></tr><tr><td>4</td><td>5</td></tr></tbody></table>
+          </div>
+          <p>Например, нижняя правая клетка результата: <strong>2·1 + 1·3 = 5</strong>. Нижняя левая: 2·2 + 1·0 = 4. Обе совпали с исходной матрицей.</p>
+        </div>
+
+        <div class="ch7-practice" data-ch7-exercise="lu">
+          <div class="micro">Проверка без готового ответа</div>
+          <h4>Попробуй на других числах</h4>
+          <p>В A = [[3,1],[6,5]] найди множитель k, который уничтожит 6 под тройкой, и нижнюю правую клетку U после вычитания.</p>
+          <div class="ch7-answer-fields"><label for="ch7-lu-k">Множитель k<input id="ch7-lu-k" type="text" inputmode="decimal" autocomplete="off" placeholder="Число"></label><label for="ch7-lu-u22">Новая клетка U₂₂<input id="ch7-lu-u22" type="text" inputmode="decimal" autocomplete="off" placeholder="Число"></label></div>
+          <button type="button" class="ch7-check" id="ch7-lu-check">Проверить два шага</button>
+          <p class="ch7-feedback" id="ch7-lu-feedback" role="status" aria-live="polite" hidden></p>
+          <details class="ch7-help"><summary>Показать разбор после самостоятельной попытки</summary><p>k = 6/3 = 2. Вторая строка: (6,5) − 2·(3,1) = (0,3). Поэтому L=[[1,0],[2,1]], U=[[3,1],[0,3]]. Проверка LU даёт исходную A.</p></details>
+        </div>
+
+        <div class="ch7-deep-example">
+          <h4>Как это выглядит в официальной задаче T11 (3×3)</h4>
+          <p>Та же идея, но исключаем числа под диагональю уже в двух столбцах. Начинаем с:</p>
+          <div class="ch7-matrix-row">
+            <table class="ch7-matrix" aria-label="Матрица T11"><caption>A из T11</caption><tbody><tr><td>1</td><td>2</td><td>−3</td></tr><tr><td>0</td><td>1</td><td>2</td></tr><tr><td>1</td><td>0</td><td>4</td></tr></tbody></table>
+            <div class="ch7-eq-steps"><p><strong>1.</strong> R₃ ← R₃ − R₁: (1,0,4) − (1,2,−3) = (0,−2,7).</p><p><strong>2.</strong> R₃ ← R₃ + 2R₂: (0,−2,7) + 2·(0,1,2) = (0,0,11).</p></div>
+          </div>
+          <p>Записываем использованные множители: в первой операции <strong>1</strong>, во второй <strong>−2</strong> (потому что вычитали −2 раза вторую строку). Получаем:</p>
+          <div class="ch7-matrix-row">
+            <table class="ch7-matrix" aria-label="L для задачи T11"><caption>L</caption><tbody><tr><td>1</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>−2</td><td>1</td></tr></tbody></table>
+            <span class="ch7-symbol" aria-hidden="true">×</span>
+            <table class="ch7-matrix" aria-label="U для задачи T11"><caption>U</caption><tbody><tr><td>1</td><td>2</td><td>−3</td></tr><tr><td>0</td><td>1</td><td>2</td></tr><tr><td>0</td><td>0</td><td>11</td></tr></tbody></table>
+          </div>
+          <p>Проверь хотя бы третью строку произведения: 1·R₁(U) − 2·R₂(U) + 1·R₃(U) = <strong>(1,0,4)</strong>. Полный пошаговый разбор есть в <a href="./problems.html#T11">задаче T11</a>.</p>
+          <details class="ch7-help"><summary>Когда LU без перестановки строк не получится?</summary><p>Например, A=[[0,1],[1,1]]. Если L имеет единицы на диагонали, а U — ноль под диагональю, то из верхней левой клетки следует U₁₁ = 0. Тогда нижняя левая клетка произведения LU тоже будет 0, но в исходной матрице там 1. Противоречие. Нужно сначала поменять строки: тогда записывают <strong>PA = LU</strong>, где P выполняет эту перестановку. Нулевой ведущий элемент — сигнал проверить перестановку, а не делить на ноль.</p></details>
+        </div>
+      </div>
+
+      <div class="concept ch7-topic" id="ch7-skeleton">
+        <div class="micro">02 / Скелетное разложение</div>
+        <h3>Оставляем независимые столбцы, остальные восстанавливаем</h3>
+        <p>У матрицы есть три столбца. Но если третий получается сложением первых двух, то для его восстановления достаточно знать <strong>два</strong> первых столбца и правило сложения. Это и есть скелетное разложение: <strong>A = B·C</strong>.</p>
+        <div class="ch7-matrix-row">
+          <table class="ch7-matrix" aria-label="Исходная матрица для скелетного разложения"><caption>A — 2 строки и 3 столбца</caption><tbody><tr><td>1</td><td>2</td><td>3</td></tr><tr><td>2</td><td>5</td><td>7</td></tr></tbody></table>
+          <div class="ch7-goal"><strong>Что здесь ищем</strong><span>Какие столбцы не выражаются друг через друга?</span><span>И как получить оставшиеся?</span></div>
+        </div>
+        <ol class="ch7-teaching-steps">
+          <li><strong>Выбираем независимые столбцы.</strong> Первый (1,2)ᵀ и второй (2,5)ᵀ независимы: определитель [[1,2],[2,5]] равен 1·5 − 2·2 = <strong>1 ≠ 0</strong>. Значит, оба действительно нужны. Ранг матрицы равен 2.</li>
+          <li><strong>Собираем из них B.</strong> Просто переписываем из исходной A первый и второй столбцы. Получаем B = [[1,2],[2,5]]. Здесь ничего не вычитаем и не транспонируем.</li>
+          <li><strong>Ищем коэффициенты для третьего столбца.</strong> Пусть α·(1,2) + β·(2,5) = (3,7). По строкам получаем α + 2β = 3 и 2α + 5β = 7. Вычтем из второго уравнения удвоенное первое: β = 1. Тогда α = 1.</li>
+          <li><strong>Составляем C.</strong> Для восстановления первого столбца возьмём 1·первый + 0·второй: (1,0). Для второго — (0,1). Для третьего — найденные коэффициенты (1,1). Эти три пары записываем <strong>столбцами</strong> C.</li>
+        </ol>
+        <div class="ch7-formula-block">
+          <div class="micro">В результате: A = B·C</div>
+          <div class="ch7-matrix-row">
+            <table class="ch7-matrix" aria-label="Матрица B размера 2 на 2"><caption>B · 2×2</caption><tbody><tr><td>1</td><td>2</td></tr><tr><td>2</td><td>5</td></tr></tbody></table>
+            <span class="ch7-symbol" aria-hidden="true">×</span>
+            <table class="ch7-matrix" aria-label="Матрица C размера 2 на 3"><caption>C · 2×3</caption><tbody><tr><td>1</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>1</td></tr></tbody></table>
+            <span class="ch7-symbol" aria-hidden="true">=</span>
+            <table class="ch7-matrix" aria-label="Исходная матрица A размера 2 на 3"><caption>A · 2×3</caption><tbody><tr><td>1</td><td>2</td><td>3</td></tr><tr><td>2</td><td>5</td><td>7</td></tr></tbody></table>
+          </div>
+        </div>
+        <div class="ch7-workshop" id="ch7-skeleton-workshop">
+          <div class="ch7-workshop-top"><strong>Выбери, какой столбец восстановить</strong><span>Каждый столбец C — инструкция</span></div>
+          <div class="ch7-controls ch7-controls--tabs" role="group" aria-label="Выбор столбца для восстановления">
+            <button type="button" data-ch7-column="0" aria-pressed="true">1-й столбец</button>
+            <button type="button" data-ch7-column="1" aria-pressed="false">2-й столбец</button>
+            <button type="button" data-ch7-column="2" aria-pressed="false">3-й столбец</button>
+          </div>
+          <div id="ch7-skeleton-explain" class="ch7-stage-copy" aria-live="polite">Коэффициенты (1,0) — взять первый столбец B и не брать второй.</div>
+        </div>
+        <div class="ch7-practice" data-ch7-exercise="skeleton">
+          <div class="micro">Самостоятельная проверка</div>
+          <h4>Как восстановить новый столбец?</h4>
+          <p>Первые два столбца: b₁=(1,2)ᵀ и b₂=(1,3)ᵀ. Третий столбец равен (5,13)ᵀ. Найди α и β в равенстве αb₁ + βb₂ = (5,13)ᵀ.</p>
+          <div class="ch7-answer-fields"><label for="ch7-sk-a">Коэффициент α<input id="ch7-sk-a" type="text" inputmode="decimal" autocomplete="off" placeholder="Число"></label><label for="ch7-sk-b">Коэффициент β<input id="ch7-sk-b" type="text" inputmode="decimal" autocomplete="off" placeholder="Число"></label></div>
+          <button type="button" class="ch7-check" id="ch7-sk-check">Проверить коэффициенты</button><p class="ch7-feedback" id="ch7-sk-feedback" role="status" aria-live="polite" hidden></p>
+          <details class="ch7-help"><summary>Показать вычисление</summary><p>Составляем систему: α + β = 5, 2α + 3β = 13. Вычтем удвоенное первое из второго: β = 3. Значит α = 2. Проверка: 2·(1,2) + 3·(1,3) = (5,13).</p></details>
+        </div>
+        <div class="ch7-deep-example">
+          <h4>От простого примера к официальной задаче T12</h4>
+          <p>Там матрица 4×3, но идея не меняется. Первые два столбца независимы: минор по строкам 1,3 равен 6·5 − 3·2 = <strong>24 ≠ 0</strong>. Третий столбец выражается как <strong>−½·первый + 1·второй</strong>. Поэтому ранг равен 2, и:</p>
+          <div class="ch7-matrix-row">
+            <table class="ch7-matrix" aria-label="Матрица B из T12"><caption>B · 4×2</caption><tbody><tr><td>6</td><td>3</td></tr><tr><td>6</td><td>3</td></tr><tr><td>2</td><td>5</td></tr><tr><td>−2</td><td>−5</td></tr></tbody></table>
+            <span class="ch7-symbol" aria-hidden="true">×</span>
+            <table class="ch7-matrix" aria-label="Матрица C из T12"><caption>C · 2×3</caption><tbody><tr><td>1</td><td>0</td><td>−½</td></tr><tr><td>0</td><td>1</td><td>1</td></tr></tbody></table>
+            <span class="ch7-symbol" aria-hidden="true">=</span>
+            <table class="ch7-matrix" aria-label="Матрица A из T12"><caption>A · 4×3</caption><tbody><tr><td>6</td><td>3</td><td>0</td></tr><tr><td>6</td><td>3</td><td>0</td></tr><tr><td>2</td><td>5</td><td>4</td></tr><tr><td>−2</td><td>−5</td><td>−4</td></tr></tbody></table>
+          </div>
+          <p>Проверь третью строку третьего столбца: (−½)·2 + 1·5 = <strong>4</strong>. Четвёртую: (−½)·(−2) + 1·(−5) = <strong>−4</strong>. Оба числа совпали с A. <a href="./problems.html#T12">Полное решение T12</a>.</p>
+          <div class="why"><strong>Отличие от LU.</strong> В LU мы вычисляем изменения строк, чтобы получить U. В скелетном разложении мы <strong>берём настоящие столбцы исходной A</strong>, а не строки после Гаусса. Не смешивай эти действия.</div>
+        </div>
+      </div>
+
+      <div class="concept ch7-topic" id="ch7-recurrence">
+        <div class="micro">03 / Рекуррентные соотношения</div>
+        <h3>Большой определитель из двух меньших</h3>
+        <p>Здесь мы уже <strong>не ищем произведение матриц</strong>. Нужен один результат — определитель. Для особого вида матриц его удобно считать, не раскрывая каждый раз десятки слагаемых.</p>
+        <p><strong>Трёхдиагональная матрица</strong>: ненулевые числа могут быть только на главной диагонали и на двух соседних диагоналях. У нашего примера на главной стоит 5, над ней 2, под ней 3:</p>
+        <div class="ch7-matrix-row">
+          <table class="ch7-matrix" aria-label="Трёхдиагональная матрица порядка 3"><caption>A₃ · 3×3</caption><tbody><tr><td>5</td><td>2</td><td class="ch7-zero">0</td></tr><tr><td>3</td><td>5</td><td>2</td></tr><tr><td class="ch7-zero">0</td><td>3</td><td>5</td></tr></tbody></table>
+          <div class="ch7-goal"><strong>Что означает Dₙ?</strong><span>D₂ — определитель матрицы 2×2 этого вида.</span><span>D₃ — матрицы 3×3; D₄ — матрицы 4×4 и так далее.</span></div>
+        </div>
+        <ol class="ch7-teaching-steps">
+          <li><strong>Начинаем с D₁.</strong> Матрица из одного числа 5 имеет определитель D₁=5. Дополнительно принимаем D₀=1 — соглашение, чтобы формула работала уже для D₂.</li>
+          <li><strong>Находим D₂ обычным способом.</strong> Для [[5,2],[3,5]] определитель равен 5·5 − 2·3 = <strong>19</strong>.</li>
+          <li><strong>Раскладываем D₃ по первой строке.</strong> Выбираем 5 и 2; вклад 0 равен нулю. Для 5 остаётся определитель [[5,2],[3,5]]=19. Для 2 знак минус, а оставшийся определитель [[3,2],[0,5]]=15. Получаем D₃ = 5·19 − 2·15 = <strong>65</strong>.</li>
+          <li><strong>Замечаем повторение.</strong> 15 = 3·5 = 3D₁. Значит D₃=5D₂−2·3D₁. В матрице следующего порядка точно так же появятся D₃ и D₂.</li>
+        </ol>
+        <div class="ch7-formula-block">
+          <div class="micro">Откуда знак «минус» и множитель bc</div>
+          <p>В первой строке ненулевые элементы только <strong>a</strong> и <strong>b</strong>. Если раскрыть определитель по первой строке, получим:</p>
+          <div class="ch7-recurrence-derivation"><div><span>Вклад a</span><strong>+a · Dₙ₋₁</strong><small>Удалили первую строку и первый столбец — осталась такая же матрица на порядок меньше.</small></div><div><span>Вклад b</span><strong>−b · c · Dₙ₋₂</strong><small>У позиции (1,2) знак минус. После удаления строки и столбца в первом столбце остатка единственный ненулевой элемент c.</small></div></div>
+          <p class="ch7-rec-rule"><strong>Итак, Dₙ = aDₙ₋₁ − bcDₙ₋₂.</strong> Для a=5, b=2, c=3 это <strong>Dₙ = 5Dₙ₋₁ − 6Dₙ₋₂</strong>. Формула относится именно к такому трёхдиагональному виду, не ко всем матрицам.</p>
+        </div>
+        <div class="ch7-workshop" id="ch7-rec-workshop">
+          <div class="ch7-workshop-top"><strong>Посчитай определитель другого порядка</strong><span>Не раскрываем всё с нуля</span></div>
+          <div class="ch7-rec-settings">
+            <label for="ch7-rec-preset">Числа на трёх диагоналях
+              <select id="ch7-rec-preset"><option value="base">a=5, b=2, c=3 — как на уроке</option><option value="second">a=4, b=1, c=2 — другой пример</option></select>
+            </label>
+            <label for="ch7-rec-n">Порядок n
+              <input id="ch7-rec-n" type="range" min="2" max="6" value="4" step="1" aria-describedby="ch7-rec-n-value">
+            </label>
+            <output id="ch7-rec-n-value" for="ch7-rec-n">4×4</output>
+          </div>
+          <div class="ch7-matrix-row ch7-rec-preview">
+            <div id="ch7-rec-matrix" class="ch7-matrix-mount" aria-label="Матрица выбранного порядка"></div>
+            <div class="ch7-stage-copy" aria-live="polite">
+              <p id="ch7-rec-initial">D₀=1, D₁=5</p>
+              <p id="ch7-rec-prev">D₂=19, D₃=65</p>
+              <p id="ch7-rec-equation" class="ch7-rec-live">D₄=5·65−6·19=211</p>
+              <p id="ch7-rec-caption">Чтобы получить D₄, нужны только D₃ и D₂.</p>
+            </div>
+          </div>
+        </div>
+        <div class="ch7-practice" data-ch7-exercise="recurrence">
+          <div class="micro">Проверка по новым данным</div>
+          <h4>Теперь без готовых чисел</h4>
+          <p>Главная диагональ 4, наддиагональ 1, поддиагональ 2. Используй D₀=1 и D₁=4. Найди D₂ и D₃.</p>
+          <div class="ch7-answer-fields"><label for="ch7-rec-d2">D₂<input id="ch7-rec-d2" type="text" inputmode="decimal" autocomplete="off" placeholder="Число"></label><label for="ch7-rec-d3">D₃<input id="ch7-rec-d3" type="text" inputmode="decimal" autocomplete="off" placeholder="Число"></label></div>
+          <button type="button" class="ch7-check" id="ch7-rec-check">Проверить рекурсию</button><p class="ch7-feedback" id="ch7-rec-feedback" role="status" aria-live="polite" hidden></p>
+          <details class="ch7-help"><summary>Показать вычисления</summary><p>bc=1·2=2. Рекурсия Dₙ=4Dₙ₋₁−2Dₙ₋₂. Поэтому D₂=4·4−2·1=14, D₃=4·14−2·4=48. Далее D₄=4·48−2·14=164.</p></details>
+        </div>
+        <p>На контрольной это связано с <a href="./problems.html#T08">T08</a>, а также дополнительными <a href="./problems.html#N299">№299</a> и <a href="./problems.html#N302">№302</a>. У №302 первые строки особенные: поэтому сначала отдельно определяют D₁ и D₂, и только потом пользуются рекурсией.</p>
+      </div>
+
+      <div class="concept ch7-topic" id="ch7-choice">
+        <div class="micro">04 / Выбор метода на контрольной</div>
+        <h3>Как понять, что от тебя требуется?</h3>
+        <div class="ch7-method-summary">
+          <div><strong>Найти A = LU</strong><p>Исключай элементы под диагональю; получишь U. Коэффициенты исключения помести в L и проверь произведение.</p><a href="./problems.html#T11">Официальная T11 →</a></div>
+          <div><strong>Найти A = BC ранга r</strong><p>Выбери r независимых столбцов исходной A. Это B. Вырази через них остальные столбцы — коэффициенты составят C.</p><a href="./problems.html#T12">Официальная T12 →</a></div>
+          <div><strong>Найти Dₙ для трёх диагоналей</strong><p>Сначала D₀, D₁ и D₂. Затем рекурсия через два предыдущих определителя. Для других форм матрицы метод может отличаться.</p><a href="./problems.html#T08">Официальная T08 →</a></div>
+        </div>
+        <div class="quickcheck" data-check="advanced">
+          <div class="qhead">Мини-проверка главы 7 · не является проверкой всей темы</div><h4>В A третий столбец равен сумме двух первых, а первые два независимы. Чему равен rank A?</h4>
+          <div class="choices"><button type="button" data-answer="bad">1</button><button type="button" data-answer="yes">2</button><button type="button" data-answer="bad">3</button></div>
+          <div class="feedback" hidden aria-live="polite"></div>
+        </div>
+        <p>После этой мини-проверки ниже появится ещё одна задача на новых данных. Если не удаётся решить её без подсказки, вернись к соответствующему разобранному примеру. <a href="./practice.html#advanced">Три дополнительных тренировочных варианта</a> доступны отдельно.</p>
+      </div>
+      <div class="chapter-next"><span class="chapter-footer">Глава 7 разобрана пошагово. Для подготовки к КР нужны также <a href="./syllabus.html">26 определений и 11 доказательств</a>, а не только три метода.</span><a href="./problems.html#T11">Перейти к официальным задачам →</a></div>
+    </section>

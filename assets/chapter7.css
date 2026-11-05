@@ -1,0 +1,106 @@
+/* Chapter 07: explanatory, accessible, responsive lesson; scoped to avoid regressions. */
+#chapter-6 { --ch7-ink:#26372e; --ch7-muted:#52665a; --ch7-border:#d1ddd2; --ch7-green:#24513d; --ch7-blue:#2454a7; --ch7-paper:#f4f8f2; }
+#chapter-6 .ch7-topic{scroll-margin-top:25px;border-top:1px solid var(--ch7-border);padding-top:18px;margin-top:53px}
+#chapter-6 .ch7-topic>h3{font:500 clamp(27px,3.5vw,40px)/1.2 Georgia,"Times New Roman",serif;letter-spacing:-.04em;max-width:750px}
+#chapter-6 .ch7-topic p,#chapter-6 .ch7-topic li{color:var(--ch7-ink);font-size:15px;line-height:1.8}
+#chapter-6 .ch7-topic em{font-style:normal;font-weight:700}
+#chapter-6 .ch7-preflight{border:1px solid var(--ch7-border);border-radius:10px;background:var(--ch7-paper);padding:22px 26px}
+#chapter-6 .ch7-preflight>p{font-size:15px;line-height:1.75;margin:0 0 16px;color:var(--ch7-ink)}
+#chapter-6 .ch7-lesson-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+#chapter-6 .ch7-lesson-nav a{display:grid;grid-template-columns:32px 1fr;column-gap:10px;row-gap:1px;align-items:start;text-decoration:none;background:#fff;border:1px solid #d5e0d7;border-radius:8px;padding:13px 12px;min-width:0;color:var(--ch7-ink)}
+#chapter-6 .ch7-lesson-nav a:hover{border-color:#7a9a83;background:#f9fcf7}
+#chapter-6 .ch7-lesson-nav a span{grid-row:span 2;color:var(--ch7-blue);font:800 12px/1.5 system-ui,sans-serif}
+#chapter-6 .ch7-lesson-nav a strong{color:var(--ch7-ink);font-size:15px}
+#chapter-6 .ch7-lesson-nav a small{color:var(--ch7-muted);font-size:12px;line-height:1.4}
+#chapter-6 .ch7-terms{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0 24px}
+#chapter-6 .ch7-terms>div{background:#f7faf6;border:1px solid var(--ch7-border);border-radius:9px;padding:17px 18px}
+#chapter-6 .ch7-term-icon{display:inline-flex;width:32px;height:32px;align-items:center;justify-content:center;border-radius:8px;background:#e2ebdf;color:#1e5938;font:700 18px Georgia,serif;margin-right:9px;vertical-align:middle}
+#chapter-6 .ch7-terms strong{color:var(--ch7-ink);font-size:15px}
+#chapter-6 .ch7-terms p{margin:11px 0 0;font-size:14px;line-height:1.7}
+#chapter-6 .ch7-matrix-row{display:flex;align-items:center;flex-wrap:wrap;gap:16px 22px;padding:19px 0;margin:14px 0 17px}
+#chapter-6 .ch7-matrix{border-collapse:separate;border-spacing:4px;border-left:3px solid #6d8978;border-right:3px solid #6d8978;border-radius:5px;padding:3px 7px;background:#fbfdfa;width:auto;max-width:100%}
+#chapter-6 .ch7-matrix caption{caption-side:top;text-align:center;color:#50695a;font-weight:730;font-size:12px;line-height:1.4;margin-bottom:7px;letter-spacing:.01em}
+#chapter-6 .ch7-matrix td{min-width:43px;height:43px;padding:6px 9px;background:#fff;border:1px solid #dce5db;border-radius:4px;text-align:center;color:#253a2e;font:700 17px/1.15 "DejaVu Sans Mono",Consolas,monospace;font-variant-numeric:tabular-nums}
+#chapter-6 .ch7-matrix td.ch7-zero{color:#8a9990;background:#f5f8f4}
+#chapter-6 .ch7-matrix td.ch7-highlight{background:#e1ecf9;border-color:#96b1d9;color:#1d4d93;box-shadow:inset 0 0 0 1px #87a9d9}
+#chapter-6 .ch7-matrix td.ch7-found{background:#e3f3e5;border-color:#8bc59c;color:#195735}
+#chapter-6 .ch7-symbol{font:400 25px Georgia,serif;color:#53685a;align-self:center}
+#chapter-6 .ch7-goal{flex:1;min-width:170px;display:grid;gap:8px;padding:14px 18px;border-left:3px solid #65957b;background:#f4f8f4;border-radius:0 6px 6px 0}
+#chapter-6 .ch7-goal strong{font-size:13px;color:var(--ch7-green)}
+#chapter-6 .ch7-goal span{font-size:14px;line-height:1.6;color:#42584a}
+#chapter-6 .ch7-teaching-steps{counter-reset:item;list-style:none;padding:0;margin:20px 0 23px}
+#chapter-6 .ch7-teaching-steps li{position:relative;padding:14px 12px 14px 46px;border-bottom:1px solid #e0e7df;margin:0;line-height:1.75}
+#chapter-6 .ch7-teaching-steps li::before{counter-increment:item;content:counter(item);position:absolute;top:14px;left:0;width:29px;height:29px;background:#e2eee2;color:#215037;border-radius:50%;text-align:center;font:700 13px/29px system-ui}
+#chapter-6 .ch7-teaching-steps li strong{color:#1e3f30}
+#chapter-6 .ch7-workshop{border:1px solid #b9d0be;border-top:3px solid #4d8665;border-radius:9px;padding:19px 22px;margin:24px 0;background:#f9fcf8}
+#chapter-6 .ch7-workshop-top{display:flex;justify-content:space-between;align-items:center;gap:9px;flex-wrap:wrap;color:#1f4e34}
+#chapter-6 .ch7-workshop-top>strong{font-size:15px}
+#chapter-6 .ch7-workshop-top>span{font-size:12px;color:#4f6658}
+#chapter-6 .ch7-matrix-row--interactive{margin:7px 0}
+#chapter-6 .ch7-matrix-mount{flex:0 0 auto;max-width:100%;overflow-x:auto}
+#chapter-6 .ch7-stage-copy{flex:1;min-width:220px;padding:12px 16px;background:#edf4ea;border-radius:7px;border-left:3px solid #769b7b;color:#2c4d37;font-size:14px;line-height:1.75}
+#chapter-6 .ch7-stage-copy p{font-size:14px;line-height:1.7;margin:0 0 8px}
+#chapter-6 .ch7-stage-copy p:last-child{margin-bottom:0}
+#chapter-6 .ch7-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+#chapter-6 .ch7-controls button,#chapter-6 .ch7-check{border:1px solid #8aa995;border-radius:7px;padding:10px 15px;background:#fff;color:#1f4b32;cursor:pointer;font:700 13px/1.4 system-ui,sans-serif;min-height:44px}
+#chapter-6 .ch7-controls button:hover:not(:disabled),#chapter-6 .ch7-check:hover{background:#e9f2e6}
+#chapter-6 .ch7-controls button:disabled{opacity:.5;cursor:default}
+#chapter-6 .ch7-controls button[aria-pressed=true],#chapter-6 .ch7-check{background:#285741;color:white;border-color:#285741}
+#chapter-6 .ch7-controls button[aria-pressed=true]:hover{background:#225039}
+#chapter-6 .ch7-formula-block{background:#f5f8fd;border-left:4px solid #4371b5;padding:21px 24px;border-radius:0 8px 8px 0;margin:21px 0}
+#chapter-6 .ch7-formula-block .ch7-matrix-row{margin:0}
+#chapter-6 .ch7-formula-block p{margin:7px 0 0}
+#chapter-6 .ch7-practice{border:1px solid #d2ddd3;border-radius:9px;padding:20px 23px;background:#fff;margin:25px 0}
+#chapter-6 .ch7-practice h4{font-size:21px;font-weight:730;color:#203f30;margin:4px 0 10px}
+#chapter-6 .ch7-answer-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:15px 0}
+#chapter-6 .ch7-answer-fields label{font-weight:740;font-size:14px;color:#304c38;display:grid;gap:7px}
+#chapter-6 .ch7-answer-fields input{width:100%;height:44px;background:#fff;color:#172d1e;border:1px solid #a5b6aa;border-radius:6px;padding:8px 11px;font:600 16px system-ui,sans-serif}
+#chapter-6 .ch7-answer-fields input[aria-invalid=true]{border-color:#b14734;box-shadow:0 0 0 1px #b14734}
+#chapter-6 .ch7-check{margin:2px 0 9px}
+#chapter-6 .ch7-check:hover{background:#1f4936}
+#chapter-6 .ch7-feedback{margin:8px 0 12px;font-size:14px!important;border-radius:5px;background:#e7f3e9;color:#214d33!important;padding:10px 13px;line-height:1.6!important}
+#chapter-6 .ch7-feedback.ch7-error{background:#fff1e9;color:#86402b!important}
+#chapter-6 .ch7-feedback[hidden]{display:none}
+#chapter-6 .ch7-help{border-top:1px solid #dbe4db;padding:12px 0 0;margin-top:15px;color:#314d3c}
+#chapter-6 .ch7-help summary{cursor:pointer;color:#2456a1;font-weight:750;font-size:14px;line-height:1.55}
+#chapter-6 .ch7-help p{margin:13px 0 0;font-size:14px}
+#chapter-6 .ch7-deep-example{margin-top:31px;padding:23px 26px;border:1px solid #d5dfd6;border-radius:9px;background:#fbfdfa}
+#chapter-6 .ch7-deep-example h4{margin:0 0 13px;font:500 clamp(21px,2.7vw,28px)/1.28 Georgia,serif;color:#243b2d}
+#chapter-6 .ch7-eq-steps{flex:1;min-width:210px}
+#chapter-6 .ch7-eq-steps p{margin:0 0 11px;font-size:14px}
+#chapter-6 .ch7-recurrence-derivation{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:15px 0}
+#chapter-6 .ch7-recurrence-derivation>div{display:grid;gap:6px;padding:15px 17px;background:#fff;border:1px solid #d7e0eb;border-radius:8px}
+#chapter-6 .ch7-recurrence-derivation span{font-size:12px;color:#506b83;font-weight:740}
+#chapter-6 .ch7-recurrence-derivation strong{font-size:21px;color:#1e4b90;font-family:Georgia,serif}
+#chapter-6 .ch7-recurrence-derivation small{font-size:13px;line-height:1.65;color:#506273}
+#chapter-6 .ch7-rec-rule{border-top:1px solid #d5dfea;padding-top:13px;margin-top:12px}
+#chapter-6 .ch7-rec-settings{display:flex;gap:13px 22px;align-items:end;flex-wrap:wrap;margin:18px 0}
+#chapter-6 .ch7-rec-settings label{display:grid;gap:7px;font-size:13px;font-weight:750;color:#2c4d36}
+#chapter-6 .ch7-rec-settings select{max-width:100%;min-height:42px;font-size:14px;background:#fff;color:#264032;border:1px solid #9eafa4;border-radius:6px;padding:8px 10px}
+#chapter-6 .ch7-rec-settings input[type=range]{width:190px;max-width:100%;accent-color:#255d43}
+#chapter-6 .ch7-rec-settings output{font-size:15px;font-weight:800;color:#235238;padding-bottom:8px}
+#chapter-6 .ch7-rec-live{font-weight:850;color:#1c542c!important;font-size:17px!important;overflow-wrap:anywhere}
+#chapter-6 .ch7-method-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:22px 0}
+#chapter-6 .ch7-method-summary>div{padding:19px 17px;border:1px solid #d3e0d5;background:#f8faf7;border-radius:8px}
+#chapter-6 .ch7-method-summary strong{color:#214a33}
+#chapter-6 .ch7-method-summary p{font-size:13px;line-height:1.66;margin:9px 0 15px}
+#chapter-6 .ch7-method-summary a{font-size:13px;font-weight:740}
+#chapter-6 a:focus-visible,#chapter-6 button:focus-visible,#chapter-6 input:focus-visible,#chapter-6 select:focus-visible,#chapter-6 summary:focus-visible{outline:3px solid #2454a7;outline-offset:3px}
+@media(max-width:830px){
+ #chapter-6 .ch7-lesson-nav{grid-template-columns:1fr}
+ #chapter-6 .ch7-terms{grid-template-columns:1fr}
+ #chapter-6 .ch7-method-summary{grid-template-columns:1fr}
+ #chapter-6 .ch7-recurrence-derivation{grid-template-columns:1fr}
+}
+@media(max-width:550px){
+ #chapter-6 .ch7-preflight,#chapter-6 .ch7-deep-example{padding:17px 15px}
+ #chapter-6 .ch7-workshop,#chapter-6 .ch7-practice,#chapter-6 .ch7-formula-block{padding:17px 15px}
+ #chapter-6 .ch7-matrix-row{gap:12px 8px}
+ #chapter-6 .ch7-matrix{border-spacing:2px;padding:3px 4px}
+ #chapter-6 .ch7-matrix td{min-width:31px;height:35px;padding:4px 5px;font-size:13px}
+ #chapter-6 .ch7-symbol{font-size:19px}
+ #chapter-6 .ch7-answer-fields{grid-template-columns:1fr}
+ #chapter-6 .ch7-teaching-steps li{padding-left:39px}
+ #chapter-6 .ch7-stage-copy{min-width:100%}
+ #chapter-6 .ch7-goal{min-width:100%}
+}

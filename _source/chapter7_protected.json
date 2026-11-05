@@ -1,0 +1,10 @@
+{
+  "baseline_commit": "b0d921799e817a10ae63b94666d2583c9c1acbc5",
+  "protected_before_sha256": "ca85afbdcc8937a3e2f27f8604c73a9d46650899d20b9bca867d2ce8a65bf13e",
+  "protected_after_sha256": "e262ffab51a0a8413b7f8f413528e2e7630a21a7b2113acb1c7b508db5ba9f39",
+  "chapter_anchor": "chapter-6",
+  "excluded_new_tags": [
+    "<link rel=\"stylesheet\" href=\"./assets/chapter7.css\">\n",
+    "<script src=\"./assets/chapter7.js\"></script>\n"
+  ]
+}

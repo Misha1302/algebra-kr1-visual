@@ -40,7 +40,8 @@ jobs:
           python _source/build_catalog.py
           python _source/build_transfer.py
           python _source/build_coverage.py
-          git diff --exit-code -- textbook.html proofs.html problems.html syllabus.html assets/transfer-cases.js _source/Algebra_KR1_2026_ONLINE.md docs/remediation/62_COVERAGE_POST_REMEDIATION.csv
+          python _source/build_chapter7.py
+          git diff --exit-code -- definitions.html textbook.html proofs.html problems.html syllabus.html assets/transfer-cases.js _source/Algebra_KR1_2026_ONLINE.md docs/remediation/62_COVERAGE_POST_REMEDIATION.csv
       - name: Check JavaScript syntax
         run: |
           for file in assets/*.js theory.js; do node --check "$file"; done
@@ -58,6 +59,10 @@ jobs:
         run: |
           python tests/remediation_contract.py
           python tests/remediation_e2e.py
+      - name: Chapter 7 exact mathematics and novice interactions
+        run: |
+          python tests/chapter7_math_oracle.py
+          python tests/chapter7_e2e.py
       - name: Automated WCAG accessibility checks
         run: |
           npm install --prefix "$RUNNER_TEMP/axe" axe-core@4.10.3 --no-audit --no-fund
