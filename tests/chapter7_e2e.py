@@ -65,6 +65,13 @@ def check():
         assert 'Оба шага верны' in page.locator('#ch7-lu-feedback').inner_text()
         assert page.locator('#ch7-lu-k').get_attribute('aria-invalid')=='false'
         assert page.locator('#ch7-lu-u22').get_attribute('aria-invalid')=='false'
+        page.locator('#ch7-lu-k').fill('6/3')
+        page.locator('#ch7-lu-u22').fill('3.0')
+        page.locator('#ch7-lu-check').click()
+        assert 'Оба шага верны' in page.locator('#ch7-lu-feedback').inner_text()
+        page.locator('#ch7-lu-k').fill('1/0')
+        page.locator('#ch7-lu-check').click()
+        assert 'ch7-error' in page.locator('#ch7-lu-feedback').get_attribute('class')
         for column,phrase in [(0,'(1,0)'),(1,'(0,1)'),(2,'(1,1)')]:
             page.locator(f'[data-ch7-column="{column}"]').click()
             assert phrase in page.locator('#ch7-skeleton-explain').inner_text()

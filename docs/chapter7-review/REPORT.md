@@ -14,7 +14,7 @@ The replacement has three independent guided explanations:
 2. **Rank/skeleton (T12).** Identify two independent original columns with a nonzero minor, solve two equations for the third column, construct C column-by-column, show dimensions and official 4×3 factorization.
 3. **Three-diagonal determinant (T08).** Define D₀ and D₁, directly compute D₂, expand D₃ by the first row, explain the negative cofactor and bc, use the recurrence for orders 2–6 and two parameter sets.
 
-Each includes a numerical check with actionable feedback, an optional revealed solution, and a link to official problems. The chapter-level navigation jumps directly to each part. The numerical exercises do not mark learning as mastered.
+Each includes a numerical check with actionable feedback, exact integer/fraction input (including p/q), an optional revealed solution, and a link to official problems. The chapter-level navigation jumps directly to each part. The numerical exercises do not mark learning as mastered.
 
 ## Verification results (local branch)
 

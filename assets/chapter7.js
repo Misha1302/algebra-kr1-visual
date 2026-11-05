@@ -112,10 +112,26 @@
   renderRecurrence();
 
   function strictInteger(id) {
-    const raw=get(id).value.trim().replace(/−/g,"-");
-    if(!/^[+-]?\d+$/.test(raw))return null;
-    const value=Number(raw);
-    return Number.isSafeInteger(value)?value:null;
+    // A numerical answer may be written as 2, 2.0 or 6/3.
+    // Convert fractions exactly; do not coerce empty input to zero.
+    const raw=get(id).value.trim().replace(/−/g,"-").replace(",",".").replace(/\s+/g,"");
+    if(raw.length>48)return null;
+    let numerator,denominator;
+    const frac=/^([+-]?\d+)\/([+-]?\d+)$/.exec(raw);
+    const decimal=/^([+-]?)(\d+)\.(\d+)$/.exec(raw);
+    try {
+      if(frac){
+        numerator=BigInt(frac[1]);denominator=BigInt(frac[2]);
+      } else if(decimal){
+        numerator=BigInt((decimal[1]==="-"?"-":"")+decimal[2]+decimal[3]);
+        denominator=10n**BigInt(decimal[3].length);
+      } else if(/^[+-]?\d+$/.test(raw)){
+        numerator=BigInt(raw);denominator=1n;
+      } else return null;
+      if(denominator===0n || numerator%denominator!==0n)return null;
+      const result=Number(numerator/denominator);
+      return Number.isSafeInteger(result)?result:null;
+    } catch(_) {return null;}
   }
   function exercise(buttonId,ids,values,good,bad) {
     get(buttonId).addEventListener("click",()=>{

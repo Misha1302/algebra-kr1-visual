@@ -615,6 +615,7 @@
           <div class="micro">Проверка без готового ответа</div>
           <h4>Попробуй на других числах</h4>
           <p>В A = [[3,1],[6,5]] найди множитель k, который уничтожит 6 под тройкой, и нижнюю правую клетку U после вычитания.</p>
+          <p class="ch7-input-note">Можно записать число как 2, 2.0 или точную дробь 6/3. Пустое поле не считается нулём.</p>
           <div class="ch7-answer-fields"><label for="ch7-lu-k">Множитель k<input id="ch7-lu-k" type="text" inputmode="decimal" autocomplete="off" placeholder="Число"></label><label for="ch7-lu-u22">Новая клетка U₂₂<input id="ch7-lu-u22" type="text" inputmode="decimal" autocomplete="off" placeholder="Число"></label></div>
           <button type="button" class="ch7-check" id="ch7-lu-check">Проверить два шага</button>
           <p class="ch7-feedback" id="ch7-lu-feedback" role="status" aria-live="polite" hidden></p>
@@ -676,6 +677,7 @@
           <div class="micro">Самостоятельная проверка</div>
           <h4>Как восстановить новый столбец?</h4>
           <p>Первые два столбца: b₁=(1,2)ᵀ и b₂=(1,3)ᵀ. Третий столбец равен (5,13)ᵀ. Найди α и β в равенстве αb₁ + βb₂ = (5,13)ᵀ.</p>
+          <p class="ch7-input-note">Можно записать число как 2, 2.0 или точную дробь 6/3. Пустое поле не считается нулём.</p>
           <div class="ch7-answer-fields"><label for="ch7-sk-a">Коэффициент α<input id="ch7-sk-a" type="text" inputmode="decimal" autocomplete="off" placeholder="Число"></label><label for="ch7-sk-b">Коэффициент β<input id="ch7-sk-b" type="text" inputmode="decimal" autocomplete="off" placeholder="Число"></label></div>
           <button type="button" class="ch7-check" id="ch7-sk-check">Проверить коэффициенты</button><p class="ch7-feedback" id="ch7-sk-feedback" role="status" aria-live="polite" hidden></p>
           <details class="ch7-help"><summary>Показать вычисление</summary><p>Составляем систему: α + β = 5, 2α + 3β = 13. Вычтем удвоенное первое из второго: β = 3. Значит α = 2. Проверка: 2·(1,2) + 3·(1,3) = (5,13).</p></details>
@@ -741,6 +743,7 @@
           <div class="micro">Проверка по новым данным</div>
           <h4>Теперь без готовых чисел</h4>
           <p>Главная диагональ 4, наддиагональ 1, поддиагональ 2. Используй D₀=1 и D₁=4. Найди D₂ и D₃.</p>
+          <p class="ch7-input-note">Можно записать число как 2, 2.0 или точную дробь 6/3. Пустое поле не считается нулём.</p>
           <div class="ch7-answer-fields"><label for="ch7-rec-d2">D₂<input id="ch7-rec-d2" type="text" inputmode="decimal" autocomplete="off" placeholder="Число"></label><label for="ch7-rec-d3">D₃<input id="ch7-rec-d3" type="text" inputmode="decimal" autocomplete="off" placeholder="Число"></label></div>
           <button type="button" class="ch7-check" id="ch7-rec-check">Проверить рекурсию</button><p class="ch7-feedback" id="ch7-rec-feedback" role="status" aria-live="polite" hidden></p>
           <details class="ch7-help"><summary>Показать вычисления</summary><p>bc=1·2=2. Рекурсия Dₙ=4Dₙ₋₁−2Dₙ₋₂. Поэтому D₂=4·4−2·1=14, D₃=4·14−2·4=48. Далее D₄=4·48−2·14=164.</p></details>
