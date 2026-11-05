@@ -22,7 +22,7 @@ Each includes a numerical check with actionable feedback, an optional revealed s
 | --- | --- |
 | tests/chapter7_math_oracle.py | PASS: independent exact SymPy verification of LU in 2×2 and 3×3, B·C and ranks in 2×3 and 4×3, plus 196 three-diagonal determinant cases. |
 | tests/chapter7_e2e.py | PASS: LU previous/next/reset, keyboard Enter, column selection, recurrence variants, invalid/partial/correct answers and progress noninterference. |
-| Responsive | PASS at 320, 360, 390, 768, 1366 and 1920 px without document-level horizontal overflow. |
+| Responsive | PASS at 300, 320, 360, 390, 768, 1366 and 1920 px (including a native-select intrinsic-width regression) without document-level horizontal overflow. |
 | tests/accessibility_wcag.py | PASS: axe-core 4.10.3 checks of 17 route/viewport combinations (WCAG 2.0/2.1 A/AA automated rules). Not a manual screen-reader audit. |
 | Historic and remediation tests | PASS: all previous suites, including 297 internal links. |
 | Real local HTTP | PASS: 34 files (including PDF), 23 browser checks, SHA agreement with the local checkout. |
@@ -45,5 +45,7 @@ Each includes a numerical check with actionable feedback, an optional revealed s
 - Exercises are chosen finite variants, not an unlimited task generator.
 - Printable legacy PDFs are not modified; the improved material is online at definitions.html#chapter-6.
 - External source reuse and permissions remain as described in docs/remediation/CONTENT_PROVENANCE.md.
+
+**CI-discovered issue fixed:** the Ubuntu Chromium build initially overflowed at 320 px because a native select with long option labels retained its intrinsic minimum width. The select and its flex label now have min-width:0 and an explicit bounded width; the E2E test includes a 300 px case and checks the select bounds directly.
 
 **Release criterion:** merge only after green GitHub CI; separately verify the real public GitHub Pages HTML/CSS/JS and the new Chapter 7 interactions.

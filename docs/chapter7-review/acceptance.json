@@ -13,6 +13,12 @@
   ],
   "widths": [
     {
+      "width": 300,
+      "scroll": 300,
+      "chapter": 284,
+      "viewport": 300
+    },
+    {
       "width": 320,
       "scroll": 320,
       "chapter": 304,

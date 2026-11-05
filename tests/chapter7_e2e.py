@@ -96,7 +96,7 @@ def check():
         assert page.evaluate("localStorage.getItem('algebra-kr1-mini-checks-v2')")==None
 
         responsive=[]
-        for width in [320,360,390,768,1366,1920]:
+        for width in [300,320,360,390,768,1366,1920]:
             mobile=browser.new_page(viewport={'width':width,'height':850})
             mobile.on('pageerror',lambda e:errors.append(f'{width}:'+str(e)))
             openpage(mobile)
@@ -110,6 +110,9 @@ def check():
             })""")
             assert dims['scroll']<=dims['width']+3,(width,dims)
             assert dims['chapter']<=width+3,(width,dims)
+            # Regression for native-select intrinsic-width divergence between Chromium builds.
+            select_right=mobile.locator('#ch7-rec-preset').evaluate('(e)=>e.getBoundingClientRect().right')
+            assert select_right<=width+1,(width,select_right)
             for target in ['#ch7-lu','#ch7-skeleton','#ch7-recurrence']:
                 mobile.evaluate("selector=>document.querySelector(selector).scrollIntoView({behavior:'instant',block:'start'})",target)
                 assert mobile.locator(target+' h3').first.is_visible()
@@ -127,5 +130,5 @@ def check():
             'mathematical_checks':'SymPy in chapter7_math_oracle.py'
         },ensure_ascii=False,indent=2),encoding='utf8')
         browser.close()
-    print('PASS Chapter 7 E2E: LU step navigation and keyboard, 3 separate feedback exercises, skeleton reconstruction, two recurrence series, responsive widths 320..1920, zero browser errors')
+    print('PASS Chapter 7 E2E: LU step navigation and keyboard, 3 separate feedback exercises, skeleton reconstruction, two recurrence series, responsive widths 300..1920, zero browser errors')
 if __name__=='__main__':check()
