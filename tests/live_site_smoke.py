@@ -94,6 +94,17 @@ def run(base,expect_current,browser,out):
                     page.wait_for_timeout(100)
                     dim=page.evaluate('({w:document.documentElement.scrollWidth,c:document.documentElement.clientWidth})')
                     if dim['w']>dim['c']+3:bad.append('HORIZONTAL_OVERFLOW '+repr(dim))
+                    if name=='definitions.html':
+                        if page.locator('#chapter-6 .ch7-workshop').count()!=3:
+                            bad.append('missing chapter 7 LU/skeleton/recurrence workshops')
+                        if page.locator('#ch7-lu-count').inner_text()!='Шаг 1 из 4':
+                            bad.append('chapter 7 initial LU state missing')
+                        page.locator('#ch7-lu-next').click()
+                        if page.locator('#ch7-lu-count').inner_text()!='Шаг 2 из 4':
+                            bad.append('chapter 7 LU next button failed')
+                        page.locator('#ch7-rec-n').fill('4')
+                        if not page.locator('#ch7-rec-equation').inner_text().endswith('= 211.'):
+                            bad.append('chapter 7 recurrence wrong')
                     if name=='practice.html':
                         if page.locator('.transfer-practice[data-transfer]').count()!=8:bad.append('missing independent exercises')
                     if name=='proofs.html':

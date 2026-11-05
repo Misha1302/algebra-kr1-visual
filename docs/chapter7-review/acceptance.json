@@ -1,0 +1,63 @@
+{
+  "screenshots": [
+    "after_chapter7_top_1366.png",
+    "after_lu_1366.png",
+    "after_lu_390.png",
+    "after_lu_768.png",
+    "after_recurrence_1366.png",
+    "after_recurrence_390.png",
+    "after_recurrence_768.png",
+    "after_skeleton_1366.png",
+    "after_skeleton_390.png",
+    "after_skeleton_768.png"
+  ],
+  "widths": [
+    {
+      "width": 300,
+      "scroll": 300,
+      "chapter": 284,
+      "viewport": 300
+    },
+    {
+      "width": 320,
+      "scroll": 320,
+      "chapter": 304,
+      "viewport": 320
+    },
+    {
+      "width": 360,
+      "scroll": 360,
+      "chapter": 344,
+      "viewport": 360
+    },
+    {
+      "width": 390,
+      "scroll": 390,
+      "chapter": 374,
+      "viewport": 390
+    },
+    {
+      "width": 768,
+      "scroll": 768,
+      "chapter": 742,
+      "viewport": 768
+    },
+    {
+      "width": 1366,
+      "scroll": 1366,
+      "chapter": 997,
+      "viewport": 1366
+    },
+    {
+      "width": 1920,
+      "scroll": 1920,
+      "chapter": 1030,
+      "viewport": 1920
+    }
+  ],
+  "live_errors": [],
+  "method_count": 3,
+  "interactive_workshops": 3,
+  "independent_problems": 3,
+  "mathematical_checks": "SymPy in chapter7_math_oracle.py"
+}
